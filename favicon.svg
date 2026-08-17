@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+  </defs>
+  <!-- Background rounded box -->
+  <rect width="64" height="64" rx="14" fill="url(#grad)"/>
+  
+  <!-- Sun dot / population beacon -->
+  <circle cx="32" cy="13" r="4.5" fill="#facc15"/>
+  
+  <!-- Statistical demographic bars -->
+  <path d="M16 48V36 M24 48V28 M32 48V21 M40 48V25 M48 48V33" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round"/>
+</svg>
