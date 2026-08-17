@@ -133,7 +133,7 @@
             </div>
             <h2 class="text-2xl font-bold text-white tracking-tight">Calculadora Actuarial de Esperanza de Vida y Sobrevida</h2>
             <p class="text-sm text-slate-400" id="calc-table-desc">
-              Selecciona una tabla actuarial (INDEC, GAM-71/83/94, CSO 1980/2001/2017, Invalidez o Internacional) para calcular el tiempo remanente de vida esperado (\(e_x\)), tasa de mortalidad (\(q_x\)), supervivencia (\(p_x\)) y las probabilidades de alcanzar hitos de edad.
+              Selecciona una tabla actuarial (INDEC, GAM-71/83/94, CSO 1980/2001/2017, Invalidez o Internacional) y define la edad base para calcular el tiempo remanente de vida esperado (\(e_x\)), tasa de mortalidad (\(q_x\)), supervivencia (\(p_x\)) y las probabilidades de alcanzar hitos de edad.
             </p>
           </div>
 
@@ -143,9 +143,9 @@
               <label class="block text-xs font-medium text-slate-400 mb-1">Tabla Actuarial Activa</label>
               <select id="calc-tabla-select" onchange="runLifeExpectancyCalculator()" class="bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 focus:ring-2 focus:ring-sky-500 outline-none max-w-[240px]">
                 <optgroup label="Población General Argentina (INDEC)">
-                  <option value="indec_2022_mujeres" selected>INDEC 2022 - Mujeres</option>
+                  <option value="indec_2022_mujeres">INDEC 2022 - Mujeres</option>
                   <option value="indec_2022_varones">INDEC 2022 - Varones</option>
-                  <option value="indec_2022_total">INDEC 2022 - Total País</option>
+                  <option value="indec_2022_total" selected>INDEC 2022 - Total País</option>
                   <option value="indec_2010_total">INDEC 2010 - Total</option>
                   <option value="indec_2001_total">INDEC 2001 - Total</option>
                 </optgroup>
@@ -177,9 +177,9 @@
               </select>
             </div>
             <div>
-              <label class="block text-xs font-medium text-slate-400 mb-1">Edad Actual (\(x\))</label>
+              <label class="block text-xs font-medium text-slate-400 mb-1">Edad Base / Raíz (\(x_0\))</label>
               <div class="flex items-center gap-2">
-                <input type="number" id="calc-edad" value="40" min="0" max="99" oninput="runLifeExpectancyCalculator()" class="w-16 bg-slate-900 border border-slate-700 text-slate-200 text-sm font-semibold rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-sky-500 outline-none">
+                <input type="number" id="calc-edad" value="65" min="0" max="99" oninput="runLifeExpectancyCalculator()" class="w-16 bg-slate-900 border border-slate-700 text-slate-200 text-sm font-semibold rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-sky-500 outline-none">
                 <span class="text-xs text-slate-400">años</span>
               </div>
             </div>
@@ -215,33 +215,40 @@
           <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-4 col-span-2 sm:col-span-2 lg:col-span-1">
             <span class="text-xs text-slate-400">Sobrevivientes (\(l_x\))</span>
             <div class="text-2xl font-black text-purple-400 mt-1" id="calc-res-lx">--</div>
-            <span class="text-[11px] text-slate-500">de 100.000 de la cohorte base</span>
+            <span class="text-[11px] text-slate-500">de 100.000 nacidos vivos</span>
           </div>
         </div>
 
         <!-- Milestones Survival Progress Bars -->
         <div class="mt-4 bg-slate-950/40 border border-slate-800/60 rounded-xl p-4">
-          <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-wider mb-3">Probabilidad de alcanzar edades de referencia desde la edad actual:</h4>
+          <h4 class="text-xs font-semibold text-slate-300 uppercase tracking-wider mb-3">Probabilidad de alcanzar edades de referencia desde la edad base seleccionada:</h4>
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-center" id="calc-milestones-container">
             <!-- Dynamic milestones will be injected here -->
           </div>
         </div>
       </div>
 
-      <!-- COMPARATIVA MULTI-TABLA ACTUARIAL INTERACTIVA -->
+      <!-- COMPARATIVA MULTI-TABLA ACTUARIAL INTERACTIVA CON RAÍZ DINÁMICA -->
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
             <div class="flex items-center gap-2">
               <h3 class="text-sm font-semibold text-white">Comparativa Multi-Tabla Actuarial (Supervivencia y Esperanza de Vida)</h3>
-              <span class="text-[11px] text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">Herramienta Actuarial</span>
+              <span class="text-[11px] text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20" id="badge-radix-status">Raíz en edad base seleccionada</span>
             </div>
-            <p class="text-xs text-slate-400 mt-0.5">Selecciona y contrasta la mortalidad entre población general (INDEC), tablas de retiro (GAM) y seguros de vida (CSO).</p>
+            <p class="text-xs text-slate-400 mt-0.5">
+              Las curvas de sobrevivientes (\(l_{x|x_0}\)) y de esperanza de vida (\(e_x\)) se computan <strong>con raíz en la edad seleccionada</strong> (\(x_0\), default: <strong>65 años</strong>) para reflejar la trayectoria de longevidad real a partir de esa edad.
+            </p>
           </div>
 
-          <div class="flex items-center gap-2">
+          <div class="flex flex-wrap items-center gap-2">
+            <!-- Toggle Radix Mode -->
+            <label class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs bg-slate-950 border border-slate-700 rounded-lg text-slate-300 cursor-pointer">
+              <input type="checkbox" id="chk-radix-condicional" checked onchange="updateMultiTableCharts()" class="rounded bg-slate-900 border-slate-700 text-sky-500">
+              <span>Raíz en Edad Seleccionada (\(x_0\))</span>
+            </label>
             <button onclick="setComparePreset('retiro_vs_poblacion')" class="px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 rounded border border-slate-700 text-slate-300 transition">Preset: Retiro vs Población</button>
-            <button onclick="setComparePreset('cso_evolucion')" class="px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 rounded border border-slate-700 text-slate-300 transition">Preset: Evolución CSO (80/01/17)</button>
+            <button onclick="setComparePreset('cso_evolucion')" class="px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 rounded border border-slate-700 text-slate-300 transition">Preset: CSO (80/01/17)</button>
             <button onclick="setComparePreset('gam_evolucion')" class="px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 rounded border border-slate-700 text-slate-300 transition">Preset: GAM (71/83/94)</button>
           </div>
         </div>
@@ -254,7 +261,10 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
           <!-- Chart Comparativa lx -->
           <div class="bg-slate-950/60 border border-slate-800 rounded-lg p-4">
-            <h4 class="text-xs font-semibold text-slate-300 mb-2">Curvas de Sobrevivientes (\(l_x\)) Comparadas</h4>
+            <div class="flex items-center justify-between mb-2">
+              <h4 class="text-xs font-semibold text-slate-300" id="title-chart-lx">Curvas de Sobrevivientes (\(l_{x|x_0}\))</h4>
+              <span class="text-[10px] text-sky-400 font-mono" id="label-radix-lx">Radix: 100.000 a los 65 años</span>
+            </div>
             <div class="h-64">
               <canvas id="chart-multi-lx"></canvas>
             </div>
@@ -262,7 +272,10 @@
 
           <!-- Chart Comparativa ex -->
           <div class="bg-slate-950/60 border border-slate-800 rounded-lg p-4">
-            <h4 class="text-xs font-semibold text-slate-300 mb-2">Curvas de Esperanza de Vida Remanente (\(e_x\)) Comparadas</h4>
+            <div class="flex items-center justify-between mb-2">
+              <h4 class="text-xs font-semibold text-slate-300" id="title-chart-ex">Curvas de Esperanza de Vida Remanente (\(e_x\))</h4>
+              <span class="text-[10px] text-indigo-400 font-mono" id="label-radix-ex">Desde los 65 años</span>
+            </div>
             <div class="h-64">
               <canvas id="chart-multi-ex"></canvas>
             </div>
@@ -845,7 +858,7 @@
           <h4 class="text-xs font-bold text-slate-200 uppercase tracking-wider">Definición de Funciones Actuariales de la Tabla de Mortalidad:</h4>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs text-slate-300">
             <div>
-              <strong class="text-sky-400 font-mono">l_x:</strong> Número de personas sobrevivientes a la edad exacta \(x\) sobre una cohorte base de 100.000 nacidos vivos.
+              <strong class="text-sky-400 font-mono">l_{x|x₀}:</strong> Curva condicional de sobrevivientes a partir de la edad base \(x_0\) (\(l_{x|x_0} = \frac{l_x}{l_{x_0}} \times 100.000\)).
             </div>
             <div>
               <strong class="text-amber-400 font-mono">d_x:</strong> Fallecimientos ocurridos entre las edades \(x\) y \(x+1\) (\(d_x = l_x - l_{x+1}\)).
@@ -925,7 +938,6 @@
       explorerSelect.innerHTML = calcSelect.innerHTML;
       explorerSelect.value = calcSelect.value;
 
-      // Populate multi-compare checkboxes
       const container = document.getElementById('multi-table-checkboxes');
       container.innerHTML = '';
       
@@ -991,8 +1003,8 @@
       document.getElementById('calc-res-qx').innerText = (row.qx * 1000).toFixed(2) + ' ‰';
       document.getElementById('calc-res-lx').innerText = Math.round(row.lx).toLocaleString('es-AR');
 
-      // Milestones Calculation
-      const targetAges = [60, 65, 70, 75, 80, 85, 90, 95];
+      // Milestones Calculation from attained age
+      const targetAges = [65, 70, 75, 80, 85, 90, 95, 100];
       const container = document.getElementById('calc-milestones-container');
       container.innerHTML = '';
 
@@ -1019,6 +1031,9 @@
       // Synchronize explorer select
       document.getElementById('tabla-explorer-select').value = tableKey;
       renderFullActuarialTable();
+
+      // Refresh multi-table curves with updated base radix age
+      updateMultiTableCharts();
     }
 
     // 5. Render Provincial Mortality Table
@@ -1130,20 +1145,68 @@
       a.click();
     }
 
-    // 9. Update Multi-Table Comparison Charts
+    // 9. Update Multi-Table Comparison Charts WITH DYNAMIC RADIX AT SELECTED AGE
     function updateMultiTableCharts() {
-      const ages = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100];
+      if (!DATA) return;
+
+      const edadInput = document.getElementById('calc-edad');
+      let baseAge = parseInt(edadInput ? edadInput.value : 65, 10);
+      if (isNaN(baseAge) || baseAge < 0 || baseAge > 99) baseAge = 65;
+
+      const isConditional = document.getElementById('chk-radix-condicional')?.checked ?? true;
+      const startAge = isConditional ? baseAge : 0;
+
+      // Update badge and labels
+      const radixBadge = document.getElementById('badge-radix-status');
+      const labelRadixLx = document.getElementById('label-radix-lx');
+      const labelRadixEx = document.getElementById('label-radix-ex');
       
+      if (isConditional) {
+        if (radixBadge) radixBadge.innerText = `Raíz en ${baseAge} años (Radix l_${baseAge} = 100.000)`;
+        if (labelRadixLx) labelRadixLx.innerText = `Radix: 100.000 a los ${baseAge} años`;
+        if (labelRadixEx) labelRadixEx.innerText = `Esperanza remanente desde los ${baseAge} años`;
+      } else {
+        if (radixBadge) radixBadge.innerText = `Raíz al nacer (l₀ = 100.000)`;
+        if (labelRadixLx) labelRadixLx.innerText = `Radix: 100.000 al nacer (x=0)`;
+        if (labelRadixEx) labelRadixEx.innerText = `Esperanza de vida total (0-100+)`;
+      }
+
+      // Generate ages array starting from startAge
+      const ages = [];
+      for (let x = startAge; x <= 100; x++) {
+        if ((x - startAge) % (isConditional ? 1 : 2) === 0 || x === 100) {
+          ages.push(x);
+        }
+      }
+
+      // Prepare Datasets for lx (Conditional) and ex
       const lxDatasets = activeCompareTables.map(key => {
         const item = DATA.mortalidad.catalogo[key];
         const color = TABLE_COLORS[key] || '#0ea5e9';
+        const table = item.tabla;
+        
+        // Base lx at startAge
+        const baseRow = table.find(r => r.x === startAge) || table[0];
+        const lx_base = baseRow.lx > 0 ? baseRow.lx : 1.0;
+
+        const dataPoints = ages.map(x => {
+          const row = table.find(r => r.x === x);
+          if (!row) return 0;
+          if (isConditional) {
+            // Curva condicional reescalada con raíz 100.000 a la edad base
+            return Math.round((row.lx / lx_base) * 100000.0 * 10) / 10;
+          } else {
+            return row.lx;
+          }
+        });
+
         return {
           label: item.metadata.nombre,
-          data: ages.map(x => item.tabla.find(r => r.x === x)?.lx || 0),
+          data: dataPoints,
           borderColor: color,
           backgroundColor: color + '20',
           borderWidth: 2.2,
-          pointRadius: 2,
+          pointRadius: isConditional ? 1.5 : 0,
           tension: 0.2
         };
       });
@@ -1151,18 +1214,29 @@
       const exDatasets = activeCompareTables.map(key => {
         const item = DATA.mortalidad.catalogo[key];
         const color = TABLE_COLORS[key] || '#0ea5e9';
+        const table = item.tabla;
+
+        const dataPoints = ages.map(x => {
+          const row = table.find(r => r.x === x);
+          return row ? row.ex : 0;
+        });
+
         return {
           label: item.metadata.nombre,
-          data: ages.map(x => item.tabla.find(r => r.x === x)?.ex || 0),
+          data: dataPoints,
           borderColor: color,
           borderWidth: 2.2,
-          pointRadius: 2,
+          pointRadius: isConditional ? 1.5 : 0,
           tension: 0.2
         };
       });
 
+      // Update lx Chart
       if (charts.multiLx) {
+        charts.multiLx.data.labels = ages;
         charts.multiLx.data.datasets = lxDatasets;
+        charts.multiLx.options.scales.x.title.text = isConditional ? `Edad (x) a partir de la edad base (${startAge} años)` : 'Edad (x)';
+        charts.multiLx.options.scales.y.title.text = isConditional ? `Sobrevivientes (l_{x|${startAge}} sobre 100.000 vivos a edad ${startAge})` : 'Sobrevivientes (lx)';
         charts.multiLx.update();
       } else {
         charts.multiLx = new Chart(document.getElementById('chart-multi-lx'), {
@@ -1172,17 +1246,31 @@
             responsive: true,
             maintainAspectRatio: false,
             interaction: { mode: 'index', intersect: false },
-            plugins: { legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } } },
+            plugins: {
+              legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } },
+              tooltip: {
+                callbacks: {
+                  label: function(c) {
+                    const val = c.raw;
+                    const pct = ((val / 100000.0) * 100).toFixed(1);
+                    return `${c.dataset.label}: ${val.toLocaleString('es-AR')} (${pct}% sobrevida)`;
+                  }
+                }
+              }
+            },
             scales: {
-              x: { title: { display: true, text: 'Edad (x)', font: { size: 10 } } },
-              y: { title: { display: true, text: 'Sobrevivientes (lx)', font: { size: 10 } }, min: 0, max: 100000 }
+              x: { title: { display: true, text: `Edad (x) a partir de los ${startAge} años`, font: { size: 10 } } },
+              y: { title: { display: true, text: `Sobrevivientes condicionales (Base 100.000)`, font: { size: 10 } }, min: 0, max: 100000 }
             }
           }
         });
       }
 
+      // Update ex Chart
       if (charts.multiEx) {
+        charts.multiEx.data.labels = ages;
         charts.multiEx.data.datasets = exDatasets;
+        charts.multiEx.options.scales.x.title.text = isConditional ? `Edad (x) desde ${startAge} años` : 'Edad (x)';
         charts.multiEx.update();
       } else {
         charts.multiEx = new Chart(document.getElementById('chart-multi-ex'), {
@@ -1192,10 +1280,21 @@
             responsive: true,
             maintainAspectRatio: false,
             interaction: { mode: 'index', intersect: false },
-            plugins: { legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } } },
+            plugins: {
+              legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } },
+              tooltip: {
+                callbacks: {
+                  label: function(c) {
+                    const exVal = c.raw;
+                    const currentAge = parseInt(c.label, 10);
+                    return `${c.dataset.label}: ${exVal.toFixed(1)} años remanentes (Edad est.: ${(currentAge + exVal).toFixed(1)} años)`;
+                  }
+                }
+              }
+            },
             scales: {
-              x: { title: { display: true, text: 'Edad (x)', font: { size: 10 } } },
-              y: { title: { display: true, text: 'Años remanentes (ex)', font: { size: 10 } }, min: 0 }
+              x: { title: { display: true, text: `Edad (x) desde ${startAge} años`, font: { size: 10 } } },
+              y: { title: { display: true, text: 'Años remanentes esperados (ex)', font: { size: 10 } }, min: 0 }
             }
           }
         });
@@ -1208,7 +1307,6 @@
       Chart.defaults.borderColor = '#1e293b';
       Chart.defaults.font.family = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
 
-      // --- Multi-table charts init ---
       updateMultiTableCharts();
 
       // --- Histórico e0 / e65 ---
