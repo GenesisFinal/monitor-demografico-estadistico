@@ -138,31 +138,31 @@
     <div class="max-w-7xl mx-auto px-4 flex gap-1 overflow-x-auto py-1 border-t border-slate-900">
       <button onclick="switchTab('mortalidad')" id="tab-btn-mortalidad" class="tab-btn active px-3 py-2 text-xs font-medium rounded-lg border border-transparent text-slate-400 hover:text-slate-200 transition whitespace-nowrap flex items-center gap-1.5">
         <i data-lucide="trending-down" class="w-3.5 h-3.5 text-emerald-400"></i>
-        <span>1. Mortalidad y Brecha Actuarial</span>
+        <span>1. Mortalidad | Actuarial</span>
       </button>
       <button onclick="switchTab('demografia')" id="tab-btn-demografia" class="tab-btn px-3 py-2 text-xs font-medium rounded-lg border border-transparent text-slate-400 hover:text-slate-200 transition whitespace-nowrap flex items-center gap-1.5">
         <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-400"></i>
-        <span>2. Demografía, Pirámide y Censo</span>
+        <span>2. Demografía | Censo</span>
       </button>
       <button onclick="switchTab('salud')" id="tab-btn-salud" class="tab-btn px-3 py-2 text-xs font-medium rounded-lg border border-transparent text-slate-400 hover:text-slate-200 transition whitespace-nowrap flex items-center gap-1.5">
         <i data-lucide="heart-pulse" class="w-3.5 h-3.5 text-emerald-400"></i>
-        <span>3. Salud y Vitales (DEIS)</span>
+        <span>3. Salud</span>
       </button>
       <button onclick="switchTab('educacion')" id="tab-btn-educacion" class="tab-btn px-3 py-2 text-xs font-medium rounded-lg border border-transparent text-slate-400 hover:text-slate-200 transition whitespace-nowrap flex items-center gap-1.5">
         <i data-lucide="graduation-cap" class="w-3.5 h-3.5 text-emerald-400"></i>
-        <span>4. Educación y Aprender</span>
+        <span>4. Educación</span>
       </button>
       <button onclick="switchTab('empleo')" id="tab-btn-empleo" class="tab-btn px-3 py-2 text-xs font-medium rounded-lg border border-transparent text-slate-400 hover:text-slate-200 transition whitespace-nowrap flex items-center gap-1.5">
         <i data-lucide="briefcase" class="w-3.5 h-3.5 text-emerald-400"></i>
-        <span>5. Mercado de Trabajo (EPH)</span>
+        <span>5. Trabajo</span>
       </button>
       <button onclick="switchTab('prevision')" id="tab-btn-prevision" class="tab-btn px-3 py-2 text-xs font-medium rounded-lg border border-transparent text-slate-400 hover:text-slate-200 transition whitespace-nowrap flex items-center gap-1.5">
         <i data-lucide="shield" class="w-3.5 h-3.5 text-emerald-400"></i>
-        <span>6. Previsión Social (ANSES/SIPA)</span>
+        <span>6. Previsión</span>
       </button>
       <button onclick="switchTab('metodologia')" id="tab-btn-metodologia" class="tab-btn px-3 py-2 text-xs font-medium rounded-lg border border-transparent text-slate-400 hover:text-slate-200 transition whitespace-nowrap flex items-center gap-1.5">
         <i data-lucide="database" class="w-3.5 h-3.5 text-emerald-400"></i>
-        <span>7. Fuentes Oficiales</span>
+        <span>7. Fuentes</span>
       </button>
     </div>
   </header>
@@ -2380,12 +2380,12 @@
 
       // Inicialización modular con aislamiento estricto (try/catch independiente por sección)
       const SECCIONES = [
-        { id: 'mortalidad', nombre: '1. Mortalidad y Brecha Actuarial', module: SectionMortalidad },
-        { id: 'demografia', nombre: '2. Demografía, Pirámide y Censo', module: SectionDemografia },
-        { id: 'salud', nombre: '3. Salud y Estadísticas Vitales', module: SectionSalud },
-        { id: 'educacion', nombre: '4. Educación y Aprender', module: SectionEducacion },
-        { id: 'empleo', nombre: '5. Mercado de Trabajo (EPH)', module: SectionEmpleo },
-        { id: 'prevision', nombre: '6. Previsión Social (ANSES/SIPA)', module: SectionPrevision }
+        { id: 'mortalidad', nombre: '1. Mortalidad | Actuarial', module: SectionMortalidad },
+        { id: 'demografia', nombre: '2. Demografía | Censo', module: SectionDemografia },
+        { id: 'salud', nombre: '3. Salud', module: SectionSalud },
+        { id: 'educacion', nombre: '4. Educación', module: SectionEducacion },
+        { id: 'empleo', nombre: '5. Trabajo', module: SectionEmpleo },
+        { id: 'prevision', nombre: '6. Previsión', module: SectionPrevision }
       ];
 
       SECCIONES.forEach(sec => {
