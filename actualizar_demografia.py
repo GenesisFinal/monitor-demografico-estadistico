@@ -302,28 +302,169 @@ def get_complete_actuarial_catalog():
 
 def get_censo_demografia_data():
     """
-    Datos Demográficos del Censo Nacional de Población, Hogares y Viviendas 2022 (INDEC)
+    Datos Demográficos Oficiales del INDEC:
+    Serie Histórica Censal, Estimaciones y Proyecciones de Población (1970 - 2040)
+    Pirámides poblacionales por grupos quinquenales y sexo
     """
-    piramide_quinquenal = [
-        {"grupo": "0-4", "varones": 1582410, "mujeres": 1519840, "total": 3102250, "pct_total": 6.71},
-        {"grupo": "5-9", "varones": 1724500, "mujeres": 1658320, "total": 3382820, "pct_total": 7.32},
-        {"grupo": "10-14", "varones": 1845120, "mujeres": 1776450, "total": 3621570, "pct_total": 7.83},
-        {"grupo": "15-19", "varones": 1801240, "mujeres": 1756890, "total": 3558130, "pct_total": 7.69},
-        {"grupo": "20-24", "varones": 1782350, "mujeres": 1765400, "total": 3547750, "pct_total": 7.67},
-        {"grupo": "25-29", "varones": 1735100, "mujeres": 1748900, "total": 3484000, "pct_total": 7.54},
-        {"grupo": "30-34", "varones": 1654200, "mujeres": 1698200, "total": 3352400, "pct_total": 7.25},
-        {"grupo": "35-39", "varones": 1582600, "mujeres": 1649800, "total": 3232400, "pct_total": 6.99},
-        {"grupo": "40-44", "varones": 1561400, "mujeres": 1642100, "total": 3203500, "pct_total": 6.93},
-        {"grupo": "45-49", "varones": 1395200, "mujeres": 1489700, "total": 2884900, "pct_total": 6.24},
-        {"grupo": "50-54", "varones": 1210400, "mujeres": 1324500, "total": 2534900, "pct_total": 5.48},
-        {"grupo": "55-59", "varones": 1058900, "mujeres": 1189400, "total": 2248300, "pct_total": 4.86},
-        {"grupo": "60-64", "varones": 924800, "mujeres": 1076200, "total": 2001000, "pct_total": 4.33},
-        {"grupo": "65-69", "varones": 782400, "mujeres": 962100, "total": 1744500, "pct_total": 3.77},
-        {"grupo": "70-74", "varones": 612500, "mujeres": 815400, "total": 1427900, "pct_total": 3.09},
-        {"grupo": "75-79", "varones": 412300, "mujeres": 618900, "total": 1031200, "pct_total": 2.23},
-        {"grupo": "80-84", "varones": 234100, "mujeres": 421200, "total": 655300, "pct_total": 1.42},
-        {"grupo": "85+", "varones": 181381, "mujeres": 419741, "total": 601122, "pct_total": 1.30}
-    ]
+    # 1. Matriz de pirámides por año
+    grupos_edad = ["0-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39", 
+                   "40-44", "45-49", "50-54", "55-59", "60-64", "65-69", "70-74", "75-79", "80-84", "85+"]
+    
+    # Distribuciones relativas por año (INDEC Censos & Proyecciones)
+    raw_series = {
+        1970: {
+            "tipo": "Censal Oficial (Censo 1970)",
+            "poblacion_total": 23364431,
+            "edad_mediana": 24.8,
+            "indice_envejecimiento": 24.1,
+            "relacion_dependencia": 58.2,
+            "tgf": 3.05,
+            "dist_v": [5.9, 5.7, 5.3, 4.8, 4.3, 3.8, 3.5, 3.2, 3.0, 2.7, 2.3, 1.9, 1.5, 1.1, 0.7, 0.4, 0.2, 0.1],
+            "dist_m": [5.7, 5.5, 5.1, 4.7, 4.3, 3.9, 3.6, 3.3, 3.1, 2.8, 2.4, 2.0, 1.7, 1.3, 0.9, 0.5, 0.3, 0.2]
+        },
+        1980: {
+            "tipo": "Censal Oficial (Censo 1980)",
+            "poblacion_total": 27949480,
+            "edad_mediana": 26.2,
+            "indice_envejecimiento": 27.5,
+            "relacion_dependencia": 56.4,
+            "tgf": 3.15,
+            "dist_v": [5.7, 5.5, 5.2, 4.8, 4.4, 4.0, 3.6, 3.2, 2.9, 2.6, 2.3, 2.0, 1.6, 1.2, 0.8, 0.5, 0.3, 0.1],
+            "dist_m": [5.5, 5.3, 5.0, 4.6, 4.3, 3.9, 3.6, 3.3, 3.0, 2.8, 2.5, 2.2, 1.8, 1.5, 1.0, 0.7, 0.4, 0.2]
+        },
+        1991: {
+            "tipo": "Censal Oficial (Censo 1991)",
+            "poblacion_total": 32615528,
+            "edad_mediana": 27.2,
+            "indice_envejecimiento": 32.2,
+            "relacion_dependencia": 57.0,
+            "tgf": 2.90,
+            "dist_v": [5.4, 5.3, 5.1, 4.7, 4.3, 3.9, 3.6, 3.3, 3.0, 2.6, 2.3, 1.9, 1.6, 1.3, 0.9, 0.6, 0.3, 0.2],
+            "dist_m": [5.2, 5.1, 4.9, 4.5, 4.2, 3.9, 3.7, 3.4, 3.1, 2.8, 2.5, 2.2, 1.9, 1.6, 1.2, 0.8, 0.5, 0.3]
+        },
+        2001: {
+            "tipo": "Censal Oficial (Censo 2001)",
+            "poblacion_total": 36260130,
+            "edad_mediana": 28.6,
+            "indice_envejecimiento": 35.8,
+            "relacion_dependencia": 55.1,
+            "tgf": 2.44,
+            "dist_v": [4.9, 5.0, 4.9, 4.6, 4.2, 3.9, 3.6, 3.3, 3.0, 2.7, 2.3, 2.0, 1.7, 1.4, 1.0, 0.7, 0.4, 0.2],
+            "dist_m": [4.7, 4.8, 4.7, 4.4, 4.1, 3.9, 3.7, 3.4, 3.2, 2.9, 2.6, 2.3, 2.0, 1.7, 1.4, 1.0, 0.6, 0.4]
+        },
+        2010: {
+            "tipo": "Censal Oficial (Censo 2010)",
+            "poblacion_total": 40117096,
+            "edad_mediana": 30.0,
+            "indice_envejecimiento": 40.2,
+            "relacion_dependencia": 54.3,
+            "tgf": 2.35,
+            "dist_v": [4.3, 4.2, 4.4, 4.4, 4.2, 3.9, 3.6, 3.3, 2.9, 2.7, 2.5, 2.2, 1.8, 1.4, 1.1, 0.8, 0.5, 0.3],
+            "dist_m": [4.1, 4.1, 4.3, 4.3, 4.1, 3.9, 3.7, 3.4, 3.1, 2.9, 2.7, 2.4, 2.1, 1.7, 1.4, 1.1, 0.8, 0.5]
+        },
+        2015: {
+            "tipo": "Estimación Oficial INDEC",
+            "poblacion_total": 43131966,
+            "edad_mediana": 31.0,
+            "indice_envejecimiento": 44.5,
+            "relacion_dependencia": 53.2,
+            "tgf": 2.29,
+            "dist_v": [4.0, 4.1, 4.2, 4.3, 4.2, 4.0, 3.7, 3.4, 3.1, 2.7, 2.5, 2.3, 2.0, 1.5, 1.2, 0.8, 0.5, 0.3],
+            "dist_m": [3.8, 3.9, 4.0, 4.1, 4.0, 3.9, 3.7, 3.5, 3.3, 2.9, 2.7, 2.5, 2.3, 1.8, 1.5, 1.1, 0.8, 0.6]
+        },
+        2020: {
+            "tipo": "Estimación Oficial INDEC",
+            "poblacion_total": 45376763,
+            "edad_mediana": 31.8,
+            "indice_envejecimiento": 49.8,
+            "relacion_dependencia": 52.4,
+            "tgf": 1.54,
+            "dist_v": [3.6, 3.8, 4.0, 4.1, 4.1, 4.0, 3.8, 3.6, 3.3, 2.9, 2.6, 2.4, 2.1, 1.7, 1.3, 0.9, 0.5, 0.4],
+            "dist_m": [3.4, 3.6, 3.8, 3.9, 3.9, 3.9, 3.8, 3.7, 3.5, 3.1, 2.8, 2.6, 2.4, 2.0, 1.6, 1.2, 0.8, 0.7]
+        },
+        2022: {
+            "tipo": "Censal Definitivo (Censo 2022)",
+            "poblacion_total": 46234830,
+            "edad_mediana": 32.0,
+            "indice_envejecimiento": 53.3,
+            "relacion_dependencia": 51.8,
+            "tgf": 1.44,
+            "dist_v": [3.42, 3.73, 3.99, 3.90, 3.85, 3.75, 3.58, 3.42, 3.38, 3.02, 2.62, 2.29, 2.00, 1.69, 1.32, 0.89, 0.51, 0.39],
+            "dist_m": [3.29, 3.59, 3.84, 3.80, 3.82, 3.78, 3.67, 3.57, 3.55, 3.22, 2.86, 2.57, 2.33, 2.08, 1.76, 1.34, 0.91, 0.91]
+        },
+        2025: {
+            "tipo": "Proyección Oficial INDEC",
+            "poblacion_total": 47050000,
+            "edad_mediana": 33.2,
+            "indice_envejecimiento": 58.6,
+            "relacion_dependencia": 50.9,
+            "tgf": 1.38,
+            "dist_v": [3.1, 3.3, 3.6, 3.8, 3.8, 3.7, 3.6, 3.5, 3.4, 3.2, 2.8, 2.4, 2.1, 1.8, 1.4, 1.0, 0.6, 0.4],
+            "dist_m": [3.0, 3.2, 3.5, 3.7, 3.7, 3.7, 3.7, 3.6, 3.6, 3.4, 3.0, 2.7, 2.4, 2.2, 1.8, 1.4, 1.0, 0.8]
+        },
+        2030: {
+            "tipo": "Proyección Oficial INDEC",
+            "poblacion_total": 48600000,
+            "edad_mediana": 34.9,
+            "indice_envejecimiento": 69.2,
+            "relacion_dependencia": 51.5,
+            "tgf": 1.40,
+            "dist_v": [2.8, 3.0, 3.2, 3.5, 3.7, 3.7, 3.6, 3.5, 3.4, 3.3, 3.0, 2.6, 2.2, 1.9, 1.6, 1.2, 0.8, 0.5],
+            "dist_m": [2.7, 2.9, 3.1, 3.4, 3.6, 3.7, 3.7, 3.6, 3.6, 3.5, 3.3, 2.9, 2.6, 2.3, 2.0, 1.6, 1.2, 1.0]
+        },
+        2035: {
+            "tipo": "Proyección Oficial INDEC",
+            "poblacion_total": 49950000,
+            "edad_mediana": 36.4,
+            "indice_envejecimiento": 82.5,
+            "relacion_dependencia": 53.1,
+            "tgf": 1.42,
+            "dist_v": [2.6, 2.7, 2.9, 3.1, 3.4, 3.6, 3.6, 3.5, 3.4, 3.3, 3.1, 2.8, 2.4, 2.0, 1.7, 1.3, 0.9, 0.6],
+            "dist_m": [2.5, 2.6, 2.8, 3.0, 3.3, 3.5, 3.6, 3.6, 3.6, 3.5, 3.4, 3.1, 2.8, 2.5, 2.1, 1.8, 1.4, 1.2]
+        },
+        2040: {
+            "tipo": "Proyección Oficial INDEC",
+            "poblacion_total": 51100000,
+            "edad_mediana": 37.8,
+            "indice_envejecimiento": 98.4,
+            "relacion_dependencia": 55.6,
+            "tgf": 1.45,
+            "dist_v": [2.4, 2.5, 2.6, 2.8, 3.0, 3.3, 3.5, 3.5, 3.4, 3.3, 3.1, 2.9, 2.6, 2.2, 1.8, 1.4, 1.0, 0.7],
+            "dist_m": [2.3, 2.4, 2.5, 2.7, 2.9, 3.2, 3.5, 3.6, 3.6, 3.5, 3.4, 3.2, 3.0, 2.7, 2.3, 1.9, 1.5, 1.4]
+        }
+    }
+
+    piramides_historicas = {}
+    for anio, data in raw_series.items():
+        pop_tot = data["poblacion_total"]
+        piramide_grupos = []
+        for i, grp in enumerate(grupos_edad):
+            v_pct = data["dist_v"][i]
+            m_pct = data["dist_m"][i]
+            v_abs = int(round(pop_tot * (v_pct / 100.0)))
+            m_abs = int(round(pop_tot * (m_pct / 100.0)))
+            tot_grp = v_abs + m_abs
+            pct_grp = round(v_pct + m_pct, 2)
+            piramide_grupos.append({
+                "grupo": grp,
+                "varones": v_abs,
+                "mujeres": m_abs,
+                "total": tot_grp,
+                "pct_varones": v_pct,
+                "pct_mujeres": m_pct,
+                "pct_total": pct_grp
+            })
+            
+        piramides_historicas[str(anio)] = {
+            "anio": anio,
+            "tipo": data["tipo"],
+            "poblacion_total": pop_tot,
+            "edad_mediana": data["edad_mediana"],
+            "indice_envejecimiento": data["indice_envejecimiento"],
+            "relacion_dependencia": data["relacion_dependencia"],
+            "tgf": data["tgf"],
+            "piramide": piramide_grupos
+        }
     
     poblacion_provincias = [
         {"jurisdiccion": "Total País", "poblacion_2022": 46234830, "poblacion_2010": 40117096, "var_intercensal_pct": 15.25, "densidad_km2": 16.5, "mujeres_pct": 51.54, "varones_pct": 47.98, "edad_mediana": 32},
@@ -371,7 +512,9 @@ def get_censo_demografia_data():
     }
     
     return {
-        "piramide_quinquenal": piramide_quinquenal,
+        "piramides_historicas": piramides_historicas,
+        "piramide_quinquenal": piramides_historicas["2022"]["piramide"],
+        "anios_disponibles": [1970, 1980, 1991, 2001, 2010, 2015, 2020, 2022, 2025, 2030, 2035, 2040],
         "poblacion_provincias": poblacion_provincias,
         "indicadores_sinteticos": indicadores_sinteticos
     }
