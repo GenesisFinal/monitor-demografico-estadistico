@@ -1361,35 +1361,6 @@
       }
     }
 
-    // 10. Initialize Chart.js Graphs
-    function initAllCharts() {
-      Chart.defaults.color = '#94a3b8';
-      Chart.defaults.borderColor = '#1e293b';
-      Chart.defaults.font.family = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-
-      updateMultiTableCharts();
-
-      // --- Histórico e0 / e65 ---
-      const hist = DATA.mortalidad.historico_ex;
-      charts.hist = new Chart(document.getElementById('chart-historico-ex'), {
-        type: 'bar',
-        data: {
-          labels: hist.map(h => h.periodo),
-          datasets: [
-            { label: 'Mujeres e0', data: hist.map(h => h.mujeres_e0), backgroundColor: '#ec4899' },
-            { label: 'Total e0', data: hist.map(h => h.total_e0), backgroundColor: '#0ea5e9' },
-            { label: 'Varones e0', data: hist.map(h => h.varones_e0), backgroundColor: '#6366f1' },
-            { label: 'Total e65 (A los 65 años)', data: hist.map(h => h.total_e65), type: 'line', borderColor: '#10b981', borderWidth: 3, pointRadius: 4 }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } },
-          scales: { y: { min: 0, max: 90, title: { display: true, text: 'Años', font: { size: 10 } } } }
-        }
-      });
-
     // --- Interactive Population Pyramid (1970 - 2040) ---
     const PYRAMID_YEARS = [1970, 1980, 1991, 2001, 2010, 2015, 2020, 2022, 2025, 2030, 2035, 2040];
     let currentPyramidYear = 2022;
