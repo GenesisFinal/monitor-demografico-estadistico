@@ -944,256 +944,932 @@
     </div>
   </footer>
 
-  <!-- EMBEDDED MASTER DATASET & INTERACTIVE APPLICATION LOGIC -->
+  <!-- EMBEDDED MASTER DATASET & MODULAR ISOLATED APPLICATION LOGIC -->
   <script>
     let DATA = null;
-    let charts = {};
-    let activeCompareTables = ['indec_2022_total', 'gam_83_varones', 'cso_2017_varones'];
+    const charts = {};
 
-    const TABLE_COLORS = {
-      'indec_2022_mujeres': '#ec4899',
-      'indec_2022_varones': '#3b82f6',
-      'indec_2022_total': '#0ea5e9',
-      'indec_2010_total': '#64748b',
-      'indec_2001_total': '#475569',
-      'gam_71_varones': '#eab308',
-      'gam_71_mujeres': '#facc15',
-      'gam_83_varones': '#10b981',
-      'gam_83_mujeres': '#34d399',
-      'gam_94_varones': '#06b6d4',
-      'gam_94_mujeres': '#22d3ee',
-      'up_94_total': '#14b8a6',
-      'cso_1980_varones': '#f97316',
-      'cso_1980_mujeres': '#fb923c',
-      'cso_2001_varones': '#a855f7',
-      'cso_2001_mujeres': '#c084fc',
-      'cso_2017_varones': '#8b5cf6',
-      'cso_2017_mujeres': '#a78bfa',
-      'mi_85_invalidez': '#ef4444',
-      'chile_ine_total': '#059669',
-      'uruguay_ine_total': '#d97706',
-      'espana_ine_total': '#6366f1'
+    // -------------------------------------------------------------
+    // GESTIÓN DE PESTAÑAS (TABS) - NAVEGACIÓN GLOBAL
+    // -------------------------------------------------------------
+    function switchTab(tabId) {
+      try {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        
+        const targetContent = document.getElementById('tab-' + tabId);
+        const targetBtn = document.getElementById('tab-btn-' + tabId);
+        
+        if (targetContent) targetContent.classList.remove('hidden');
+        if (targetBtn) targetBtn.classList.add('active');
+
+        // Disparar resize diferido para reajuste responsivo de Chart.js
+        setTimeout(() => {
+          window.dispatchEvent(new Event('resize'));
+        }, 60);
+      } catch (err) {
+        console.error('[Error en navegación switchTab]:', err);
+      }
+    }
+
+    // =============================================================
+    // SECCIÓN 1: MORTALIDAD, BIOMETRÍA Y TABLAS ACTUARIALES
+    // =============================================================
+    const SectionMortalidad = {
+      activeCompareTables: ['indec_2022_total', 'gam_83_varones', 'cso_2017_varones'],
+      
+      colors: {
+        'indec_2022_mujeres': '#ec4899',
+        'indec_2022_varones': '#3b82f6',
+        'indec_2022_total': '#0ea5e9',
+        'indec_2010_total': '#64748b',
+        'indec_2001_total': '#475569',
+        'gam_71_varones': '#eab308',
+        'gam_71_mujeres': '#facc15',
+        'gam_83_varones': '#10b981',
+        'gam_83_mujeres': '#34d399',
+        'gam_94_varones': '#06b6d4',
+        'gam_94_mujeres': '#22d3ee',
+        'up_94_total': '#14b8a6',
+        'cso_1980_varones': '#f97316',
+        'cso_1980_mujeres': '#fb923c',
+        'cso_2001_varones': '#a855f7',
+        'cso_2001_mujeres': '#c084fc',
+        'cso_2017_varones': '#8b5cf6',
+        'cso_2017_mujeres': '#a78bfa',
+        'mi_85_invalidez': '#ef4444',
+        'chile_ine_total': '#059669',
+        'uruguay_ine_total': '#d97706',
+        'espana_ine_total': '#6366f1'
+      },
+
+      init() {
+        this.populateSelectors();
+        this.runCalculator();
+        this.renderProvincialTable();
+        this.initHistoricalChart();
+      },
+
+      populateSelectors() {
+        if (!DATA?.mortalidad?.catalogo) return;
+        const calcSelect = document.getElementById('calc-tabla-select');
+        const explorerSelect = document.getElementById('tabla-explorer-select');
+        if (calcSelect && explorerSelect) {
+          explorerSelect.innerHTML = calcSelect.innerHTML;
+          explorerSelect.value = calcSelect.value;
+        }
+
+        const container = document.getElementById('multi-table-checkboxes');
+        if (!container) return;
+        container.innerHTML = '';
+        
+        const catalogo = DATA.mortalidad.catalogo;
+        Object.keys(catalogo).forEach(key => {
+          const item = catalogo[key];
+          const isChecked = this.activeCompareTables.includes(key);
+          const label = document.createElement('label');
+          label.className = `inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border transition cursor-pointer ${isChecked ? 'bg-slate-800 border-sky-500/50 text-sky-300' : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-slate-200'}`;
+          label.innerHTML = `
+            <input type="checkbox" value="${key}" ${isChecked ? 'checked' : ''} onchange="SectionMortalidad.toggleTable('${key}', this.checked)" class="rounded bg-slate-900 border-slate-700 text-sky-500 focus:ring-0">
+            <span>${item.metadata.nombre}</span>
+          `;
+          container.appendChild(label);
+        });
+      },
+
+      toggleTable(tableKey, isChecked) {
+        if (isChecked) {
+          if (!this.activeCompareTables.includes(tableKey)) this.activeCompareTables.push(tableKey);
+        } else {
+          this.activeCompareTables = this.activeCompareTables.filter(k => k !== tableKey);
+        }
+        this.populateSelectors();
+        this.updateMultiCharts();
+      },
+
+      setPreset(preset) {
+        if (preset === 'retiro_vs_poblacion') {
+          this.activeCompareTables = ['indec_2022_total', 'gam_83_varones', 'gam_83_mujeres', 'up_94_total'];
+        } else if (preset === 'cso_evolucion') {
+          this.activeCompareTables = ['cso_1980_varones', 'cso_2001_varones', 'cso_2017_varones', 'indec_2022_varones'];
+        } else if (preset === 'gam_evolucion') {
+          this.activeCompareTables = ['gam_71_varones', 'gam_83_varones', 'gam_94_varones', 'indec_2022_varones'];
+        }
+        this.populateSelectors();
+        this.updateMultiCharts();
+      },
+
+      runCalculator() {
+        if (!DATA?.mortalidad?.catalogo) return;
+        
+        const tableKey = document.getElementById('calc-tabla-select')?.value || 'indec_2022_total';
+        const edadInput = document.getElementById('calc-edad');
+        const edad = parseInt(edadInput ? edadInput.value : 65, 10);
+        
+        if (isNaN(edad) || edad < 0 || edad > 100) return;
+
+        const tableData = DATA.mortalidad.catalogo[tableKey];
+        if (!tableData) return;
+
+        const table = tableData.tabla;
+        const row = table.find(r => r.x === edad) || table[table.length - 1];
+
+        // Actualizar descripción
+        const descEl = document.getElementById('calc-table-desc');
+        if (descEl) descEl.innerText = `${tableData.metadata.nombre} (${tableData.metadata.categoria}): ${tableData.metadata.descripcion}`;
+
+        // Actualizar tarjetas de resultados
+        const elEx = document.getElementById('calc-res-ex');
+        const elEdadFin = document.getElementById('calc-res-edad-final');
+        const elPx = document.getElementById('calc-res-px');
+        const elQx = document.getElementById('calc-res-qx');
+        const elLx = document.getElementById('calc-res-lx');
+
+        if (elEx) elEx.innerText = row.ex.toFixed(1) + ' años';
+        if (elEdadFin) elEdadFin.innerText = (edad + row.ex).toFixed(1) + ' años';
+        if (elPx) elPx.innerText = (row.px * 100).toFixed(3) + '%';
+        if (elQx) elQx.innerText = (row.qx * 1000).toFixed(2) + ' ‰';
+        if (elLx) elLx.innerText = Math.round(row.lx).toLocaleString('es-AR');
+
+        // Hitos de Supervivencia desde la edad alcanzada
+        const targetAges = [65, 70, 75, 80, 85, 90, 95, 100];
+        const container = document.getElementById('calc-milestones-container');
+        if (container) {
+          container.innerHTML = '';
+          targetAges.forEach(targetAge => {
+            if (targetAge <= edad) return;
+            const targetRow = table.find(r => r.x === targetAge);
+            if (!targetRow) return;
+
+            const prob = (targetRow.lx / row.lx) * 100;
+            const card = document.createElement('div');
+            card.className = 'p-2.5 bg-slate-900 border border-slate-800 rounded-lg';
+            card.innerHTML = `
+              <div class="text-[11px] text-slate-400">Alcanzar ${targetAge} años</div>
+              <div class="text-sm font-bold text-sky-400 mt-0.5">${prob.toFixed(1)}%</div>
+              <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mt-1.5">
+                <div class="bg-gradient-to-r from-sky-500 to-indigo-500 h-full rounded-full" style="width: ${Math.min(100, Math.max(0, prob))}%"></div>
+              </div>
+            `;
+            container.appendChild(card);
+          });
+        }
+
+        // Sincronizar tabla completa y gráficos
+        const explorerSelect = document.getElementById('tabla-explorer-select');
+        if (explorerSelect) explorerSelect.value = tableKey;
+        this.renderFullTable();
+        this.updateMultiCharts();
+      },
+
+      updateMultiCharts() {
+        if (!DATA?.mortalidad?.catalogo) return;
+
+        const edadInput = document.getElementById('calc-edad');
+        let baseAge = parseInt(edadInput ? edadInput.value : 65, 10);
+        if (isNaN(baseAge) || baseAge < 0 || baseAge > 99) baseAge = 65;
+
+        const isConditional = document.getElementById('chk-radix-condicional')?.checked ?? true;
+        const startAge = isConditional ? baseAge : 0;
+
+        // Actualizar badges
+        const radixBadge = document.getElementById('badge-radix-status');
+        const labelRadixLx = document.getElementById('label-radix-lx');
+        const labelRadixEx = document.getElementById('label-radix-ex');
+        
+        if (isConditional) {
+          if (radixBadge) radixBadge.innerText = `Raíz en ${baseAge} años (Radix l_${baseAge} = 100.000)`;
+          if (labelRadixLx) labelRadixLx.innerText = `Radix: 100.000 a los ${baseAge} años`;
+          if (labelRadixEx) labelRadixEx.innerText = `Esperanza remanente desde los ${baseAge} años`;
+        } else {
+          if (radixBadge) radixBadge.innerText = `Raíz al nacer (l₀ = 100.000)`;
+          if (labelRadixLx) labelRadixLx.innerText = `Radix: 100.000 al nacer (x=0)`;
+          if (labelRadixEx) labelRadixEx.innerText = `Esperanza de vida total (0-100+)`;
+        }
+
+        const ages = [];
+        for (let x = startAge; x <= 100; x++) {
+          if ((x - startAge) % (isConditional ? 1 : 2) === 0 || x === 100) {
+            ages.push(x);
+          }
+        }
+
+        const lxDatasets = this.activeCompareTables.map(key => {
+          const item = DATA.mortalidad.catalogo[key];
+          const color = this.colors[key] || '#0ea5e9';
+          const table = item.tabla;
+          const baseRow = table.find(r => r.x === startAge) || table[0];
+          const lx_base = baseRow.lx > 0 ? baseRow.lx : 1.0;
+
+          const dataPoints = ages.map(x => {
+            const row = table.find(r => r.x === x);
+            if (!row) return 0;
+            return isConditional ? Math.round((row.lx / lx_base) * 100000.0 * 10) / 10 : row.lx;
+          });
+
+          return {
+            label: item.metadata.nombre,
+            data: dataPoints,
+            borderColor: color,
+            backgroundColor: color + '20',
+            borderWidth: 2.2,
+            pointRadius: isConditional ? 1.5 : 0,
+            tension: 0.2
+          };
+        });
+
+        const exDatasets = this.activeCompareTables.map(key => {
+          const item = DATA.mortalidad.catalogo[key];
+          const color = this.colors[key] || '#0ea5e9';
+          const table = item.tabla;
+          return {
+            label: item.metadata.nombre,
+            data: ages.map(x => table.find(r => r.x === x)?.ex || 0),
+            borderColor: color,
+            borderWidth: 2.2,
+            pointRadius: isConditional ? 1.5 : 0,
+            tension: 0.2
+          };
+        });
+
+        // Gráfico lx
+        const canvasLx = document.getElementById('chart-multi-lx');
+        if (canvasLx) {
+          if (charts.multiLx) {
+            charts.multiLx.data.labels = ages;
+            charts.multiLx.data.datasets = lxDatasets;
+            charts.multiLx.options.scales.x.title.text = isConditional ? `Edad (x) a partir de la edad base (${startAge} años)` : 'Edad (x)';
+            charts.multiLx.options.scales.y.title.text = isConditional ? `Sobrevivientes (l_{x|${startAge}} sobre 100.000 vivos a edad ${startAge})` : 'Sobrevivientes (lx)';
+            charts.multiLx.update();
+          } else {
+            charts.multiLx = new Chart(canvasLx, {
+              type: 'line',
+              data: { labels: ages, datasets: lxDatasets },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                  legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } },
+                  tooltip: {
+                    callbacks: {
+                      label: function(c) {
+                        const val = c.raw;
+                        const pct = ((val / 100000.0) * 100).toFixed(1);
+                        return `${c.dataset.label}: ${val.toLocaleString('es-AR')} (${pct}% sobrevida)`;
+                      }
+                    }
+                  }
+                },
+                scales: {
+                  x: { title: { display: true, text: `Edad (x) a partir de los ${startAge} años`, font: { size: 10 } } },
+                  y: { title: { display: true, text: 'Sobrevivientes condicionales (Base 100.000)', font: { size: 10 } }, min: 0, max: 100000 }
+                }
+              }
+            });
+          }
+        }
+
+        // Gráfico ex
+        const canvasEx = document.getElementById('chart-multi-ex');
+        if (canvasEx) {
+          if (charts.multiEx) {
+            charts.multiEx.data.labels = ages;
+            charts.multiEx.data.datasets = exDatasets;
+            charts.multiEx.options.scales.x.title.text = isConditional ? `Edad (x) desde ${startAge} años` : 'Edad (x)';
+            charts.multiEx.update();
+          } else {
+            charts.multiEx = new Chart(canvasEx, {
+              type: 'line',
+              data: { labels: ages, datasets: exDatasets },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                  legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } },
+                  tooltip: {
+                    callbacks: {
+                      label: function(c) {
+                        const exVal = c.raw;
+                        const currentAge = parseInt(c.label, 10);
+                        return `${c.dataset.label}: ${exVal.toFixed(1)} años remanentes (Edad est.: ${(currentAge + exVal).toFixed(1)} años)`;
+                      }
+                    }
+                  }
+                },
+                scales: {
+                  x: { title: { display: true, text: `Edad (x) desde ${startAge} años`, font: { size: 10 } } },
+                  y: { title: { display: true, text: 'Años remanentes esperados (ex)', font: { size: 10 } }, min: 0 }
+                }
+              }
+            });
+          }
+        }
+      },
+
+      initHistoricalChart() {
+        const hist = DATA?.mortalidad?.historico_ex;
+        const canvasHist = document.getElementById('chart-historico-ex');
+        if (!hist || !canvasHist) return;
+
+        charts.hist = new Chart(canvasHist, {
+          type: 'bar',
+          data: {
+            labels: hist.map(h => h.periodo),
+            datasets: [
+              { label: 'Mujeres e0', data: hist.map(h => h.mujeres_e0), backgroundColor: '#ec4899' },
+              { label: 'Total e0', data: hist.map(h => h.total_e0), backgroundColor: '#0ea5e9' },
+              { label: 'Varones e0', data: hist.map(h => h.varones_e0), backgroundColor: '#6366f1' },
+              { label: 'Total e65 (A los 65 años)', data: hist.map(h => h.total_e65), type: 'line', borderColor: '#10b981', borderWidth: 3, pointRadius: 4 }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } },
+            scales: { y: { min: 0, max: 90, title: { display: true, text: 'Años', font: { size: 10 } } } }
+          }
+        });
+      },
+
+      renderFullTable() {
+        if (!DATA?.mortalidad?.catalogo) return;
+        const tableKey = document.getElementById('tabla-explorer-select')?.value || 'indec_2022_total';
+        const tableData = DATA.mortalidad.catalogo[tableKey];
+        if (!tableData) return;
+
+        const titleEl = document.getElementById('tabla-explorer-title');
+        const descEl = document.getElementById('tabla-explorer-desc');
+        if (titleEl) titleEl.innerText = `Tabla Biométrica Completa: ${tableData.metadata.nombre}`;
+        if (descEl) descEl.innerText = `${tableData.metadata.descripcion} (Radix l₀ = 100.000)`;
+
+        const table = tableData.tabla;
+        const tbody = document.getElementById('tabla-actuarial-completa-body');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+
+        table.forEach(r => {
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-slate-800/50 transition';
+          tr.innerHTML = `
+            <td class="py-1.5 px-3 font-semibold text-slate-200">${r.x}</td>
+            <td class="py-1.5 px-3 text-right text-slate-300">${Math.round(r.lx).toLocaleString('es-AR')}</td>
+            <td class="py-1.5 px-3 text-right text-rose-300">${Math.round(r.dx).toLocaleString('es-AR')}</td>
+            <td class="py-1.5 px-3 text-right text-amber-300">${r.qx.toFixed(5)}</td>
+            <td class="py-1.5 px-3 text-right text-indigo-300">${r.px.toFixed(5)}</td>
+            <td class="py-1.5 px-3 text-right text-slate-400">${Math.round(r.Lx).toLocaleString('es-AR')}</td>
+            <td class="py-1.5 px-3 text-right text-slate-400">${Math.round(r.Tx).toLocaleString('es-AR')}</td>
+            <td class="py-1.5 px-3 text-right font-bold text-sky-400">${r.ex.toFixed(2)}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      },
+
+      renderProvincialTable() {
+        if (!DATA?.mortalidad?.provincias_ex) return;
+        const filtro = document.getElementById('filtro-prov-mortalidad')?.value.toLowerCase() || '';
+        const tbody = document.getElementById('tabla-provincias-mortalidad-body');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+
+        const list = DATA.mortalidad.provincias_ex.filter(p => p.provincia.toLowerCase().includes(filtro));
+        list.forEach(p => {
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-slate-800/40 transition';
+          tr.innerHTML = `
+            <td class="py-2 px-3 font-medium text-slate-200">${p.provincia}</td>
+            <td class="py-2 px-3 text-right font-semibold text-sky-400">${p.e0_total}</td>
+            <td class="py-2 px-3 text-right text-purple-300">${p.e0_mujeres}</td>
+            <td class="py-2 px-3 text-right text-indigo-300">${p.e0_varones}</td>
+            <td class="py-2 px-3 text-right font-medium text-emerald-400">${p.e65_total}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      },
+
+      exportCSV() {
+        if (!DATA?.mortalidad?.catalogo) return;
+        const tableKey = document.getElementById('tabla-explorer-select')?.value || 'indec_2022_total';
+        const tableData = DATA.mortalidad.catalogo[tableKey];
+        if (!tableData) return;
+
+        let csv = 'Edad_x,lx_Sobrevivientes,dx_Defunciones,qx_TasaMortalidad,px_TasaSupervivencia,Lx_PoblacionEstacionaria,Tx_TotalAniosVividos,ex_EsperanzaVida\n';
+        tableData.tabla.forEach(r => {
+          csv += `${r.x},${r.lx},${r.dx},${r.qx},${r.px},${r.Lx},${r.Tx},${r.ex}\n`;
+        });
+
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `tabla_mortalidad_${tableKey}.csv`;
+        a.click();
+      }
     };
 
-    // 1. Tab Switching Functionality
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      
-      const targetContent = document.getElementById('tab-' + tabId);
-      const targetBtn = document.getElementById('tab-btn-' + tabId);
-      
-      if (targetContent) targetContent.classList.remove('hidden');
-      if (targetBtn) targetBtn.classList.add('active');
+    // Funciones globales vinculadas a Sección 1
+    function runLifeExpectancyCalculator() { SectionMortalidad.runCalculator(); }
+    function setComparePreset(preset) { SectionMortalidad.setPreset(preset); }
+    function updateMultiTableCharts() { SectionMortalidad.updateMultiCharts(); }
+    function renderFullActuarialTable() { SectionMortalidad.renderFullTable(); }
+    function renderProvMortalidadTable() { SectionMortalidad.renderProvincialTable(); }
+    function exportActuarialCSV() { SectionMortalidad.exportCSV(); }
 
-      setTimeout(() => {
-        window.dispatchEvent(new Event('resize'));
-      }, 50);
-    }
 
-    // 2. Populate Dropdowns & Checkboxes
-    function populateCatalogSelectors() {
-      const calcSelect = document.getElementById('calc-tabla-select');
-      const explorerSelect = document.getElementById('tabla-explorer-select');
-      explorerSelect.innerHTML = calcSelect.innerHTML;
-      explorerSelect.value = calcSelect.value;
+    // =============================================================
+    // SECCIÓN 2: DEMOGRAFÍA, CENSO Y PIRÁMIDE POBLACIONAL
+    // =============================================================
+    const SectionDemografia = {
+      years: [1970, 1980, 1991, 2001, 2010, 2015, 2020, 2022, 2025, 2030, 2035, 2040],
+      currentYear: 2022,
+      unit: 'personas', // 'personas' o 'pct'
+      animationTimer: null,
 
-      const container = document.getElementById('multi-table-checkboxes');
-      container.innerHTML = '';
-      
-      const catalogo = DATA.mortalidad.catalogo;
-      Object.keys(catalogo).forEach(key => {
-        const item = catalogo[key];
-        const isChecked = activeCompareTables.includes(key);
-        const label = document.createElement('label');
-        label.className = `inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border transition cursor-pointer ${isChecked ? 'bg-slate-800 border-sky-500/50 text-sky-300' : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-slate-200'}`;
-        label.innerHTML = `
-          <input type="checkbox" value="${key}" ${isChecked ? 'checked' : ''} onchange="toggleCompareTable('${key}', this.checked)" class="rounded bg-slate-900 border-slate-700 text-sky-500 focus:ring-0">
-          <span>${item.metadata.nombre}</span>
-        `;
-        container.appendChild(label);
-      });
-    }
+      init() {
+        this.updateDisplay(this.currentYear);
+        this.renderCensoTable();
+      },
 
-    // 3. Toggle compare tables
-    function toggleCompareTable(tableKey, isChecked) {
-      if (isChecked) {
-        if (!activeCompareTables.includes(tableKey)) activeCompareTables.push(tableKey);
-      } else {
-        activeCompareTables = activeCompareTables.filter(k => k !== tableKey);
+      setYear(year) {
+        this.currentYear = year;
+        const idx = this.years.indexOf(year);
+        const slider = document.getElementById('slider-piramide-anio');
+        if (slider && idx !== -1) slider.value = idx;
+        this.updateDisplay(year);
+      },
+
+      onSliderChange(valIndex) {
+        const year = this.years[parseInt(valIndex, 10)] || 2022;
+        this.currentYear = year;
+        this.updateDisplay(year);
+      },
+
+      changeUnit() {
+        const sel = document.getElementById('select-piramide-unidad');
+        if (sel) this.unit = sel.value;
+        this.updateDisplay(this.currentYear);
+      },
+
+      toggleAnimation() {
+        const btn = document.getElementById('btn-play-pyramid');
+        const text = document.getElementById('text-play-pyramid');
+
+        if (this.animationTimer) {
+          clearInterval(this.animationTimer);
+          this.animationTimer = null;
+          if (text) text.innerText = 'Reproducir Evolución';
+          if (btn) btn.className = 'flex items-center gap-1.5 px-3 py-1.5 bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold rounded-lg shadow-md transition';
+        } else {
+          if (text) text.innerText = 'Pausar Animación';
+          if (btn) btn.className = 'flex items-center gap-1.5 px-3 py-1.5 bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold rounded-lg shadow-md transition';
+          
+          this.animationTimer = setInterval(() => {
+            let currIdx = this.years.indexOf(this.currentYear);
+            let nextIdx = (currIdx + 1) % this.years.length;
+            this.setYear(this.years[nextIdx]);
+          }, 1100);
+        }
+        if (window.lucide) lucide.createIcons();
+      },
+
+      updateDisplay(year) {
+        if (!DATA?.demografia?.piramides_historicas) return;
+
+        const yearData = DATA.demografia.piramides_historicas[String(year)];
+        if (!yearData) return;
+
+        // Actualizar textos y badges
+        const badge = document.getElementById('badge-piramide-anio');
+        if (badge) badge.innerText = `Año: ${year}`;
+
+        const descTipo = document.getElementById('desc-piramide-tipo');
+        if (descTipo) descTipo.innerText = yearData.tipo;
+
+        const titleChart = document.getElementById('title-piramide-chart');
+        if (titleChart) titleChart.innerText = `Pirámide de Población Argentina (${year} - ${yearData.tipo})`;
+
+        // KPIs dinámicos
+        const kpiPopLabel = document.getElementById('kpi-poblacion-label');
+        if (kpiPopLabel) kpiPopLabel.innerText = `Población Total (${year})`;
+
+        const kpiPopVal = document.getElementById('kpi-poblacion-val');
+        if (kpiPopVal) kpiPopVal.innerText = yearData.poblacion_total.toLocaleString('es-AR');
+
+        const kpiPopSub = document.getElementById('kpi-poblacion-sub');
+        if (kpiPopSub) kpiPopSub.innerHTML = `<i data-lucide="info" class="w-3 h-3"></i> ${yearData.tipo}`;
+
+        const kpiEdadVal = document.getElementById('kpi-edad-mediana-val');
+        if (kpiEdadVal) kpiEdadVal.innerText = `${yearData.edad_mediana.toFixed(1)} años`;
+
+        const kpiEnvVal = document.getElementById('kpi-envejecimiento-val');
+        if (kpiEnvVal) kpiEnvVal.innerText = `${yearData.indice_envejecimiento.toFixed(1)}%`;
+
+        const kpiTgfVal = document.getElementById('kpi-tgf-val');
+        if (kpiTgfVal) kpiTgfVal.innerText = yearData.tgf.toFixed(2);
+
+        const kpiDepVal = document.getElementById('kpi-dependencia-val');
+        if (kpiDepVal) kpiDepVal.innerText = `${yearData.relacion_dependencia.toFixed(1)} dependientes / 100 activos`;
+
+        const descPatron = document.getElementById('desc-patron-piramide');
+        if (descPatron) {
+          if (year <= 1980) {
+            descPatron.innerText = 'Pirámide Expansiva (Población Joven)';
+          } else if (year <= 2015) {
+            descPatron.innerText = 'Transición Estacionaria';
+          } else {
+            descPatron.innerText = 'Constricción / Envejecimiento Avanzado';
+          }
+        }
+
+        // Estilos de botones de año
+        const ticksContainer = document.getElementById('ticks-piramide-anios');
+        if (ticksContainer) {
+          const buttons = ticksContainer.querySelectorAll('button');
+          buttons.forEach(btn => {
+            const btnYear = parseInt(btn.innerText, 10);
+            if (btnYear === year) {
+              btn.className = 'text-sky-400 font-bold bg-sky-500/10 py-0.5 px-1.5 rounded border border-sky-500/30';
+            } else {
+              btn.className = 'hover:text-sky-400 py-0.5 px-1 rounded text-slate-400';
+            }
+          });
+        }
+
+        // Dataset de Chart.js
+        const piramide = yearData.piramide;
+        const piramideGrupos = piramide.map(p => p.grupo);
+        
+        let varonesData, mujeresData;
+        if (this.unit === 'pct') {
+          varonesData = piramide.map(p => -p.pct_varones);
+          mujeresData = piramide.map(p => p.pct_mujeres);
+        } else {
+          varonesData = piramide.map(p => -p.varones);
+          mujeresData = piramide.map(p => p.mujeres);
+        }
+
+        const canvasPiramide = document.getElementById('chart-piramide-poblacion');
+        if (!canvasPiramide) return;
+
+        if (charts.piramide) {
+          charts.piramide.data.labels = piramideGrupos;
+          charts.piramide.data.datasets[0].data = varonesData;
+          charts.piramide.data.datasets[1].data = mujeresData;
+          
+          charts.piramide.options.scales.x.ticks.callback = (v) => {
+            return this.unit === 'pct' ? Math.abs(v).toFixed(1) + '%' : Math.abs(v / 1000000).toFixed(1) + 'M';
+          };
+          charts.piramide.options.scales.x.title.text = this.unit === 'pct' ? 'Porcentaje de la Población (%)' : 'Población (Millones de personas)';
+          charts.piramide.update();
+        } else {
+          charts.piramide = new Chart(canvasPiramide, {
+            type: 'bar',
+            data: {
+              labels: piramideGrupos,
+              datasets: [
+                { label: 'Varones', data: varonesData, backgroundColor: '#6366f1', borderRadius: 4 },
+                { label: 'Mujeres', data: mujeresData, backgroundColor: '#ec4899', borderRadius: 4 }
+              ]
+            },
+            options: {
+              indexAxis: 'y',
+              responsive: true,
+              maintainAspectRatio: false,
+              animation: { duration: 350 },
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: {
+                    callback: (v) => {
+                      return this.unit === 'pct' ? Math.abs(v).toFixed(1) + '%' : Math.abs(v / 1000000).toFixed(1) + 'M';
+                    }
+                  },
+                  title: { display: true, text: 'Población (Millones de personas)', font: { size: 10 } }
+                },
+                y: { stacked: true, title: { display: true, text: 'Grupo Quinquenal de Edad', font: { size: 10 } } }
+              },
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    label: (c) => {
+                      const val = Math.abs(c.raw);
+                      return this.unit === 'pct' ? `${c.dataset.label}: ${val.toFixed(2)}% del total` : `${c.dataset.label}: ${val.toLocaleString('es-AR')} personas`;
+                    }
+                  }
+                },
+                legend: { position: 'top' }
+              }
+            }
+          });
+        }
+
+        if (window.lucide) lucide.createIcons();
+      },
+
+      renderCensoTable() {
+        if (!DATA?.demografia?.poblacion_provincias) return;
+        const filtro = document.getElementById('filtro-prov-censo')?.value.toLowerCase() || '';
+        const tbody = document.getElementById('tabla-censo-prov-body');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+
+        const list = DATA.demografia.poblacion_provincias.filter(p => p.jurisdiccion.toLowerCase().includes(filtro));
+        list.forEach(p => {
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-slate-800/40 transition';
+          tr.innerHTML = `
+            <td class="py-2 px-3 font-medium text-slate-200">${p.jurisdiccion}</td>
+            <td class="py-2 px-3 text-right font-bold text-white">${p.poblacion_2022.toLocaleString('es-AR')}</td>
+            <td class="py-2 px-3 text-right text-slate-400">${p.poblacion_2010.toLocaleString('es-AR')}</td>
+            <td class="py-2 px-3 text-right font-semibold text-emerald-400">+${p.var_intercensal_pct.toFixed(2)}%</td>
+            <td class="py-2 px-3 text-right text-slate-300">${p.densidad_km2.toLocaleString('es-AR')}</td>
+            <td class="py-2 px-3 text-right text-purple-300">${p.mujeres_pct}%</td>
+            <td class="py-2 px-3 text-right text-amber-300">${p.edad_mediana} años</td>
+          `;
+          tbody.appendChild(tr);
+        });
       }
-      populateCatalogSelectors();
-      updateMultiTableCharts();
-    }
+    };
 
-    function setComparePreset(preset) {
-      if (preset === 'retiro_vs_poblacion') {
-        activeCompareTables = ['indec_2022_total', 'gam_83_varones', 'gam_83_mujeres', 'up_94_total'];
-      } else if (preset === 'cso_evolucion') {
-        activeCompareTables = ['cso_1980_varones', 'cso_2001_varones', 'cso_2017_varones', 'indec_2022_varones'];
-      } else if (preset === 'gam_evolucion') {
-        activeCompareTables = ['gam_71_varones', 'gam_83_varones', 'gam_94_varones', 'indec_2022_varones'];
+    // Funciones globales vinculadas a Sección 2
+    function setPyramidYear(year) { SectionDemografia.setYear(year); }
+    function onPyramidSliderChange(val) { SectionDemografia.onSliderChange(val); }
+    function changePyramidUnit() { SectionDemografia.changeUnit(); }
+    function togglePyramidAnimation() { SectionDemografia.toggleAnimation(); }
+    function renderCensoProvTable() { SectionDemografia.renderCensoTable(); }
+
+
+    // =============================================================
+    // SECCIÓN 3: SALUD Y ESTADÍSTICAS VITALES (DEIS)
+    // =============================================================
+    const SectionSalud = {
+      init() {
+        if (!DATA?.salud) return;
+
+        // TMI Histórico
+        const tmiData = DATA.salud.serie_mortalidad_infantil;
+        const canvasTmi = document.getElementById('chart-salud-tmi');
+        if (tmiData && canvasTmi) {
+          charts.tmi = new Chart(canvasTmi, {
+            type: 'line',
+            data: {
+              labels: tmiData.map(d => d.anio),
+              datasets: [
+                { label: 'Tasa Total', data: tmiData.map(d => d.tmi_total), borderColor: '#10b981', backgroundColor: '#10b98120', fill: true, tension: 0.3, borderWidth: 3 },
+                { label: 'Neonatal (<28 días)', data: tmiData.map(d => d.tmi_neonatal), borderColor: '#3b82f6', tension: 0.3, borderWidth: 2 },
+                { label: 'Posneonatal (28d a 11m)', data: tmiData.map(d => d.tmi_posneonatal), borderColor: '#f59e0b', tension: 0.3, borderWidth: 2 }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: { y: { title: { display: true, text: 'Por mil nacidos vivos (‰)', font: { size: 10 } }, min: 0 } },
+              plugins: { legend: { position: 'top' } }
+            }
+          });
+        }
+
+        // Fecundidad
+        const fecData = DATA.salud.serie_fecundidad;
+        const canvasFec = document.getElementById('chart-salud-fecundidad');
+        if (fecData && canvasFec) {
+          charts.fec = new Chart(canvasFec, {
+            type: 'line',
+            data: {
+              labels: fecData.map(d => d.anio),
+              datasets: [
+                { label: 'Tasa Global de Fecundidad (Hijos/mujer)', data: fecData.map(d => d.tgf), borderColor: '#0ea5e9', yAxisID: 'y', borderWidth: 3 },
+                { label: 'Fecundidad Adolescente 15-19 (‰)', data: fecData.map(d => d.tasa_fec_adolescente_15_19), borderColor: '#ec4899', yAxisID: 'y1', borderWidth: 2, borderDash: [4, 4] }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                y: { type: 'linear', position: 'left', min: 1.0, max: 3.2, title: { display: true, text: 'TGF (Hijos por mujer)', font: { size: 10 } } },
+                y1: { type: 'linear', position: 'right', min: 0, max: 80, grid: { drawOnChartArea: false }, title: { display: true, text: 'Fec. Adolescente (‰)', font: { size: 10 } } }
+              },
+              plugins: { legend: { position: 'top' } }
+            }
+          });
+        }
+
+        // Causas CIE-10
+        const causas = DATA.salud.causas_defuncion;
+        const canvasCausas = document.getElementById('chart-salud-causas');
+        if (causas && canvasCausas) {
+          charts.causas = new Chart(canvasCausas, {
+            type: 'bar',
+            data: {
+              labels: causas.map(c => c.causa),
+              datasets: [{
+                label: '% del Total de Defunciones',
+                data: causas.map(c => c.porcentaje),
+                backgroundColor: causas.map(c => c.color),
+                borderRadius: 4
+              }]
+            },
+            options: {
+              indexAxis: 'y',
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { display: false } },
+              scales: { x: { title: { display: true, text: 'Porcentaje (%)', font: { size: 10 } } } }
+            }
+          });
+        }
+
+        // Cobertura
+        const cobData = DATA.salud.cobertura_salud;
+        const canvasCob = document.getElementById('chart-salud-cobertura');
+        if (cobData && canvasCob) {
+          charts.cobertura = new Chart(canvasCob, {
+            type: 'doughnut',
+            data: {
+              labels: cobData.map(c => c.tipo),
+              datasets: [{
+                data: cobData.map(c => c.porcentaje),
+                backgroundColor: ['#0ea5e9', '#10b981', '#a855f7'],
+                borderWidth: 0
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 } } } }
+            }
+          });
+        }
       }
-      populateCatalogSelectors();
-      updateMultiTableCharts();
-    }
+    };
 
-    // 4. Life Expectancy Calculator Logic
-    function runLifeExpectancyCalculator() {
-      if (!DATA) return;
-      
-      const tableKey = document.getElementById('calc-tabla-select').value;
-      const edad = parseInt(document.getElementById('calc-edad').value, 10);
-      
-      if (isNaN(edad) || edad < 0 || edad > 100) return;
 
-      const tableData = DATA.mortalidad.catalogo[tableKey];
-      if (!tableData) return;
+    // =============================================================
+    // SECCIÓN 4: EDUCACIÓN Y TRAYECTORIAS
+    // =============================================================
+    const SectionEducacion = {
+      init() {
+        if (!DATA?.educacion) return;
 
-      const table = tableData.tabla;
-      const row = table.find(r => r.x === edad) || table[table.length - 1];
+        // Cobertura por Nivel
+        const edCob = DATA.educacion.cobertura_niveles;
+        const canvasCob = document.getElementById('chart-educacion-cobertura');
+        if (edCob && canvasCob) {
+          charts.edCob = new Chart(canvasCob, {
+            type: 'bar',
+            data: {
+              labels: edCob.map(e => e.nivel),
+              datasets: [{
+                label: 'Tasa de Escolarización (%)',
+                data: edCob.map(e => e.tasa_escolarizacion),
+                backgroundColor: '#0284c7',
+                borderRadius: 6
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: { y: { min: 0, max: 100, title: { display: true, text: 'Porcentaje Asistencia (%)', font: { size: 10 } } } },
+              plugins: { legend: { display: false } }
+            }
+          });
+        }
 
-      // Update description
-      document.getElementById('calc-table-desc').innerText = `${tableData.metadata.nombre} (${tableData.metadata.categoria}): ${tableData.metadata.descripcion}`;
+        // Trayectoria Secundaria
+        const edTray = DATA.educacion.trayectoria_secundaria;
+        const canvasTray = document.getElementById('chart-educacion-trayectoria');
+        if (edTray && canvasTray) {
+          charts.edTray = new Chart(canvasTray, {
+            type: 'bar',
+            data: {
+              labels: edTray.map(t => t.anio_estudio),
+              datasets: [
+                { label: 'Sobreedad (%)', data: edTray.map(t => t.sobreedad_pct), backgroundColor: '#f59e0b' },
+                { label: 'Repitencia (%)', data: edTray.map(t => t.repitencia_pct), backgroundColor: '#ef4444' },
+                { label: 'Abandono Interanual (%)', data: edTray.map(t => t.abandono_pct), backgroundColor: '#8b5cf6' }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } },
+              scales: { y: { min: 0, max: 40, title: { display: true, text: 'Porcentaje (%)', font: { size: 10 } } } }
+            }
+          });
+        }
 
-      // Update UI cards
-      document.getElementById('calc-res-ex').innerText = row.ex.toFixed(1) + ' años';
-      document.getElementById('calc-res-edad-final').innerText = (edad + row.ex).toFixed(1) + ' años';
-      document.getElementById('calc-res-px').innerText = (row.px * 100).toFixed(3) + '%';
-      document.getElementById('calc-res-qx').innerText = (row.qx * 1000).toFixed(2) + ' ‰';
-      document.getElementById('calc-res-lx').innerText = Math.round(row.lx).toLocaleString('es-AR');
+        // Nivel Educativo Alcanzado
+        const edNivel = DATA.educacion.nivel_alcanzado_pob25;
+        const canvasNivel = document.getElementById('chart-educacion-nivel-alcanzado');
+        if (edNivel && canvasNivel) {
+          charts.edNivel = new Chart(canvasNivel, {
+            type: 'bar',
+            data: {
+              labels: edNivel.map(n => n.nivel),
+              datasets: [{
+                label: '% Población 25 años y más',
+                data: edNivel.map(n => n.porcentaje),
+                backgroundColor: ['#ef4444', '#f59e0b', '#0ea5e9', '#6366f1', '#10b981'],
+                borderRadius: 6
+              }]
+            },
+            options: {
+              indexAxis: 'y',
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { display: false } },
+              scales: { x: { min: 0, max: 45, title: { display: true, text: 'Porcentaje (%)', font: { size: 10 } } } }
+            }
+          });
+        }
 
-      // Milestones Calculation from attained age
-      const targetAges = [65, 70, 75, 80, 85, 90, 95, 100];
-      const container = document.getElementById('calc-milestones-container');
-      container.innerHTML = '';
+        // Sector de Gestión
+        const canvasGestion = document.getElementById('chart-educacion-gestion');
+        if (canvasGestion) {
+          charts.edGestion = new Chart(canvasGestion, {
+            type: 'doughnut',
+            data: {
+              labels: ['Gestión Estatal (72.8%)', 'Gestión Privada (27.2%)'],
+              datasets: [{
+                data: [72.8, 27.2],
+                backgroundColor: ['#0284c7', '#f59e0b'],
+                borderWidth: 0
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 } } } }
+            }
+          });
+        }
+      }
+    };
 
-      targetAges.forEach(targetAge => {
-        if (targetAge <= edad) return;
 
-        const targetRow = table.find(r => r.x === targetAge);
-        if (!targetRow) return;
+    // =============================================================
+    // SECCIÓN 5: MERCADO DE TRABAJO (EPH INDEC)
+    // =============================================================
+    const SectionEmpleo = {
+      init() {
+        if (!DATA?.mercado_trabajo) return;
 
-        const prob = (targetRow.lx / row.lx) * 100;
+        // Serie EPH
+        const ephSerie = DATA.mercado_trabajo.serie_eph;
+        const canvasSerie = document.getElementById('chart-eph-serie');
+        if (ephSerie && canvasSerie) {
+          charts.ephSerie = new Chart(canvasSerie, {
+            type: 'line',
+            data: {
+              labels: ephSerie.map(s => s.periodo),
+              datasets: [
+                { label: 'Actividad', data: ephSerie.map(s => s.actividad), borderColor: '#0ea5e9', borderWidth: 2 },
+                { label: 'Empleo', data: ephSerie.map(s => s.empleo), borderColor: '#10b981', borderWidth: 2 },
+                { label: 'Informalidad', data: ephSerie.map(s => s.informalidad), borderColor: '#f59e0b', borderWidth: 2 },
+                { label: 'Desocupación', data: ephSerie.map(s => s.desocupacion), borderColor: '#ef4444', borderWidth: 2.5 }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } },
+              scales: { y: { min: 0, max: 55, title: { display: true, text: 'Tasa (%)', font: { size: 10 } } } }
+            }
+          });
+        }
 
-        const card = document.createElement('div');
-        card.className = 'p-2.5 bg-slate-900 border border-slate-800 rounded-lg';
-        card.innerHTML = `
-          <div class="text-[11px] text-slate-400">Alcanzar ${targetAge} años</div>
-          <div class="text-sm font-bold text-sky-400 mt-0.5">${prob.toFixed(1)}%</div>
-          <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mt-1.5">
-            <div class="bg-gradient-to-r from-sky-500 to-indigo-500 h-full rounded-full" style="width: ${Math.min(100, Math.max(0, prob))}%"></div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
+        // Ramas de Actividad
+        const ephRamas = DATA.mercado_trabajo.ramas_actividad;
+        const canvasRamas = document.getElementById('chart-eph-ramas');
+        if (ephRamas && canvasRamas) {
+          charts.ephRamas = new Chart(canvasRamas, {
+            type: 'bar',
+            data: {
+              labels: ephRamas.map(r => r.rama),
+              datasets: [{
+                label: '% de los Ocupados',
+                data: ephRamas.map(r => r.porcentaje),
+                backgroundColor: '#0284c7',
+                borderRadius: 4
+              }]
+            },
+            options: {
+              indexAxis: 'y',
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { display: false } },
+              scales: { x: { title: { display: true, text: 'Participación (%)', font: { size: 10 } } } }
+            }
+          });
+        }
+      }
+    };
 
-      // Synchronize explorer select
-      document.getElementById('tabla-explorer-select').value = tableKey;
-      renderFullActuarialTable();
 
-      // Refresh multi-table curves with updated base radix age
-      updateMultiTableCharts();
-    }
-
-    // 5. Render Provincial Mortality Table
-    function renderProvMortalidadTable() {
-      if (!DATA) return;
-      const filtro = document.getElementById('filtro-prov-mortalidad').value.toLowerCase();
-      const tbody = document.getElementById('tabla-provincias-mortalidad-body');
-      tbody.innerHTML = '';
-
-      const list = DATA.mortalidad.provincias_ex.filter(p => p.provincia.toLowerCase().includes(filtro));
-      list.forEach(p => {
-        const tr = document.createElement('tr');
-        tr.className = 'hover:bg-slate-800/40 transition';
-        tr.innerHTML = `
-          <td class="py-2 px-3 font-medium text-slate-200">${p.provincia}</td>
-          <td class="py-2 px-3 text-right font-semibold text-sky-400">${p.e0_total}</td>
-          <td class="py-2 px-3 text-right text-purple-300">${p.e0_mujeres}</td>
-          <td class="py-2 px-3 text-right text-indigo-300">${p.e0_varones}</td>
-          <td class="py-2 px-3 text-right font-medium text-emerald-400">${p.e65_total}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    // 6. Render Full Actuarial Table Explorer
-    function renderFullActuarialTable() {
-      if (!DATA) return;
-      const tableKey = document.getElementById('tabla-explorer-select').value;
-      const tableData = DATA.mortalidad.catalogo[tableKey];
-      if (!tableData) return;
-
-      document.getElementById('tabla-explorer-title').innerText = `Tabla Biométrica Completa: ${tableData.metadata.nombre}`;
-      document.getElementById('tabla-explorer-desc').innerText = `${tableData.metadata.descripcion} (Radix l₀ = 100.000)`;
-
-      const table = tableData.tabla;
-      const tbody = document.getElementById('tabla-actuarial-completa-body');
-      tbody.innerHTML = '';
-
-      table.forEach(r => {
-        const tr = document.createElement('tr');
-        tr.className = 'hover:bg-slate-800/50 transition';
-        tr.innerHTML = `
-          <td class="py-1.5 px-3 font-semibold text-slate-200">${r.x}</td>
-          <td class="py-1.5 px-3 text-right text-slate-300">${Math.round(r.lx).toLocaleString('es-AR')}</td>
-          <td class="py-1.5 px-3 text-right text-rose-300">${Math.round(r.dx).toLocaleString('es-AR')}</td>
-          <td class="py-1.5 px-3 text-right text-amber-300">${r.qx.toFixed(5)}</td>
-          <td class="py-1.5 px-3 text-right text-indigo-300">${r.px.toFixed(5)}</td>
-          <td class="py-1.5 px-3 text-right text-slate-400">${Math.round(r.Lx).toLocaleString('es-AR')}</td>
-          <td class="py-1.5 px-3 text-right text-slate-400">${Math.round(r.Tx).toLocaleString('es-AR')}</td>
-          <td class="py-1.5 px-3 text-right font-bold text-sky-400">${r.ex.toFixed(2)}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    // 7. Render Censo Provincial Table
-    function renderCensoProvTable() {
-      if (!DATA) return;
-      const filtro = document.getElementById('filtro-prov-censo').value.toLowerCase();
-      const tbody = document.getElementById('tabla-censo-prov-body');
-      tbody.innerHTML = '';
-
-      const list = DATA.demografia.poblacion_provincias.filter(p => p.jurisdiccion.toLowerCase().includes(filtro));
-      list.forEach(p => {
-        const tr = document.createElement('tr');
-        tr.className = 'hover:bg-slate-800/40 transition';
-        tr.innerHTML = `
-          <td class="py-2 px-3 font-medium text-slate-200">${p.jurisdiccion}</td>
-          <td class="py-2 px-3 text-right font-bold text-white">${p.poblacion_2022.toLocaleString('es-AR')}</td>
-          <td class="py-2 px-3 text-right text-slate-400">${p.poblacion_2010.toLocaleString('es-AR')}</td>
-          <td class="py-2 px-3 text-right font-semibold text-emerald-400">+${p.var_intercensal_pct.toFixed(2)}%</td>
-          <td class="py-2 px-3 text-right text-slate-300">${p.densidad_km2.toLocaleString('es-AR')}</td>
-          <td class="py-2 px-3 text-right text-purple-300">${p.mujeres_pct}%</td>
-          <td class="py-2 px-3 text-right text-amber-300">${p.edad_mediana} años</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    // 8. CSV Export Helpers
-    function exportActuarialCSV() {
-      if (!DATA) return;
-      const tableKey = document.getElementById('tabla-explorer-select').value;
-      const tableData = DATA.mortalidad.catalogo[tableKey];
-      if (!tableData) return;
-
-      const table = tableData.tabla;
-      let csv = 'Edad_x,lx_Sobrevivientes,dx_Defunciones,qx_TasaMortalidad,px_TasaSupervivencia,Lx_PoblacionEstacionaria,Tx_TotalAniosVividos,ex_EsperanzaVida\n';
-      table.forEach(r => {
-        csv += `${r.x},${r.lx},${r.dx},${r.qx},${r.px},${r.Lx},${r.Tx},${r.ex}\n`;
-      });
-
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `tabla_mortalidad_${tableKey}.csv`;
-      a.click();
-    }
-
+    // =============================================================
+    // GLOBAL EXPORT HELPER
+    // =============================================================
     function exportFullJSON() {
       if (!DATA) return;
       const jsonStr = JSON.stringify(DATA, null, 2);
@@ -1205,615 +1881,56 @@
       a.click();
     }
 
-    // 9. Update Multi-Table Comparison Charts WITH DYNAMIC RADIX AT SELECTED AGE
-    function updateMultiTableCharts() {
-      if (!DATA) return;
 
-      const edadInput = document.getElementById('calc-edad');
-      let baseAge = parseInt(edadInput ? edadInput.value : 65, 10);
-      if (isNaN(baseAge) || baseAge < 0 || baseAge > 99) baseAge = 65;
-
-      const isConditional = document.getElementById('chk-radix-condicional')?.checked ?? true;
-      const startAge = isConditional ? baseAge : 0;
-
-      // Update badge and labels
-      const radixBadge = document.getElementById('badge-radix-status');
-      const labelRadixLx = document.getElementById('label-radix-lx');
-      const labelRadixEx = document.getElementById('label-radix-ex');
-      
-      if (isConditional) {
-        if (radixBadge) radixBadge.innerText = `Raíz en ${baseAge} años (Radix l_${baseAge} = 100.000)`;
-        if (labelRadixLx) labelRadixLx.innerText = `Radix: 100.000 a los ${baseAge} años`;
-        if (labelRadixEx) labelRadixEx.innerText = `Esperanza remanente desde los ${baseAge} años`;
-      } else {
-        if (radixBadge) radixBadge.innerText = `Raíz al nacer (l₀ = 100.000)`;
-        if (labelRadixLx) labelRadixLx.innerText = `Radix: 100.000 al nacer (x=0)`;
-        if (labelRadixEx) labelRadixEx.innerText = `Esperanza de vida total (0-100+)`;
-      }
-
-      // Generate ages array starting from startAge
-      const ages = [];
-      for (let x = startAge; x <= 100; x++) {
-        if ((x - startAge) % (isConditional ? 1 : 2) === 0 || x === 100) {
-          ages.push(x);
-        }
-      }
-
-      // Prepare Datasets for lx (Conditional) and ex
-      const lxDatasets = activeCompareTables.map(key => {
-        const item = DATA.mortalidad.catalogo[key];
-        const color = TABLE_COLORS[key] || '#0ea5e9';
-        const table = item.tabla;
-        
-        // Base lx at startAge
-        const baseRow = table.find(r => r.x === startAge) || table[0];
-        const lx_base = baseRow.lx > 0 ? baseRow.lx : 1.0;
-
-        const dataPoints = ages.map(x => {
-          const row = table.find(r => r.x === x);
-          if (!row) return 0;
-          if (isConditional) {
-            // Curva condicional reescalada con raíz 100.000 a la edad base
-            return Math.round((row.lx / lx_base) * 100000.0 * 10) / 10;
-          } else {
-            return row.lx;
-          }
-        });
-
-        return {
-          label: item.metadata.nombre,
-          data: dataPoints,
-          borderColor: color,
-          backgroundColor: color + '20',
-          borderWidth: 2.2,
-          pointRadius: isConditional ? 1.5 : 0,
-          tension: 0.2
-        };
-      });
-
-      const exDatasets = activeCompareTables.map(key => {
-        const item = DATA.mortalidad.catalogo[key];
-        const color = TABLE_COLORS[key] || '#0ea5e9';
-        const table = item.tabla;
-
-        const dataPoints = ages.map(x => {
-          const row = table.find(r => r.x === x);
-          return row ? row.ex : 0;
-        });
-
-        return {
-          label: item.metadata.nombre,
-          data: dataPoints,
-          borderColor: color,
-          borderWidth: 2.2,
-          pointRadius: isConditional ? 1.5 : 0,
-          tension: 0.2
-        };
-      });
-
-      // Update lx Chart
-      if (charts.multiLx) {
-        charts.multiLx.data.labels = ages;
-        charts.multiLx.data.datasets = lxDatasets;
-        charts.multiLx.options.scales.x.title.text = isConditional ? `Edad (x) a partir de la edad base (${startAge} años)` : 'Edad (x)';
-        charts.multiLx.options.scales.y.title.text = isConditional ? `Sobrevivientes (l_{x|${startAge}} sobre 100.000 vivos a edad ${startAge})` : 'Sobrevivientes (lx)';
-        charts.multiLx.update();
-      } else {
-        charts.multiLx = new Chart(document.getElementById('chart-multi-lx'), {
-          type: 'line',
-          data: { labels: ages, datasets: lxDatasets },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
-            plugins: {
-              legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } },
-              tooltip: {
-                callbacks: {
-                  label: function(c) {
-                    const val = c.raw;
-                    const pct = ((val / 100000.0) * 100).toFixed(1);
-                    return `${c.dataset.label}: ${val.toLocaleString('es-AR')} (${pct}% sobrevida)`;
-                  }
-                }
-              }
-            },
-            scales: {
-              x: { title: { display: true, text: `Edad (x) a partir de los ${startAge} años`, font: { size: 10 } } },
-              y: { title: { display: true, text: `Sobrevivientes condicionales (Base 100.000)`, font: { size: 10 } }, min: 0, max: 100000 }
-            }
-          }
-        });
-      }
-
-      // Update ex Chart
-      if (charts.multiEx) {
-        charts.multiEx.data.labels = ages;
-        charts.multiEx.data.datasets = exDatasets;
-        charts.multiEx.options.scales.x.title.text = isConditional ? `Edad (x) desde ${startAge} años` : 'Edad (x)';
-        charts.multiEx.update();
-      } else {
-        charts.multiEx = new Chart(document.getElementById('chart-multi-ex'), {
-          type: 'line',
-          data: { labels: ages, datasets: exDatasets },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
-            plugins: {
-              legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } },
-              tooltip: {
-                callbacks: {
-                  label: function(c) {
-                    const exVal = c.raw;
-                    const currentAge = parseInt(c.label, 10);
-                    return `${c.dataset.label}: ${exVal.toFixed(1)} años remanentes (Edad est.: ${(currentAge + exVal).toFixed(1)} años)`;
-                  }
-                }
-              }
-            },
-            scales: {
-              x: { title: { display: true, text: `Edad (x) desde ${startAge} años`, font: { size: 10 } } },
-              y: { title: { display: true, text: 'Años remanentes esperados (ex)', font: { size: 10 } }, min: 0 }
-            }
-          }
-        });
-      }
-    }
-
-    // --- Interactive Population Pyramid (1970 - 2040) ---
-    const PYRAMID_YEARS = [1970, 1980, 1991, 2001, 2010, 2015, 2020, 2022, 2025, 2030, 2035, 2040];
-    let currentPyramidYear = 2022;
-    let pyramidUnit = 'personas'; // 'personas' o 'pct'
-    let pyramidAnimationTimer = null;
-
-    function setPyramidYear(year) {
-      currentPyramidYear = year;
-      const idx = PYRAMID_YEARS.indexOf(year);
-      const slider = document.getElementById('slider-piramide-anio');
-      if (slider && idx !== -1) slider.value = idx;
-      updatePyramidDisplay(year);
-    }
-
-    function onPyramidSliderChange(valIndex) {
-      const year = PYRAMID_YEARS[parseInt(valIndex, 10)] || 2022;
-      currentPyramidYear = year;
-      updatePyramidDisplay(year);
-    }
-
-    function changePyramidUnit() {
-      const sel = document.getElementById('select-piramide-unidad');
-      if (sel) pyramidUnit = sel.value;
-      updatePyramidDisplay(currentPyramidYear);
-    }
-
-    function togglePyramidAnimation() {
-      const btn = document.getElementById('btn-play-pyramid');
-      const text = document.getElementById('text-play-pyramid');
-      const icon = document.getElementById('icon-play-pyramid');
-
-      if (pyramidAnimationTimer) {
-        clearInterval(pyramidAnimationTimer);
-        pyramidAnimationTimer = null;
-        if (text) text.innerText = 'Reproducir Evolución';
-        if (btn) btn.className = 'flex items-center gap-1.5 px-3 py-1.5 bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold rounded-lg shadow-md transition';
-      } else {
-        if (text) text.innerText = 'Pausar Animación';
-        if (btn) btn.className = 'flex items-center gap-1.5 px-3 py-1.5 bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold rounded-lg shadow-md transition';
-        
-        pyramidAnimationTimer = setInterval(() => {
-          let currIdx = PYRAMID_YEARS.indexOf(currentPyramidYear);
-          let nextIdx = (currIdx + 1) % PYRAMID_YEARS.length;
-          setPyramidYear(PYRAMID_YEARS[nextIdx]);
-        }, 1100);
-      }
-      if (window.lucide) lucide.createIcons();
-    }
-
-    function updatePyramidDisplay(year) {
-      if (!DATA || !DATA.demografia || !DATA.demografia.piramides_historicas) return;
-
-      const yearData = DATA.demografia.piramides_historicas[String(year)];
-      if (!yearData) return;
-
-      // Update text and badges
-      const badge = document.getElementById('badge-piramide-anio');
-      if (badge) badge.innerText = `Año: ${year}`;
-
-      const descTipo = document.getElementById('desc-piramide-tipo');
-      if (descTipo) descTipo.innerText = yearData.tipo;
-
-      const titleChart = document.getElementById('title-piramide-chart');
-      if (titleChart) titleChart.innerText = `Pirámide de Población Argentina (${year} - ${yearData.tipo})`;
-
-      // Update Dynamic KPIs
-      const kpiPopLabel = document.getElementById('kpi-poblacion-label');
-      if (kpiPopLabel) kpiPopLabel.innerText = `Población Total (${year})`;
-
-      const kpiPopVal = document.getElementById('kpi-poblacion-val');
-      if (kpiPopVal) kpiPopVal.innerText = yearData.poblacion_total.toLocaleString('es-AR');
-
-      const kpiPopSub = document.getElementById('kpi-poblacion-sub');
-      if (kpiPopSub) kpiPopSub.innerHTML = `<i data-lucide="info" class="w-3 h-3"></i> ${yearData.tipo}`;
-
-      const kpiEdadVal = document.getElementById('kpi-edad-mediana-val');
-      if (kpiEdadVal) kpiEdadVal.innerText = `${yearData.edad_mediana.toFixed(1)} años`;
-
-      const kpiEnvVal = document.getElementById('kpi-envejecimiento-val');
-      if (kpiEnvVal) kpiEnvVal.innerText = `${yearData.indice_envejecimiento.toFixed(1)}%`;
-
-      const kpiTgfVal = document.getElementById('kpi-tgf-val');
-      if (kpiTgfVal) kpiTgfVal.innerText = yearData.tgf.toFixed(2);
-
-      const kpiDepVal = document.getElementById('kpi-dependencia-val');
-      if (kpiDepVal) kpiDepVal.innerText = `${yearData.relacion_dependencia.toFixed(1)} dependientes / 100 activos`;
-
-      const descPatron = document.getElementById('desc-patron-piramide');
-      if (descPatron) {
-        if (year <= 1980) {
-          descPatron.innerText = 'Pirámide Expansiva (Población Joven)';
-        } else if (year <= 2015) {
-          descPatron.innerText = 'Transición Estacionaria';
-        } else {
-          descPatron.innerText = 'Constricción / Envejecimiento Avanzado';
-        }
-      }
-
-      // Update tick buttons active style
-      const ticksContainer = document.getElementById('ticks-piramide-anios');
-      if (ticksContainer) {
-        const buttons = ticksContainer.querySelectorAll('button');
-        buttons.forEach(btn => {
-          const btnYear = parseInt(btn.innerText, 10);
-          if (btnYear === year) {
-            btn.className = 'text-sky-400 font-bold bg-sky-500/10 py-0.5 px-1.5 rounded border border-sky-500/30';
-          } else {
-            btn.className = 'hover:text-sky-400 py-0.5 px-1 rounded text-slate-400';
-          }
-        });
-      }
-
-      // Update Chart.js dataset
-      const piramide = yearData.piramide;
-      const piramideGrupos = piramide.map(p => p.grupo);
-      
-      let varonesData, mujeresData;
-      if (pyramidUnit === 'pct') {
-        varonesData = piramide.map(p => -p.pct_varones);
-        mujeresData = piramide.map(p => p.pct_mujeres);
-      } else {
-        varonesData = piramide.map(p => -p.varones);
-        mujeresData = piramide.map(p => p.mujeres);
-      }
-
-      if (charts.piramide) {
-        charts.piramide.data.labels = piramideGrupos;
-        charts.piramide.data.datasets[0].data = varonesData;
-        charts.piramide.data.datasets[1].data = mujeresData;
-        
-        charts.piramide.options.scales.x.ticks.callback = function(v) {
-          if (pyramidUnit === 'pct') {
-            return Math.abs(v).toFixed(1) + '%';
-          } else {
-            return Math.abs(v / 1000000).toFixed(1) + 'M';
-          }
-        };
-        charts.piramide.options.scales.x.title.text = pyramidUnit === 'pct' ? 'Porcentaje de la Población (%)' : 'Población (Millones de personas)';
-        charts.piramide.update();
-      } else {
-        charts.piramide = new Chart(document.getElementById('chart-piramide-poblacion'), {
-          type: 'bar',
-          data: {
-            labels: piramideGrupos,
-            datasets: [
-              { label: 'Varones', data: varonesData, backgroundColor: '#6366f1', borderRadius: 4 },
-              { label: 'Mujeres', data: mujeresData, backgroundColor: '#ec4899', borderRadius: 4 }
-            ]
-          },
-          options: {
-            indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: false,
-            animation: { duration: 350 },
-            scales: {
-              x: {
-                stacked: true,
-                ticks: {
-                  callback: function(v) {
-                    return pyramidUnit === 'pct' ? Math.abs(v).toFixed(1) + '%' : Math.abs(v / 1000000).toFixed(1) + 'M';
-                  }
-                },
-                title: { display: true, text: 'Población (Millones de personas)', font: { size: 10 } }
-              },
-              y: { stacked: true, title: { display: true, text: 'Grupo Quinquenal de Edad', font: { size: 10 } } }
-            },
-            plugins: {
-              tooltip: {
-                callbacks: {
-                  label: function(c) {
-                    const val = Math.abs(c.raw);
-                    if (pyramidUnit === 'pct') {
-                      return `${c.dataset.label}: ${val.toFixed(2)}% del total nacional`;
-                    } else {
-                      return `${c.dataset.label}: ${val.toLocaleString('es-AR')} personas`;
-                    }
-                  }
-                }
-              },
-              legend: { position: 'top' }
-            }
-          }
-        });
-      }
-
-      if (window.lucide) lucide.createIcons();
-    }
-
-    // 10. Initialize Chart.js Graphs
-    function initAllCharts() {
-      Chart.defaults.color = '#94a3b8';
-      Chart.defaults.borderColor = '#1e293b';
-      Chart.defaults.font.family = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-
-      updateMultiTableCharts();
-
-      // --- Histórico e0 / e65 ---
-      const hist = DATA.mortalidad.historico_ex;
-      charts.hist = new Chart(document.getElementById('chart-historico-ex'), {
-        type: 'bar',
-        data: {
-          labels: hist.map(h => h.periodo),
-          datasets: [
-            { label: 'Mujeres e0', data: hist.map(h => h.mujeres_e0), backgroundColor: '#ec4899' },
-            { label: 'Total e0', data: hist.map(h => h.total_e0), backgroundColor: '#0ea5e9' },
-            { label: 'Varones e0', data: hist.map(h => h.varones_e0), backgroundColor: '#6366f1' },
-            { label: 'Total e65 (A los 65 años)', data: hist.map(h => h.total_e65), type: 'line', borderColor: '#10b981', borderWidth: 3, pointRadius: 4 }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } },
-          scales: { y: { min: 0, max: 90, title: { display: true, text: 'Años', font: { size: 10 } } } }
-        }
-      });
-
-      // --- Pirámide Poblacional Interactiva ---
-      updatePyramidDisplay(currentPyramidYear);
-
-      // --- Salud - TMI Histórico ---
-      const tmiData = DATA.salud.serie_mortalidad_infantil;
-      charts.tmi = new Chart(document.getElementById('chart-salud-tmi'), {
-        type: 'line',
-        data: {
-          labels: tmiData.map(d => d.anio),
-          datasets: [
-            { label: 'Tasa Total', data: tmiData.map(d => d.tmi_total), borderColor: '#10b981', backgroundColor: '#10b98120', fill: true, tension: 0.3, borderWidth: 3 },
-            { label: 'Neonatal (<28 días)', data: tmiData.map(d => d.tmi_neonatal), borderColor: '#3b82f6', tension: 0.3, borderWidth: 2 },
-            { label: 'Posneonatal (28d a 11m)', data: tmiData.map(d => d.tmi_posneonatal), borderColor: '#f59e0b', tension: 0.3, borderWidth: 2 }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: { y: { title: { display: true, text: 'Por mil nacidos vivos (‰)', font: { size: 10 } }, min: 0 } },
-          plugins: { legend: { position: 'top' } }
-        }
-      });
-
-      // --- Salud - Fecundidad ---
-      const fecData = DATA.salud.serie_fecundidad;
-      charts.fec = new Chart(document.getElementById('chart-salud-fecundidad'), {
-        type: 'line',
-        data: {
-          labels: fecData.map(d => d.anio),
-          datasets: [
-            { label: 'Tasa Global de Fecundidad (Hijos/mujer)', data: fecData.map(d => d.tgf), borderColor: '#0ea5e9', yAxisID: 'y', borderWidth: 3 },
-            { label: 'Fecundidad Adolescente 15-19 (‰)', data: fecData.map(d => d.tasa_fec_adolescente_15_19), borderColor: '#ec4899', yAxisID: 'y1', borderWidth: 2, borderDash: [4, 4] }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            y: { type: 'linear', position: 'left', min: 1.0, max: 3.2, title: { display: true, text: 'TGF (Hijos por mujer)', font: { size: 10 } } },
-            y1: { type: 'linear', position: 'right', min: 0, max: 80, grid: { drawOnChartArea: false }, title: { display: true, text: 'Fec. Adolescente (‰)', font: { size: 10 } } }
-          },
-          plugins: { legend: { position: 'top' } }
-        }
-      });
-
-      // --- Salud - Causas CIE-10 ---
-      const causas = DATA.salud.causas_defuncion;
-      charts.causas = new Chart(document.getElementById('chart-salud-causas'), {
-        type: 'bar',
-        data: {
-          labels: causas.map(c => c.causa),
-          datasets: [{
-            label: '% del Total de Defunciones',
-            data: causas.map(c => c.porcentaje),
-            backgroundColor: causas.map(c => c.color),
-            borderRadius: 4
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: { x: { title: { display: true, text: 'Porcentaje (%)', font: { size: 10 } } } }
-        }
-      });
-
-      // --- Salud - Cobertura ---
-      const cobData = DATA.salud.cobertura_salud;
-      charts.cobertura = new Chart(document.getElementById('chart-salud-cobertura'), {
-        type: 'doughnut',
-        data: {
-          labels: cobData.map(c => c.tipo),
-          datasets: [{
-            data: cobData.map(c => c.porcentaje),
-            backgroundColor: ['#0ea5e9', '#10b981', '#a855f7'],
-            borderWidth: 0
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 } } } }
-        }
-      });
-
-      // --- Educación - Cobertura por Nivel ---
-      const edCob = DATA.educacion.cobertura_niveles;
-      charts.edCob = new Chart(document.getElementById('chart-educacion-cobertura'), {
-        type: 'bar',
-        data: {
-          labels: edCob.map(e => e.nivel),
-          datasets: [{
-            label: 'Tasa de Escolarización (%)',
-            data: edCob.map(e => e.tasa_escolarizacion),
-            backgroundColor: '#0284c7',
-            borderRadius: 6
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: { y: { min: 0, max: 100, title: { display: true, text: 'Porcentaje Asistencia (%)', font: { size: 10 } } } },
-          plugins: { legend: { display: false } }
-        }
-      });
-
-      // --- Educación - Trayectoria Secundaria ---
-      const edTray = DATA.educacion.trayectoria_secundaria;
-      charts.edTray = new Chart(document.getElementById('chart-educacion-trayectoria'), {
-        type: 'bar',
-        data: {
-          labels: edTray.map(t => t.anio_estudio),
-          datasets: [
-            { label: 'Sobreedad (%)', data: edTray.map(t => t.sobreedad_pct), backgroundColor: '#f59e0b' },
-            { label: 'Repitencia (%)', data: edTray.map(t => t.repitencia_pct), backgroundColor: '#ef4444' },
-            { label: 'Abandono Interanual (%)', data: edTray.map(t => t.abandono_pct), backgroundColor: '#8b5cf6' }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } },
-          scales: { y: { min: 0, max: 40, title: { display: true, text: 'Porcentaje (%)', font: { size: 10 } } } }
-        }
-      });
-
-      // --- Educación - Nivel Alcanzado Pob 25+ ---
-      const edNivel = DATA.educacion.nivel_alcanzado_pob25;
-      charts.edNivel = new Chart(document.getElementById('chart-educacion-nivel-alcanzado'), {
-        type: 'bar',
-        data: {
-          labels: edNivel.map(n => n.nivel),
-          datasets: [{
-            label: '% Población 25 años y más',
-            data: edNivel.map(n => n.porcentaje),
-            backgroundColor: ['#ef4444', '#f59e0b', '#0ea5e9', '#6366f1', '#10b981'],
-            borderRadius: 6
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: { x: { min: 0, max: 45, title: { display: true, text: 'Porcentaje (%)', font: { size: 10 } } } }
-        }
-      });
-
-      // --- Educación - Sector de Gestión ---
-      charts.edGestion = new Chart(document.getElementById('chart-educacion-gestion'), {
-        type: 'doughnut',
-        data: {
-          labels: ['Gestión Estatal (72.8%)', 'Gestión Privada (27.2%)'],
-          datasets: [{
-            data: [72.8, 27.2],
-            backgroundColor: ['#0284c7', '#f59e0b'],
-            borderWidth: 0
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 } } } }
-        }
-      });
-
-      // --- EPH Serie ---
-      const ephSerie = DATA.mercado_trabajo.serie_eph;
-      charts.ephSerie = new Chart(document.getElementById('chart-eph-serie'), {
-        type: 'line',
-        data: {
-          labels: ephSerie.map(s => s.periodo),
-          datasets: [
-            { label: 'Actividad', data: ephSerie.map(s => s.actividad), borderColor: '#0ea5e9', borderWidth: 2 },
-            { label: 'Empleo', data: ephSerie.map(s => s.empleo), borderColor: '#10b981', borderWidth: 2 },
-            { label: 'Informalidad', data: ephSerie.map(s => s.informalidad), borderColor: '#f59e0b', borderWidth: 2 },
-            { label: 'Desocupación', data: ephSerie.map(s => s.desocupacion), borderColor: '#ef4444', borderWidth: 2.5 }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } },
-          scales: { y: { min: 0, max: 55, title: { display: true, text: 'Tasa (%)', font: { size: 10 } } } }
-        }
-      });
-
-      // --- EPH Ramas de Actividad ---
-      const ephRamas = DATA.mercado_trabajo.ramas_actividad;
-      charts.ephRamas = new Chart(document.getElementById('chart-eph-ramas'), {
-        type: 'bar',
-        data: {
-          labels: ephRamas.map(r => r.rama),
-          datasets: [{
-            label: '% de los Ocupados',
-            data: ephRamas.map(r => r.porcentaje),
-            backgroundColor: '#0284c7',
-            borderRadius: 4
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: { x: { title: { display: true, text: 'Participación (%)', font: { size: 10 } } } }
-        }
-      });
-    }
-
-    // 11. Bootstrap Application
+    // =============================================================
+    // BOOTSTRAP GENERAL CON AISLAMIENTO ESTRICTO DE SECCIONES
+    // =============================================================
     async function initApp() {
+      // 1. Configuración global de Chart.js
+      if (window.Chart) {
+        Chart.defaults.color = '#94a3b8';
+        Chart.defaults.borderColor = '#1e293b';
+        Chart.defaults.font.family = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+      }
+
+      // 2. Carga segura del dataset (fetch con fallback local instantáneo)
       try {
         const res = await fetch('master_dataset_demografia.json');
         if (res.ok) {
           DATA = await res.json();
         } else {
-          throw new Error('fetch error');
+          throw new Error('fetch status ' + res.status);
         }
       } catch (e) {
-        console.warn('Cargando dataset local integrado...');
         if (window.__INTEGRATED_DATASET__) {
           DATA = window.__INTEGRATED_DATASET__;
         }
       }
 
-      if (DATA) {
-        populateCatalogSelectors();
-        runLifeExpectancyCalculator();
-        renderProvMortalidadTable();
-        renderCensoProvTable();
-        initAllCharts();
+      if (!DATA) {
+        console.error('No se pudo cargar el dataset para inicializar el monitor.');
+        return;
       }
 
-      lucide.createIcons();
+      // 3. Inicialización aislada por módulo (try/catch independiente por sección)
+      const SECCIONES = [
+        { id: 'mortalidad', nombre: '1. Tablas de Mortalidad y Biometría', module: SectionMortalidad },
+        { id: 'demografia', nombre: '2. Demografía y Pirámide Poblacional', module: SectionDemografia },
+        { id: 'salud', nombre: '3. Salud y Estadísticas Vitales', module: SectionSalud },
+        { id: 'educacion', nombre: '4. Educación y Trayectorias', module: SectionEducacion },
+        { id: 'empleo', nombre: '5. Mercado de Trabajo (EPH)', module: SectionEmpleo }
+      ];
+
+      SECCIONES.forEach(sec => {
+        try {
+          sec.module.init();
+        } catch (secError) {
+          console.error(`[Error aislado en ${sec.nombre}]:`, secError);
+        }
+      });
+
+      // 4. Inicializar iconos
+      if (window.lucide) lucide.createIcons();
     }
 
     window.addEventListener('DOMContentLoaded', initApp);
