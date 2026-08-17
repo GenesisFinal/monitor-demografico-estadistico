@@ -22703,133 +22703,2261 @@
     ]
   },
   "demografia": {
+    "piramides_historicas": {
+      "1970": {
+        "anio": 1970,
+        "tipo": "Censal Oficial (Censo 1970)",
+        "poblacion_total": 23364431,
+        "edad_mediana": 24.8,
+        "indice_envejecimiento": 24.1,
+        "relacion_dependencia": 58.2,
+        "tgf": 3.05,
+        "piramide": [
+          {
+            "grupo": "0-4",
+            "varones": 1378501,
+            "mujeres": 1331773,
+            "total": 2710274,
+            "pct_varones": 5.9,
+            "pct_mujeres": 5.7,
+            "pct_total": 11.6
+          },
+          {
+            "grupo": "5-9",
+            "varones": 1331773,
+            "mujeres": 1285044,
+            "total": 2616817,
+            "pct_varones": 5.7,
+            "pct_mujeres": 5.5,
+            "pct_total": 11.2
+          },
+          {
+            "grupo": "10-14",
+            "varones": 1238315,
+            "mujeres": 1191586,
+            "total": 2429901,
+            "pct_varones": 5.3,
+            "pct_mujeres": 5.1,
+            "pct_total": 10.4
+          },
+          {
+            "grupo": "15-19",
+            "varones": 1121493,
+            "mujeres": 1098128,
+            "total": 2219621,
+            "pct_varones": 4.8,
+            "pct_mujeres": 4.7,
+            "pct_total": 9.5
+          },
+          {
+            "grupo": "20-24",
+            "varones": 1004671,
+            "mujeres": 1004671,
+            "total": 2009342,
+            "pct_varones": 4.3,
+            "pct_mujeres": 4.3,
+            "pct_total": 8.6
+          },
+          {
+            "grupo": "25-29",
+            "varones": 887848,
+            "mujeres": 911213,
+            "total": 1799061,
+            "pct_varones": 3.8,
+            "pct_mujeres": 3.9,
+            "pct_total": 7.7
+          },
+          {
+            "grupo": "30-34",
+            "varones": 817755,
+            "mujeres": 841120,
+            "total": 1658875,
+            "pct_varones": 3.5,
+            "pct_mujeres": 3.6,
+            "pct_total": 7.1
+          },
+          {
+            "grupo": "35-39",
+            "varones": 747662,
+            "mujeres": 771026,
+            "total": 1518688,
+            "pct_varones": 3.2,
+            "pct_mujeres": 3.3,
+            "pct_total": 6.5
+          },
+          {
+            "grupo": "40-44",
+            "varones": 700933,
+            "mujeres": 724297,
+            "total": 1425230,
+            "pct_varones": 3.0,
+            "pct_mujeres": 3.1,
+            "pct_total": 6.1
+          },
+          {
+            "grupo": "45-49",
+            "varones": 630840,
+            "mujeres": 654204,
+            "total": 1285044,
+            "pct_varones": 2.7,
+            "pct_mujeres": 2.8,
+            "pct_total": 5.5
+          },
+          {
+            "grupo": "50-54",
+            "varones": 537382,
+            "mujeres": 560746,
+            "total": 1098128,
+            "pct_varones": 2.3,
+            "pct_mujeres": 2.4,
+            "pct_total": 4.7
+          },
+          {
+            "grupo": "55-59",
+            "varones": 443924,
+            "mujeres": 467289,
+            "total": 911213,
+            "pct_varones": 1.9,
+            "pct_mujeres": 2.0,
+            "pct_total": 3.9
+          },
+          {
+            "grupo": "60-64",
+            "varones": 350466,
+            "mujeres": 397195,
+            "total": 747661,
+            "pct_varones": 1.5,
+            "pct_mujeres": 1.7,
+            "pct_total": 3.2
+          },
+          {
+            "grupo": "65-69",
+            "varones": 257009,
+            "mujeres": 303738,
+            "total": 560747,
+            "pct_varones": 1.1,
+            "pct_mujeres": 1.3,
+            "pct_total": 2.4
+          },
+          {
+            "grupo": "70-74",
+            "varones": 163551,
+            "mujeres": 210280,
+            "total": 373831,
+            "pct_varones": 0.7,
+            "pct_mujeres": 0.9,
+            "pct_total": 1.6
+          },
+          {
+            "grupo": "75-79",
+            "varones": 93458,
+            "mujeres": 116822,
+            "total": 210280,
+            "pct_varones": 0.4,
+            "pct_mujeres": 0.5,
+            "pct_total": 0.9
+          },
+          {
+            "grupo": "80-84",
+            "varones": 46729,
+            "mujeres": 70093,
+            "total": 116822,
+            "pct_varones": 0.2,
+            "pct_mujeres": 0.3,
+            "pct_total": 0.5
+          },
+          {
+            "grupo": "85+",
+            "varones": 23364,
+            "mujeres": 46729,
+            "total": 70093,
+            "pct_varones": 0.1,
+            "pct_mujeres": 0.2,
+            "pct_total": 0.3
+          }
+        ]
+      },
+      "1980": {
+        "anio": 1980,
+        "tipo": "Censal Oficial (Censo 1980)",
+        "poblacion_total": 27949480,
+        "edad_mediana": 26.2,
+        "indice_envejecimiento": 27.5,
+        "relacion_dependencia": 56.4,
+        "tgf": 3.15,
+        "piramide": [
+          {
+            "grupo": "0-4",
+            "varones": 1593120,
+            "mujeres": 1537221,
+            "total": 3130341,
+            "pct_varones": 5.7,
+            "pct_mujeres": 5.5,
+            "pct_total": 11.2
+          },
+          {
+            "grupo": "5-9",
+            "varones": 1537221,
+            "mujeres": 1481322,
+            "total": 3018543,
+            "pct_varones": 5.5,
+            "pct_mujeres": 5.3,
+            "pct_total": 10.8
+          },
+          {
+            "grupo": "10-14",
+            "varones": 1453373,
+            "mujeres": 1397474,
+            "total": 2850847,
+            "pct_varones": 5.2,
+            "pct_mujeres": 5.0,
+            "pct_total": 10.2
+          },
+          {
+            "grupo": "15-19",
+            "varones": 1341575,
+            "mujeres": 1285676,
+            "total": 2627251,
+            "pct_varones": 4.8,
+            "pct_mujeres": 4.6,
+            "pct_total": 9.4
+          },
+          {
+            "grupo": "20-24",
+            "varones": 1229777,
+            "mujeres": 1201828,
+            "total": 2431605,
+            "pct_varones": 4.4,
+            "pct_mujeres": 4.3,
+            "pct_total": 8.7
+          },
+          {
+            "grupo": "25-29",
+            "varones": 1117979,
+            "mujeres": 1090030,
+            "total": 2208009,
+            "pct_varones": 4.0,
+            "pct_mujeres": 3.9,
+            "pct_total": 7.9
+          },
+          {
+            "grupo": "30-34",
+            "varones": 1006181,
+            "mujeres": 1006181,
+            "total": 2012362,
+            "pct_varones": 3.6,
+            "pct_mujeres": 3.6,
+            "pct_total": 7.2
+          },
+          {
+            "grupo": "35-39",
+            "varones": 894383,
+            "mujeres": 922333,
+            "total": 1816716,
+            "pct_varones": 3.2,
+            "pct_mujeres": 3.3,
+            "pct_total": 6.5
+          },
+          {
+            "grupo": "40-44",
+            "varones": 810535,
+            "mujeres": 838484,
+            "total": 1649019,
+            "pct_varones": 2.9,
+            "pct_mujeres": 3.0,
+            "pct_total": 5.9
+          },
+          {
+            "grupo": "45-49",
+            "varones": 726686,
+            "mujeres": 782585,
+            "total": 1509271,
+            "pct_varones": 2.6,
+            "pct_mujeres": 2.8,
+            "pct_total": 5.4
+          },
+          {
+            "grupo": "50-54",
+            "varones": 642838,
+            "mujeres": 698737,
+            "total": 1341575,
+            "pct_varones": 2.3,
+            "pct_mujeres": 2.5,
+            "pct_total": 4.8
+          },
+          {
+            "grupo": "55-59",
+            "varones": 558990,
+            "mujeres": 614889,
+            "total": 1173879,
+            "pct_varones": 2.0,
+            "pct_mujeres": 2.2,
+            "pct_total": 4.2
+          },
+          {
+            "grupo": "60-64",
+            "varones": 447192,
+            "mujeres": 503091,
+            "total": 950283,
+            "pct_varones": 1.6,
+            "pct_mujeres": 1.8,
+            "pct_total": 3.4
+          },
+          {
+            "grupo": "65-69",
+            "varones": 335394,
+            "mujeres": 419242,
+            "total": 754636,
+            "pct_varones": 1.2,
+            "pct_mujeres": 1.5,
+            "pct_total": 2.7
+          },
+          {
+            "grupo": "70-74",
+            "varones": 223596,
+            "mujeres": 279495,
+            "total": 503091,
+            "pct_varones": 0.8,
+            "pct_mujeres": 1.0,
+            "pct_total": 1.8
+          },
+          {
+            "grupo": "75-79",
+            "varones": 139747,
+            "mujeres": 195646,
+            "total": 335393,
+            "pct_varones": 0.5,
+            "pct_mujeres": 0.7,
+            "pct_total": 1.2
+          },
+          {
+            "grupo": "80-84",
+            "varones": 83848,
+            "mujeres": 111798,
+            "total": 195646,
+            "pct_varones": 0.3,
+            "pct_mujeres": 0.4,
+            "pct_total": 0.7
+          },
+          {
+            "grupo": "85+",
+            "varones": 27949,
+            "mujeres": 55899,
+            "total": 83848,
+            "pct_varones": 0.1,
+            "pct_mujeres": 0.2,
+            "pct_total": 0.3
+          }
+        ]
+      },
+      "1991": {
+        "anio": 1991,
+        "tipo": "Censal Oficial (Censo 1991)",
+        "poblacion_total": 32615528,
+        "edad_mediana": 27.2,
+        "indice_envejecimiento": 32.2,
+        "relacion_dependencia": 57.0,
+        "tgf": 2.9,
+        "piramide": [
+          {
+            "grupo": "0-4",
+            "varones": 1761239,
+            "mujeres": 1696007,
+            "total": 3457246,
+            "pct_varones": 5.4,
+            "pct_mujeres": 5.2,
+            "pct_total": 10.6
+          },
+          {
+            "grupo": "5-9",
+            "varones": 1728623,
+            "mujeres": 1663392,
+            "total": 3392015,
+            "pct_varones": 5.3,
+            "pct_mujeres": 5.1,
+            "pct_total": 10.4
+          },
+          {
+            "grupo": "10-14",
+            "varones": 1663392,
+            "mujeres": 1598161,
+            "total": 3261553,
+            "pct_varones": 5.1,
+            "pct_mujeres": 4.9,
+            "pct_total": 10.0
+          },
+          {
+            "grupo": "15-19",
+            "varones": 1532930,
+            "mujeres": 1467699,
+            "total": 3000629,
+            "pct_varones": 4.7,
+            "pct_mujeres": 4.5,
+            "pct_total": 9.2
+          },
+          {
+            "grupo": "20-24",
+            "varones": 1402468,
+            "mujeres": 1369852,
+            "total": 2772320,
+            "pct_varones": 4.3,
+            "pct_mujeres": 4.2,
+            "pct_total": 8.5
+          },
+          {
+            "grupo": "25-29",
+            "varones": 1272006,
+            "mujeres": 1272006,
+            "total": 2544012,
+            "pct_varones": 3.9,
+            "pct_mujeres": 3.9,
+            "pct_total": 7.8
+          },
+          {
+            "grupo": "30-34",
+            "varones": 1174159,
+            "mujeres": 1206775,
+            "total": 2380934,
+            "pct_varones": 3.6,
+            "pct_mujeres": 3.7,
+            "pct_total": 7.3
+          },
+          {
+            "grupo": "35-39",
+            "varones": 1076312,
+            "mujeres": 1108928,
+            "total": 2185240,
+            "pct_varones": 3.3,
+            "pct_mujeres": 3.4,
+            "pct_total": 6.7
+          },
+          {
+            "grupo": "40-44",
+            "varones": 978466,
+            "mujeres": 1011081,
+            "total": 1989547,
+            "pct_varones": 3.0,
+            "pct_mujeres": 3.1,
+            "pct_total": 6.1
+          },
+          {
+            "grupo": "45-49",
+            "varones": 848004,
+            "mujeres": 913235,
+            "total": 1761239,
+            "pct_varones": 2.6,
+            "pct_mujeres": 2.8,
+            "pct_total": 5.4
+          },
+          {
+            "grupo": "50-54",
+            "varones": 750157,
+            "mujeres": 815388,
+            "total": 1565545,
+            "pct_varones": 2.3,
+            "pct_mujeres": 2.5,
+            "pct_total": 4.8
+          },
+          {
+            "grupo": "55-59",
+            "varones": 619695,
+            "mujeres": 717542,
+            "total": 1337237,
+            "pct_varones": 1.9,
+            "pct_mujeres": 2.2,
+            "pct_total": 4.1
+          },
+          {
+            "grupo": "60-64",
+            "varones": 521848,
+            "mujeres": 619695,
+            "total": 1141543,
+            "pct_varones": 1.6,
+            "pct_mujeres": 1.9,
+            "pct_total": 3.5
+          },
+          {
+            "grupo": "65-69",
+            "varones": 424002,
+            "mujeres": 521848,
+            "total": 945850,
+            "pct_varones": 1.3,
+            "pct_mujeres": 1.6,
+            "pct_total": 2.9
+          },
+          {
+            "grupo": "70-74",
+            "varones": 293540,
+            "mujeres": 391386,
+            "total": 684926,
+            "pct_varones": 0.9,
+            "pct_mujeres": 1.2,
+            "pct_total": 2.1
+          },
+          {
+            "grupo": "75-79",
+            "varones": 195693,
+            "mujeres": 260924,
+            "total": 456617,
+            "pct_varones": 0.6,
+            "pct_mujeres": 0.8,
+            "pct_total": 1.4
+          },
+          {
+            "grupo": "80-84",
+            "varones": 97847,
+            "mujeres": 163078,
+            "total": 260925,
+            "pct_varones": 0.3,
+            "pct_mujeres": 0.5,
+            "pct_total": 0.8
+          },
+          {
+            "grupo": "85+",
+            "varones": 65231,
+            "mujeres": 97847,
+            "total": 163078,
+            "pct_varones": 0.2,
+            "pct_mujeres": 0.3,
+            "pct_total": 0.5
+          }
+        ]
+      },
+      "2001": {
+        "anio": 2001,
+        "tipo": "Censal Oficial (Censo 2001)",
+        "poblacion_total": 36260130,
+        "edad_mediana": 28.6,
+        "indice_envejecimiento": 35.8,
+        "relacion_dependencia": 55.1,
+        "tgf": 2.44,
+        "piramide": [
+          {
+            "grupo": "0-4",
+            "varones": 1776746,
+            "mujeres": 1704226,
+            "total": 3480972,
+            "pct_varones": 4.9,
+            "pct_mujeres": 4.7,
+            "pct_total": 9.6
+          },
+          {
+            "grupo": "5-9",
+            "varones": 1813006,
+            "mujeres": 1740486,
+            "total": 3553492,
+            "pct_varones": 5.0,
+            "pct_mujeres": 4.8,
+            "pct_total": 9.8
+          },
+          {
+            "grupo": "10-14",
+            "varones": 1776746,
+            "mujeres": 1704226,
+            "total": 3480972,
+            "pct_varones": 4.9,
+            "pct_mujeres": 4.7,
+            "pct_total": 9.6
+          },
+          {
+            "grupo": "15-19",
+            "varones": 1667966,
+            "mujeres": 1595446,
+            "total": 3263412,
+            "pct_varones": 4.6,
+            "pct_mujeres": 4.4,
+            "pct_total": 9.0
+          },
+          {
+            "grupo": "20-24",
+            "varones": 1522925,
+            "mujeres": 1486665,
+            "total": 3009590,
+            "pct_varones": 4.2,
+            "pct_mujeres": 4.1,
+            "pct_total": 8.3
+          },
+          {
+            "grupo": "25-29",
+            "varones": 1414145,
+            "mujeres": 1414145,
+            "total": 2828290,
+            "pct_varones": 3.9,
+            "pct_mujeres": 3.9,
+            "pct_total": 7.8
+          },
+          {
+            "grupo": "30-34",
+            "varones": 1305365,
+            "mujeres": 1341625,
+            "total": 2646990,
+            "pct_varones": 3.6,
+            "pct_mujeres": 3.7,
+            "pct_total": 7.3
+          },
+          {
+            "grupo": "35-39",
+            "varones": 1196584,
+            "mujeres": 1232844,
+            "total": 2429428,
+            "pct_varones": 3.3,
+            "pct_mujeres": 3.4,
+            "pct_total": 6.7
+          },
+          {
+            "grupo": "40-44",
+            "varones": 1087804,
+            "mujeres": 1160324,
+            "total": 2248128,
+            "pct_varones": 3.0,
+            "pct_mujeres": 3.2,
+            "pct_total": 6.2
+          },
+          {
+            "grupo": "45-49",
+            "varones": 979024,
+            "mujeres": 1051544,
+            "total": 2030568,
+            "pct_varones": 2.7,
+            "pct_mujeres": 2.9,
+            "pct_total": 5.6
+          },
+          {
+            "grupo": "50-54",
+            "varones": 833983,
+            "mujeres": 942763,
+            "total": 1776746,
+            "pct_varones": 2.3,
+            "pct_mujeres": 2.6,
+            "pct_total": 4.9
+          },
+          {
+            "grupo": "55-59",
+            "varones": 725203,
+            "mujeres": 833983,
+            "total": 1559186,
+            "pct_varones": 2.0,
+            "pct_mujeres": 2.3,
+            "pct_total": 4.3
+          },
+          {
+            "grupo": "60-64",
+            "varones": 616422,
+            "mujeres": 725203,
+            "total": 1341625,
+            "pct_varones": 1.7,
+            "pct_mujeres": 2.0,
+            "pct_total": 3.7
+          },
+          {
+            "grupo": "65-69",
+            "varones": 507642,
+            "mujeres": 616422,
+            "total": 1124064,
+            "pct_varones": 1.4,
+            "pct_mujeres": 1.7,
+            "pct_total": 3.1
+          },
+          {
+            "grupo": "70-74",
+            "varones": 362601,
+            "mujeres": 507642,
+            "total": 870243,
+            "pct_varones": 1.0,
+            "pct_mujeres": 1.4,
+            "pct_total": 2.4
+          },
+          {
+            "grupo": "75-79",
+            "varones": 253821,
+            "mujeres": 362601,
+            "total": 616422,
+            "pct_varones": 0.7,
+            "pct_mujeres": 1.0,
+            "pct_total": 1.7
+          },
+          {
+            "grupo": "80-84",
+            "varones": 145041,
+            "mujeres": 217561,
+            "total": 362602,
+            "pct_varones": 0.4,
+            "pct_mujeres": 0.6,
+            "pct_total": 1.0
+          },
+          {
+            "grupo": "85+",
+            "varones": 72520,
+            "mujeres": 145041,
+            "total": 217561,
+            "pct_varones": 0.2,
+            "pct_mujeres": 0.4,
+            "pct_total": 0.6
+          }
+        ]
+      },
+      "2010": {
+        "anio": 2010,
+        "tipo": "Censal Oficial (Censo 2010)",
+        "poblacion_total": 40117096,
+        "edad_mediana": 30.0,
+        "indice_envejecimiento": 40.2,
+        "relacion_dependencia": 54.3,
+        "tgf": 2.35,
+        "piramide": [
+          {
+            "grupo": "0-4",
+            "varones": 1725035,
+            "mujeres": 1644801,
+            "total": 3369836,
+            "pct_varones": 4.3,
+            "pct_mujeres": 4.1,
+            "pct_total": 8.4
+          },
+          {
+            "grupo": "5-9",
+            "varones": 1684918,
+            "mujeres": 1644801,
+            "total": 3329719,
+            "pct_varones": 4.2,
+            "pct_mujeres": 4.1,
+            "pct_total": 8.3
+          },
+          {
+            "grupo": "10-14",
+            "varones": 1765152,
+            "mujeres": 1725035,
+            "total": 3490187,
+            "pct_varones": 4.4,
+            "pct_mujeres": 4.3,
+            "pct_total": 8.7
+          },
+          {
+            "grupo": "15-19",
+            "varones": 1765152,
+            "mujeres": 1725035,
+            "total": 3490187,
+            "pct_varones": 4.4,
+            "pct_mujeres": 4.3,
+            "pct_total": 8.7
+          },
+          {
+            "grupo": "20-24",
+            "varones": 1684918,
+            "mujeres": 1644801,
+            "total": 3329719,
+            "pct_varones": 4.2,
+            "pct_mujeres": 4.1,
+            "pct_total": 8.3
+          },
+          {
+            "grupo": "25-29",
+            "varones": 1564567,
+            "mujeres": 1564567,
+            "total": 3129134,
+            "pct_varones": 3.9,
+            "pct_mujeres": 3.9,
+            "pct_total": 7.8
+          },
+          {
+            "grupo": "30-34",
+            "varones": 1444215,
+            "mujeres": 1484333,
+            "total": 2928548,
+            "pct_varones": 3.6,
+            "pct_mujeres": 3.7,
+            "pct_total": 7.3
+          },
+          {
+            "grupo": "35-39",
+            "varones": 1323864,
+            "mujeres": 1363981,
+            "total": 2687845,
+            "pct_varones": 3.3,
+            "pct_mujeres": 3.4,
+            "pct_total": 6.7
+          },
+          {
+            "grupo": "40-44",
+            "varones": 1163396,
+            "mujeres": 1243630,
+            "total": 2407026,
+            "pct_varones": 2.9,
+            "pct_mujeres": 3.1,
+            "pct_total": 6.0
+          },
+          {
+            "grupo": "45-49",
+            "varones": 1083162,
+            "mujeres": 1163396,
+            "total": 2246558,
+            "pct_varones": 2.7,
+            "pct_mujeres": 2.9,
+            "pct_total": 5.6
+          },
+          {
+            "grupo": "50-54",
+            "varones": 1002927,
+            "mujeres": 1083162,
+            "total": 2086089,
+            "pct_varones": 2.5,
+            "pct_mujeres": 2.7,
+            "pct_total": 5.2
+          },
+          {
+            "grupo": "55-59",
+            "varones": 882576,
+            "mujeres": 962810,
+            "total": 1845386,
+            "pct_varones": 2.2,
+            "pct_mujeres": 2.4,
+            "pct_total": 4.6
+          },
+          {
+            "grupo": "60-64",
+            "varones": 722108,
+            "mujeres": 842459,
+            "total": 1564567,
+            "pct_varones": 1.8,
+            "pct_mujeres": 2.1,
+            "pct_total": 3.9
+          },
+          {
+            "grupo": "65-69",
+            "varones": 561639,
+            "mujeres": 681991,
+            "total": 1243630,
+            "pct_varones": 1.4,
+            "pct_mujeres": 1.7,
+            "pct_total": 3.1
+          },
+          {
+            "grupo": "70-74",
+            "varones": 441288,
+            "mujeres": 561639,
+            "total": 1002927,
+            "pct_varones": 1.1,
+            "pct_mujeres": 1.4,
+            "pct_total": 2.5
+          },
+          {
+            "grupo": "75-79",
+            "varones": 320937,
+            "mujeres": 441288,
+            "total": 762225,
+            "pct_varones": 0.8,
+            "pct_mujeres": 1.1,
+            "pct_total": 1.9
+          },
+          {
+            "grupo": "80-84",
+            "varones": 200585,
+            "mujeres": 320937,
+            "total": 521522,
+            "pct_varones": 0.5,
+            "pct_mujeres": 0.8,
+            "pct_total": 1.3
+          },
+          {
+            "grupo": "85+",
+            "varones": 120351,
+            "mujeres": 200585,
+            "total": 320936,
+            "pct_varones": 0.3,
+            "pct_mujeres": 0.5,
+            "pct_total": 0.8
+          }
+        ]
+      },
+      "2015": {
+        "anio": 2015,
+        "tipo": "Estimación Oficial INDEC",
+        "poblacion_total": 43131966,
+        "edad_mediana": 31.0,
+        "indice_envejecimiento": 44.5,
+        "relacion_dependencia": 53.2,
+        "tgf": 2.29,
+        "piramide": [
+          {
+            "grupo": "0-4",
+            "varones": 1725279,
+            "mujeres": 1639015,
+            "total": 3364294,
+            "pct_varones": 4.0,
+            "pct_mujeres": 3.8,
+            "pct_total": 7.8
+          },
+          {
+            "grupo": "5-9",
+            "varones": 1768411,
+            "mujeres": 1682147,
+            "total": 3450558,
+            "pct_varones": 4.1,
+            "pct_mujeres": 3.9,
+            "pct_total": 8.0
+          },
+          {
+            "grupo": "10-14",
+            "varones": 1811543,
+            "mujeres": 1725279,
+            "total": 3536822,
+            "pct_varones": 4.2,
+            "pct_mujeres": 4.0,
+            "pct_total": 8.2
+          },
+          {
+            "grupo": "15-19",
+            "varones": 1854675,
+            "mujeres": 1768411,
+            "total": 3623086,
+            "pct_varones": 4.3,
+            "pct_mujeres": 4.1,
+            "pct_total": 8.4
+          },
+          {
+            "grupo": "20-24",
+            "varones": 1811543,
+            "mujeres": 1725279,
+            "total": 3536822,
+            "pct_varones": 4.2,
+            "pct_mujeres": 4.0,
+            "pct_total": 8.2
+          },
+          {
+            "grupo": "25-29",
+            "varones": 1725279,
+            "mujeres": 1682147,
+            "total": 3407426,
+            "pct_varones": 4.0,
+            "pct_mujeres": 3.9,
+            "pct_total": 7.9
+          },
+          {
+            "grupo": "30-34",
+            "varones": 1595883,
+            "mujeres": 1595883,
+            "total": 3191766,
+            "pct_varones": 3.7,
+            "pct_mujeres": 3.7,
+            "pct_total": 7.4
+          },
+          {
+            "grupo": "35-39",
+            "varones": 1466487,
+            "mujeres": 1509619,
+            "total": 2976106,
+            "pct_varones": 3.4,
+            "pct_mujeres": 3.5,
+            "pct_total": 6.9
+          },
+          {
+            "grupo": "40-44",
+            "varones": 1337091,
+            "mujeres": 1423355,
+            "total": 2760446,
+            "pct_varones": 3.1,
+            "pct_mujeres": 3.3,
+            "pct_total": 6.4
+          },
+          {
+            "grupo": "45-49",
+            "varones": 1164563,
+            "mujeres": 1250827,
+            "total": 2415390,
+            "pct_varones": 2.7,
+            "pct_mujeres": 2.9,
+            "pct_total": 5.6
+          },
+          {
+            "grupo": "50-54",
+            "varones": 1078299,
+            "mujeres": 1164563,
+            "total": 2242862,
+            "pct_varones": 2.5,
+            "pct_mujeres": 2.7,
+            "pct_total": 5.2
+          },
+          {
+            "grupo": "55-59",
+            "varones": 992035,
+            "mujeres": 1078299,
+            "total": 2070334,
+            "pct_varones": 2.3,
+            "pct_mujeres": 2.5,
+            "pct_total": 4.8
+          },
+          {
+            "grupo": "60-64",
+            "varones": 862639,
+            "mujeres": 992035,
+            "total": 1854674,
+            "pct_varones": 2.0,
+            "pct_mujeres": 2.3,
+            "pct_total": 4.3
+          },
+          {
+            "grupo": "65-69",
+            "varones": 646979,
+            "mujeres": 776375,
+            "total": 1423354,
+            "pct_varones": 1.5,
+            "pct_mujeres": 1.8,
+            "pct_total": 3.3
+          },
+          {
+            "grupo": "70-74",
+            "varones": 517584,
+            "mujeres": 646979,
+            "total": 1164563,
+            "pct_varones": 1.2,
+            "pct_mujeres": 1.5,
+            "pct_total": 2.7
+          },
+          {
+            "grupo": "75-79",
+            "varones": 345056,
+            "mujeres": 474452,
+            "total": 819508,
+            "pct_varones": 0.8,
+            "pct_mujeres": 1.1,
+            "pct_total": 1.9
+          },
+          {
+            "grupo": "80-84",
+            "varones": 215660,
+            "mujeres": 345056,
+            "total": 560716,
+            "pct_varones": 0.5,
+            "pct_mujeres": 0.8,
+            "pct_total": 1.3
+          },
+          {
+            "grupo": "85+",
+            "varones": 129396,
+            "mujeres": 258792,
+            "total": 388188,
+            "pct_varones": 0.3,
+            "pct_mujeres": 0.6,
+            "pct_total": 0.9
+          }
+        ]
+      },
+      "2020": {
+        "anio": 2020,
+        "tipo": "Estimación Oficial INDEC",
+        "poblacion_total": 45376763,
+        "edad_mediana": 31.8,
+        "indice_envejecimiento": 49.8,
+        "relacion_dependencia": 52.4,
+        "tgf": 1.54,
+        "piramide": [
+          {
+            "grupo": "0-4",
+            "varones": 1633563,
+            "mujeres": 1542810,
+            "total": 3176373,
+            "pct_varones": 3.6,
+            "pct_mujeres": 3.4,
+            "pct_total": 7.0
+          },
+          {
+            "grupo": "5-9",
+            "varones": 1724317,
+            "mujeres": 1633563,
+            "total": 3357880,
+            "pct_varones": 3.8,
+            "pct_mujeres": 3.6,
+            "pct_total": 7.4
+          },
+          {
+            "grupo": "10-14",
+            "varones": 1815071,
+            "mujeres": 1724317,
+            "total": 3539388,
+            "pct_varones": 4.0,
+            "pct_mujeres": 3.8,
+            "pct_total": 7.8
+          },
+          {
+            "grupo": "15-19",
+            "varones": 1860447,
+            "mujeres": 1769694,
+            "total": 3630141,
+            "pct_varones": 4.1,
+            "pct_mujeres": 3.9,
+            "pct_total": 8.0
+          },
+          {
+            "grupo": "20-24",
+            "varones": 1860447,
+            "mujeres": 1769694,
+            "total": 3630141,
+            "pct_varones": 4.1,
+            "pct_mujeres": 3.9,
+            "pct_total": 8.0
+          },
+          {
+            "grupo": "25-29",
+            "varones": 1815071,
+            "mujeres": 1769694,
+            "total": 3584765,
+            "pct_varones": 4.0,
+            "pct_mujeres": 3.9,
+            "pct_total": 7.9
+          },
+          {
+            "grupo": "30-34",
+            "varones": 1724317,
+            "mujeres": 1724317,
+            "total": 3448634,
+            "pct_varones": 3.8,
+            "pct_mujeres": 3.8,
+            "pct_total": 7.6
+          },
+          {
+            "grupo": "35-39",
+            "varones": 1633563,
+            "mujeres": 1678940,
+            "total": 3312503,
+            "pct_varones": 3.6,
+            "pct_mujeres": 3.7,
+            "pct_total": 7.3
+          },
+          {
+            "grupo": "40-44",
+            "varones": 1497433,
+            "mujeres": 1588187,
+            "total": 3085620,
+            "pct_varones": 3.3,
+            "pct_mujeres": 3.5,
+            "pct_total": 6.8
+          },
+          {
+            "grupo": "45-49",
+            "varones": 1315926,
+            "mujeres": 1406680,
+            "total": 2722606,
+            "pct_varones": 2.9,
+            "pct_mujeres": 3.1,
+            "pct_total": 6.0
+          },
+          {
+            "grupo": "50-54",
+            "varones": 1179796,
+            "mujeres": 1270549,
+            "total": 2450345,
+            "pct_varones": 2.6,
+            "pct_mujeres": 2.8,
+            "pct_total": 5.4
+          },
+          {
+            "grupo": "55-59",
+            "varones": 1089042,
+            "mujeres": 1179796,
+            "total": 2268838,
+            "pct_varones": 2.4,
+            "pct_mujeres": 2.6,
+            "pct_total": 5.0
+          },
+          {
+            "grupo": "60-64",
+            "varones": 952912,
+            "mujeres": 1089042,
+            "total": 2041954,
+            "pct_varones": 2.1,
+            "pct_mujeres": 2.4,
+            "pct_total": 4.5
+          },
+          {
+            "grupo": "65-69",
+            "varones": 771405,
+            "mujeres": 907535,
+            "total": 1678940,
+            "pct_varones": 1.7,
+            "pct_mujeres": 2.0,
+            "pct_total": 3.7
+          },
+          {
+            "grupo": "70-74",
+            "varones": 589898,
+            "mujeres": 726028,
+            "total": 1315926,
+            "pct_varones": 1.3,
+            "pct_mujeres": 1.6,
+            "pct_total": 2.9
+          },
+          {
+            "grupo": "75-79",
+            "varones": 408391,
+            "mujeres": 544521,
+            "total": 952912,
+            "pct_varones": 0.9,
+            "pct_mujeres": 1.2,
+            "pct_total": 2.1
+          },
+          {
+            "grupo": "80-84",
+            "varones": 226884,
+            "mujeres": 363014,
+            "total": 589898,
+            "pct_varones": 0.5,
+            "pct_mujeres": 0.8,
+            "pct_total": 1.3
+          },
+          {
+            "grupo": "85+",
+            "varones": 181507,
+            "mujeres": 317637,
+            "total": 499144,
+            "pct_varones": 0.4,
+            "pct_mujeres": 0.7,
+            "pct_total": 1.1
+          }
+        ]
+      },
+      "2022": {
+        "anio": 2022,
+        "tipo": "Censal Definitivo (Censo 2022)",
+        "poblacion_total": 46234830,
+        "edad_mediana": 32.0,
+        "indice_envejecimiento": 53.3,
+        "relacion_dependencia": 51.8,
+        "tgf": 1.44,
+        "piramide": [
+          {
+            "grupo": "0-4",
+            "varones": 1581231,
+            "mujeres": 1521126,
+            "total": 3102357,
+            "pct_varones": 3.42,
+            "pct_mujeres": 3.29,
+            "pct_total": 6.71
+          },
+          {
+            "grupo": "5-9",
+            "varones": 1724559,
+            "mujeres": 1659830,
+            "total": 3384389,
+            "pct_varones": 3.73,
+            "pct_mujeres": 3.59,
+            "pct_total": 7.32
+          },
+          {
+            "grupo": "10-14",
+            "varones": 1844770,
+            "mujeres": 1775417,
+            "total": 3620187,
+            "pct_varones": 3.99,
+            "pct_mujeres": 3.84,
+            "pct_total": 7.83
+          },
+          {
+            "grupo": "15-19",
+            "varones": 1803158,
+            "mujeres": 1756924,
+            "total": 3560082,
+            "pct_varones": 3.9,
+            "pct_mujeres": 3.8,
+            "pct_total": 7.7
+          },
+          {
+            "grupo": "20-24",
+            "varones": 1780041,
+            "mujeres": 1766171,
+            "total": 3546212,
+            "pct_varones": 3.85,
+            "pct_mujeres": 3.82,
+            "pct_total": 7.67
+          },
+          {
+            "grupo": "25-29",
+            "varones": 1733806,
+            "mujeres": 1747677,
+            "total": 3481483,
+            "pct_varones": 3.75,
+            "pct_mujeres": 3.78,
+            "pct_total": 7.53
+          },
+          {
+            "grupo": "30-34",
+            "varones": 1655207,
+            "mujeres": 1696818,
+            "total": 3352025,
+            "pct_varones": 3.58,
+            "pct_mujeres": 3.67,
+            "pct_total": 7.25
+          },
+          {
+            "grupo": "35-39",
+            "varones": 1581231,
+            "mujeres": 1650583,
+            "total": 3231814,
+            "pct_varones": 3.42,
+            "pct_mujeres": 3.57,
+            "pct_total": 6.99
+          },
+          {
+            "grupo": "40-44",
+            "varones": 1562737,
+            "mujeres": 1641336,
+            "total": 3204073,
+            "pct_varones": 3.38,
+            "pct_mujeres": 3.55,
+            "pct_total": 6.93
+          },
+          {
+            "grupo": "45-49",
+            "varones": 1396292,
+            "mujeres": 1488762,
+            "total": 2885054,
+            "pct_varones": 3.02,
+            "pct_mujeres": 3.22,
+            "pct_total": 6.24
+          },
+          {
+            "grupo": "50-54",
+            "varones": 1211353,
+            "mujeres": 1322316,
+            "total": 2533669,
+            "pct_varones": 2.62,
+            "pct_mujeres": 2.86,
+            "pct_total": 5.48
+          },
+          {
+            "grupo": "55-59",
+            "varones": 1058778,
+            "mujeres": 1188235,
+            "total": 2247013,
+            "pct_varones": 2.29,
+            "pct_mujeres": 2.57,
+            "pct_total": 4.86
+          },
+          {
+            "grupo": "60-64",
+            "varones": 924697,
+            "mujeres": 1077272,
+            "total": 2001969,
+            "pct_varones": 2.0,
+            "pct_mujeres": 2.33,
+            "pct_total": 4.33
+          },
+          {
+            "grupo": "65-69",
+            "varones": 781369,
+            "mujeres": 961684,
+            "total": 1743053,
+            "pct_varones": 1.69,
+            "pct_mujeres": 2.08,
+            "pct_total": 3.77
+          },
+          {
+            "grupo": "70-74",
+            "varones": 610300,
+            "mujeres": 813733,
+            "total": 1424033,
+            "pct_varones": 1.32,
+            "pct_mujeres": 1.76,
+            "pct_total": 3.08
+          },
+          {
+            "grupo": "75-79",
+            "varones": 411490,
+            "mujeres": 619547,
+            "total": 1031037,
+            "pct_varones": 0.89,
+            "pct_mujeres": 1.34,
+            "pct_total": 2.23
+          },
+          {
+            "grupo": "80-84",
+            "varones": 235798,
+            "mujeres": 420737,
+            "total": 656535,
+            "pct_varones": 0.51,
+            "pct_mujeres": 0.91,
+            "pct_total": 1.42
+          },
+          {
+            "grupo": "85+",
+            "varones": 180316,
+            "mujeres": 420737,
+            "total": 601053,
+            "pct_varones": 0.39,
+            "pct_mujeres": 0.91,
+            "pct_total": 1.3
+          }
+        ]
+      },
+      "2025": {
+        "anio": 2025,
+        "tipo": "Proyección Oficial INDEC",
+        "poblacion_total": 47050000,
+        "edad_mediana": 33.2,
+        "indice_envejecimiento": 58.6,
+        "relacion_dependencia": 50.9,
+        "tgf": 1.38,
+        "piramide": [
+          {
+            "grupo": "0-4",
+            "varones": 1458550,
+            "mujeres": 1411500,
+            "total": 2870050,
+            "pct_varones": 3.1,
+            "pct_mujeres": 3.0,
+            "pct_total": 6.1
+          },
+          {
+            "grupo": "5-9",
+            "varones": 1552650,
+            "mujeres": 1505600,
+            "total": 3058250,
+            "pct_varones": 3.3,
+            "pct_mujeres": 3.2,
+            "pct_total": 6.5
+          },
+          {
+            "grupo": "10-14",
+            "varones": 1693800,
+            "mujeres": 1646750,
+            "total": 3340550,
+            "pct_varones": 3.6,
+            "pct_mujeres": 3.5,
+            "pct_total": 7.1
+          },
+          {
+            "grupo": "15-19",
+            "varones": 1787900,
+            "mujeres": 1740850,
+            "total": 3528750,
+            "pct_varones": 3.8,
+            "pct_mujeres": 3.7,
+            "pct_total": 7.5
+          },
+          {
+            "grupo": "20-24",
+            "varones": 1787900,
+            "mujeres": 1740850,
+            "total": 3528750,
+            "pct_varones": 3.8,
+            "pct_mujeres": 3.7,
+            "pct_total": 7.5
+          },
+          {
+            "grupo": "25-29",
+            "varones": 1740850,
+            "mujeres": 1740850,
+            "total": 3481700,
+            "pct_varones": 3.7,
+            "pct_mujeres": 3.7,
+            "pct_total": 7.4
+          },
+          {
+            "grupo": "30-34",
+            "varones": 1693800,
+            "mujeres": 1740850,
+            "total": 3434650,
+            "pct_varones": 3.6,
+            "pct_mujeres": 3.7,
+            "pct_total": 7.3
+          },
+          {
+            "grupo": "35-39",
+            "varones": 1646750,
+            "mujeres": 1693800,
+            "total": 3340550,
+            "pct_varones": 3.5,
+            "pct_mujeres": 3.6,
+            "pct_total": 7.1
+          },
+          {
+            "grupo": "40-44",
+            "varones": 1599700,
+            "mujeres": 1693800,
+            "total": 3293500,
+            "pct_varones": 3.4,
+            "pct_mujeres": 3.6,
+            "pct_total": 7.0
+          },
+          {
+            "grupo": "45-49",
+            "varones": 1505600,
+            "mujeres": 1599700,
+            "total": 3105300,
+            "pct_varones": 3.2,
+            "pct_mujeres": 3.4,
+            "pct_total": 6.6
+          },
+          {
+            "grupo": "50-54",
+            "varones": 1317400,
+            "mujeres": 1411500,
+            "total": 2728900,
+            "pct_varones": 2.8,
+            "pct_mujeres": 3.0,
+            "pct_total": 5.8
+          },
+          {
+            "grupo": "55-59",
+            "varones": 1129200,
+            "mujeres": 1270350,
+            "total": 2399550,
+            "pct_varones": 2.4,
+            "pct_mujeres": 2.7,
+            "pct_total": 5.1
+          },
+          {
+            "grupo": "60-64",
+            "varones": 988050,
+            "mujeres": 1129200,
+            "total": 2117250,
+            "pct_varones": 2.1,
+            "pct_mujeres": 2.4,
+            "pct_total": 4.5
+          },
+          {
+            "grupo": "65-69",
+            "varones": 846900,
+            "mujeres": 1035100,
+            "total": 1882000,
+            "pct_varones": 1.8,
+            "pct_mujeres": 2.2,
+            "pct_total": 4.0
+          },
+          {
+            "grupo": "70-74",
+            "varones": 658700,
+            "mujeres": 846900,
+            "total": 1505600,
+            "pct_varones": 1.4,
+            "pct_mujeres": 1.8,
+            "pct_total": 3.2
+          },
+          {
+            "grupo": "75-79",
+            "varones": 470500,
+            "mujeres": 658700,
+            "total": 1129200,
+            "pct_varones": 1.0,
+            "pct_mujeres": 1.4,
+            "pct_total": 2.4
+          },
+          {
+            "grupo": "80-84",
+            "varones": 282300,
+            "mujeres": 470500,
+            "total": 752800,
+            "pct_varones": 0.6,
+            "pct_mujeres": 1.0,
+            "pct_total": 1.6
+          },
+          {
+            "grupo": "85+",
+            "varones": 188200,
+            "mujeres": 376400,
+            "total": 564600,
+            "pct_varones": 0.4,
+            "pct_mujeres": 0.8,
+            "pct_total": 1.2
+          }
+        ]
+      },
+      "2030": {
+        "anio": 2030,
+        "tipo": "Proyección Oficial INDEC",
+        "poblacion_total": 48600000,
+        "edad_mediana": 34.9,
+        "indice_envejecimiento": 69.2,
+        "relacion_dependencia": 51.5,
+        "tgf": 1.4,
+        "piramide": [
+          {
+            "grupo": "0-4",
+            "varones": 1360800,
+            "mujeres": 1312200,
+            "total": 2673000,
+            "pct_varones": 2.8,
+            "pct_mujeres": 2.7,
+            "pct_total": 5.5
+          },
+          {
+            "grupo": "5-9",
+            "varones": 1458000,
+            "mujeres": 1409400,
+            "total": 2867400,
+            "pct_varones": 3.0,
+            "pct_mujeres": 2.9,
+            "pct_total": 5.9
+          },
+          {
+            "grupo": "10-14",
+            "varones": 1555200,
+            "mujeres": 1506600,
+            "total": 3061800,
+            "pct_varones": 3.2,
+            "pct_mujeres": 3.1,
+            "pct_total": 6.3
+          },
+          {
+            "grupo": "15-19",
+            "varones": 1701000,
+            "mujeres": 1652400,
+            "total": 3353400,
+            "pct_varones": 3.5,
+            "pct_mujeres": 3.4,
+            "pct_total": 6.9
+          },
+          {
+            "grupo": "20-24",
+            "varones": 1798200,
+            "mujeres": 1749600,
+            "total": 3547800,
+            "pct_varones": 3.7,
+            "pct_mujeres": 3.6,
+            "pct_total": 7.3
+          },
+          {
+            "grupo": "25-29",
+            "varones": 1798200,
+            "mujeres": 1798200,
+            "total": 3596400,
+            "pct_varones": 3.7,
+            "pct_mujeres": 3.7,
+            "pct_total": 7.4
+          },
+          {
+            "grupo": "30-34",
+            "varones": 1749600,
+            "mujeres": 1798200,
+            "total": 3547800,
+            "pct_varones": 3.6,
+            "pct_mujeres": 3.7,
+            "pct_total": 7.3
+          },
+          {
+            "grupo": "35-39",
+            "varones": 1701000,
+            "mujeres": 1749600,
+            "total": 3450600,
+            "pct_varones": 3.5,
+            "pct_mujeres": 3.6,
+            "pct_total": 7.1
+          },
+          {
+            "grupo": "40-44",
+            "varones": 1652400,
+            "mujeres": 1749600,
+            "total": 3402000,
+            "pct_varones": 3.4,
+            "pct_mujeres": 3.6,
+            "pct_total": 7.0
+          },
+          {
+            "grupo": "45-49",
+            "varones": 1603800,
+            "mujeres": 1701000,
+            "total": 3304800,
+            "pct_varones": 3.3,
+            "pct_mujeres": 3.5,
+            "pct_total": 6.8
+          },
+          {
+            "grupo": "50-54",
+            "varones": 1458000,
+            "mujeres": 1603800,
+            "total": 3061800,
+            "pct_varones": 3.0,
+            "pct_mujeres": 3.3,
+            "pct_total": 6.3
+          },
+          {
+            "grupo": "55-59",
+            "varones": 1263600,
+            "mujeres": 1409400,
+            "total": 2673000,
+            "pct_varones": 2.6,
+            "pct_mujeres": 2.9,
+            "pct_total": 5.5
+          },
+          {
+            "grupo": "60-64",
+            "varones": 1069200,
+            "mujeres": 1263600,
+            "total": 2332800,
+            "pct_varones": 2.2,
+            "pct_mujeres": 2.6,
+            "pct_total": 4.8
+          },
+          {
+            "grupo": "65-69",
+            "varones": 923400,
+            "mujeres": 1117800,
+            "total": 2041200,
+            "pct_varones": 1.9,
+            "pct_mujeres": 2.3,
+            "pct_total": 4.2
+          },
+          {
+            "grupo": "70-74",
+            "varones": 777600,
+            "mujeres": 972000,
+            "total": 1749600,
+            "pct_varones": 1.6,
+            "pct_mujeres": 2.0,
+            "pct_total": 3.6
+          },
+          {
+            "grupo": "75-79",
+            "varones": 583200,
+            "mujeres": 777600,
+            "total": 1360800,
+            "pct_varones": 1.2,
+            "pct_mujeres": 1.6,
+            "pct_total": 2.8
+          },
+          {
+            "grupo": "80-84",
+            "varones": 388800,
+            "mujeres": 583200,
+            "total": 972000,
+            "pct_varones": 0.8,
+            "pct_mujeres": 1.2,
+            "pct_total": 2.0
+          },
+          {
+            "grupo": "85+",
+            "varones": 243000,
+            "mujeres": 486000,
+            "total": 729000,
+            "pct_varones": 0.5,
+            "pct_mujeres": 1.0,
+            "pct_total": 1.5
+          }
+        ]
+      },
+      "2035": {
+        "anio": 2035,
+        "tipo": "Proyección Oficial INDEC",
+        "poblacion_total": 49950000,
+        "edad_mediana": 36.4,
+        "indice_envejecimiento": 82.5,
+        "relacion_dependencia": 53.1,
+        "tgf": 1.42,
+        "piramide": [
+          {
+            "grupo": "0-4",
+            "varones": 1298700,
+            "mujeres": 1248750,
+            "total": 2547450,
+            "pct_varones": 2.6,
+            "pct_mujeres": 2.5,
+            "pct_total": 5.1
+          },
+          {
+            "grupo": "5-9",
+            "varones": 1348650,
+            "mujeres": 1298700,
+            "total": 2647350,
+            "pct_varones": 2.7,
+            "pct_mujeres": 2.6,
+            "pct_total": 5.3
+          },
+          {
+            "grupo": "10-14",
+            "varones": 1448550,
+            "mujeres": 1398600,
+            "total": 2847150,
+            "pct_varones": 2.9,
+            "pct_mujeres": 2.8,
+            "pct_total": 5.7
+          },
+          {
+            "grupo": "15-19",
+            "varones": 1548450,
+            "mujeres": 1498500,
+            "total": 3046950,
+            "pct_varones": 3.1,
+            "pct_mujeres": 3.0,
+            "pct_total": 6.1
+          },
+          {
+            "grupo": "20-24",
+            "varones": 1698300,
+            "mujeres": 1648350,
+            "total": 3346650,
+            "pct_varones": 3.4,
+            "pct_mujeres": 3.3,
+            "pct_total": 6.7
+          },
+          {
+            "grupo": "25-29",
+            "varones": 1798200,
+            "mujeres": 1748250,
+            "total": 3546450,
+            "pct_varones": 3.6,
+            "pct_mujeres": 3.5,
+            "pct_total": 7.1
+          },
+          {
+            "grupo": "30-34",
+            "varones": 1798200,
+            "mujeres": 1798200,
+            "total": 3596400,
+            "pct_varones": 3.6,
+            "pct_mujeres": 3.6,
+            "pct_total": 7.2
+          },
+          {
+            "grupo": "35-39",
+            "varones": 1748250,
+            "mujeres": 1798200,
+            "total": 3546450,
+            "pct_varones": 3.5,
+            "pct_mujeres": 3.6,
+            "pct_total": 7.1
+          },
+          {
+            "grupo": "40-44",
+            "varones": 1698300,
+            "mujeres": 1798200,
+            "total": 3496500,
+            "pct_varones": 3.4,
+            "pct_mujeres": 3.6,
+            "pct_total": 7.0
+          },
+          {
+            "grupo": "45-49",
+            "varones": 1648350,
+            "mujeres": 1748250,
+            "total": 3396600,
+            "pct_varones": 3.3,
+            "pct_mujeres": 3.5,
+            "pct_total": 6.8
+          },
+          {
+            "grupo": "50-54",
+            "varones": 1548450,
+            "mujeres": 1698300,
+            "total": 3246750,
+            "pct_varones": 3.1,
+            "pct_mujeres": 3.4,
+            "pct_total": 6.5
+          },
+          {
+            "grupo": "55-59",
+            "varones": 1398600,
+            "mujeres": 1548450,
+            "total": 2947050,
+            "pct_varones": 2.8,
+            "pct_mujeres": 3.1,
+            "pct_total": 5.9
+          },
+          {
+            "grupo": "60-64",
+            "varones": 1198800,
+            "mujeres": 1398600,
+            "total": 2597400,
+            "pct_varones": 2.4,
+            "pct_mujeres": 2.8,
+            "pct_total": 5.2
+          },
+          {
+            "grupo": "65-69",
+            "varones": 999000,
+            "mujeres": 1248750,
+            "total": 2247750,
+            "pct_varones": 2.0,
+            "pct_mujeres": 2.5,
+            "pct_total": 4.5
+          },
+          {
+            "grupo": "70-74",
+            "varones": 849150,
+            "mujeres": 1048950,
+            "total": 1898100,
+            "pct_varones": 1.7,
+            "pct_mujeres": 2.1,
+            "pct_total": 3.8
+          },
+          {
+            "grupo": "75-79",
+            "varones": 649350,
+            "mujeres": 899100,
+            "total": 1548450,
+            "pct_varones": 1.3,
+            "pct_mujeres": 1.8,
+            "pct_total": 3.1
+          },
+          {
+            "grupo": "80-84",
+            "varones": 449550,
+            "mujeres": 699300,
+            "total": 1148850,
+            "pct_varones": 0.9,
+            "pct_mujeres": 1.4,
+            "pct_total": 2.3
+          },
+          {
+            "grupo": "85+",
+            "varones": 299700,
+            "mujeres": 599400,
+            "total": 899100,
+            "pct_varones": 0.6,
+            "pct_mujeres": 1.2,
+            "pct_total": 1.8
+          }
+        ]
+      },
+      "2040": {
+        "anio": 2040,
+        "tipo": "Proyección Oficial INDEC",
+        "poblacion_total": 51100000,
+        "edad_mediana": 37.8,
+        "indice_envejecimiento": 98.4,
+        "relacion_dependencia": 55.6,
+        "tgf": 1.45,
+        "piramide": [
+          {
+            "grupo": "0-4",
+            "varones": 1226400,
+            "mujeres": 1175300,
+            "total": 2401700,
+            "pct_varones": 2.4,
+            "pct_mujeres": 2.3,
+            "pct_total": 4.7
+          },
+          {
+            "grupo": "5-9",
+            "varones": 1277500,
+            "mujeres": 1226400,
+            "total": 2503900,
+            "pct_varones": 2.5,
+            "pct_mujeres": 2.4,
+            "pct_total": 4.9
+          },
+          {
+            "grupo": "10-14",
+            "varones": 1328600,
+            "mujeres": 1277500,
+            "total": 2606100,
+            "pct_varones": 2.6,
+            "pct_mujeres": 2.5,
+            "pct_total": 5.1
+          },
+          {
+            "grupo": "15-19",
+            "varones": 1430800,
+            "mujeres": 1379700,
+            "total": 2810500,
+            "pct_varones": 2.8,
+            "pct_mujeres": 2.7,
+            "pct_total": 5.5
+          },
+          {
+            "grupo": "20-24",
+            "varones": 1533000,
+            "mujeres": 1481900,
+            "total": 3014900,
+            "pct_varones": 3.0,
+            "pct_mujeres": 2.9,
+            "pct_total": 5.9
+          },
+          {
+            "grupo": "25-29",
+            "varones": 1686300,
+            "mujeres": 1635200,
+            "total": 3321500,
+            "pct_varones": 3.3,
+            "pct_mujeres": 3.2,
+            "pct_total": 6.5
+          },
+          {
+            "grupo": "30-34",
+            "varones": 1788500,
+            "mujeres": 1788500,
+            "total": 3577000,
+            "pct_varones": 3.5,
+            "pct_mujeres": 3.5,
+            "pct_total": 7.0
+          },
+          {
+            "grupo": "35-39",
+            "varones": 1788500,
+            "mujeres": 1839600,
+            "total": 3628100,
+            "pct_varones": 3.5,
+            "pct_mujeres": 3.6,
+            "pct_total": 7.1
+          },
+          {
+            "grupo": "40-44",
+            "varones": 1737400,
+            "mujeres": 1839600,
+            "total": 3577000,
+            "pct_varones": 3.4,
+            "pct_mujeres": 3.6,
+            "pct_total": 7.0
+          },
+          {
+            "grupo": "45-49",
+            "varones": 1686300,
+            "mujeres": 1788500,
+            "total": 3474800,
+            "pct_varones": 3.3,
+            "pct_mujeres": 3.5,
+            "pct_total": 6.8
+          },
+          {
+            "grupo": "50-54",
+            "varones": 1584100,
+            "mujeres": 1737400,
+            "total": 3321500,
+            "pct_varones": 3.1,
+            "pct_mujeres": 3.4,
+            "pct_total": 6.5
+          },
+          {
+            "grupo": "55-59",
+            "varones": 1481900,
+            "mujeres": 1635200,
+            "total": 3117100,
+            "pct_varones": 2.9,
+            "pct_mujeres": 3.2,
+            "pct_total": 6.1
+          },
+          {
+            "grupo": "60-64",
+            "varones": 1328600,
+            "mujeres": 1533000,
+            "total": 2861600,
+            "pct_varones": 2.6,
+            "pct_mujeres": 3.0,
+            "pct_total": 5.6
+          },
+          {
+            "grupo": "65-69",
+            "varones": 1124200,
+            "mujeres": 1379700,
+            "total": 2503900,
+            "pct_varones": 2.2,
+            "pct_mujeres": 2.7,
+            "pct_total": 4.9
+          },
+          {
+            "grupo": "70-74",
+            "varones": 919800,
+            "mujeres": 1175300,
+            "total": 2095100,
+            "pct_varones": 1.8,
+            "pct_mujeres": 2.3,
+            "pct_total": 4.1
+          },
+          {
+            "grupo": "75-79",
+            "varones": 715400,
+            "mujeres": 970900,
+            "total": 1686300,
+            "pct_varones": 1.4,
+            "pct_mujeres": 1.9,
+            "pct_total": 3.3
+          },
+          {
+            "grupo": "80-84",
+            "varones": 511000,
+            "mujeres": 766500,
+            "total": 1277500,
+            "pct_varones": 1.0,
+            "pct_mujeres": 1.5,
+            "pct_total": 2.5
+          },
+          {
+            "grupo": "85+",
+            "varones": 357700,
+            "mujeres": 715400,
+            "total": 1073100,
+            "pct_varones": 0.7,
+            "pct_mujeres": 1.4,
+            "pct_total": 2.1
+          }
+        ]
+      }
+    },
     "piramide_quinquenal": [
       {
         "grupo": "0-4",
-        "varones": 1582410,
-        "mujeres": 1519840,
-        "total": 3102250,
+        "varones": 1581231,
+        "mujeres": 1521126,
+        "total": 3102357,
+        "pct_varones": 3.42,
+        "pct_mujeres": 3.29,
         "pct_total": 6.71
       },
       {
         "grupo": "5-9",
-        "varones": 1724500,
-        "mujeres": 1658320,
-        "total": 3382820,
+        "varones": 1724559,
+        "mujeres": 1659830,
+        "total": 3384389,
+        "pct_varones": 3.73,
+        "pct_mujeres": 3.59,
         "pct_total": 7.32
       },
       {
         "grupo": "10-14",
-        "varones": 1845120,
-        "mujeres": 1776450,
-        "total": 3621570,
+        "varones": 1844770,
+        "mujeres": 1775417,
+        "total": 3620187,
+        "pct_varones": 3.99,
+        "pct_mujeres": 3.84,
         "pct_total": 7.83
       },
       {
         "grupo": "15-19",
-        "varones": 1801240,
-        "mujeres": 1756890,
-        "total": 3558130,
-        "pct_total": 7.69
+        "varones": 1803158,
+        "mujeres": 1756924,
+        "total": 3560082,
+        "pct_varones": 3.9,
+        "pct_mujeres": 3.8,
+        "pct_total": 7.7
       },
       {
         "grupo": "20-24",
-        "varones": 1782350,
-        "mujeres": 1765400,
-        "total": 3547750,
+        "varones": 1780041,
+        "mujeres": 1766171,
+        "total": 3546212,
+        "pct_varones": 3.85,
+        "pct_mujeres": 3.82,
         "pct_total": 7.67
       },
       {
         "grupo": "25-29",
-        "varones": 1735100,
-        "mujeres": 1748900,
-        "total": 3484000,
-        "pct_total": 7.54
+        "varones": 1733806,
+        "mujeres": 1747677,
+        "total": 3481483,
+        "pct_varones": 3.75,
+        "pct_mujeres": 3.78,
+        "pct_total": 7.53
       },
       {
         "grupo": "30-34",
-        "varones": 1654200,
-        "mujeres": 1698200,
-        "total": 3352400,
+        "varones": 1655207,
+        "mujeres": 1696818,
+        "total": 3352025,
+        "pct_varones": 3.58,
+        "pct_mujeres": 3.67,
         "pct_total": 7.25
       },
       {
         "grupo": "35-39",
-        "varones": 1582600,
-        "mujeres": 1649800,
-        "total": 3232400,
+        "varones": 1581231,
+        "mujeres": 1650583,
+        "total": 3231814,
+        "pct_varones": 3.42,
+        "pct_mujeres": 3.57,
         "pct_total": 6.99
       },
       {
         "grupo": "40-44",
-        "varones": 1561400,
-        "mujeres": 1642100,
-        "total": 3203500,
+        "varones": 1562737,
+        "mujeres": 1641336,
+        "total": 3204073,
+        "pct_varones": 3.38,
+        "pct_mujeres": 3.55,
         "pct_total": 6.93
       },
       {
         "grupo": "45-49",
-        "varones": 1395200,
-        "mujeres": 1489700,
-        "total": 2884900,
+        "varones": 1396292,
+        "mujeres": 1488762,
+        "total": 2885054,
+        "pct_varones": 3.02,
+        "pct_mujeres": 3.22,
         "pct_total": 6.24
       },
       {
         "grupo": "50-54",
-        "varones": 1210400,
-        "mujeres": 1324500,
-        "total": 2534900,
+        "varones": 1211353,
+        "mujeres": 1322316,
+        "total": 2533669,
+        "pct_varones": 2.62,
+        "pct_mujeres": 2.86,
         "pct_total": 5.48
       },
       {
         "grupo": "55-59",
-        "varones": 1058900,
-        "mujeres": 1189400,
-        "total": 2248300,
+        "varones": 1058778,
+        "mujeres": 1188235,
+        "total": 2247013,
+        "pct_varones": 2.29,
+        "pct_mujeres": 2.57,
         "pct_total": 4.86
       },
       {
         "grupo": "60-64",
-        "varones": 924800,
-        "mujeres": 1076200,
-        "total": 2001000,
+        "varones": 924697,
+        "mujeres": 1077272,
+        "total": 2001969,
+        "pct_varones": 2.0,
+        "pct_mujeres": 2.33,
         "pct_total": 4.33
       },
       {
         "grupo": "65-69",
-        "varones": 782400,
-        "mujeres": 962100,
-        "total": 1744500,
+        "varones": 781369,
+        "mujeres": 961684,
+        "total": 1743053,
+        "pct_varones": 1.69,
+        "pct_mujeres": 2.08,
         "pct_total": 3.77
       },
       {
         "grupo": "70-74",
-        "varones": 612500,
-        "mujeres": 815400,
-        "total": 1427900,
-        "pct_total": 3.09
+        "varones": 610300,
+        "mujeres": 813733,
+        "total": 1424033,
+        "pct_varones": 1.32,
+        "pct_mujeres": 1.76,
+        "pct_total": 3.08
       },
       {
         "grupo": "75-79",
-        "varones": 412300,
-        "mujeres": 618900,
-        "total": 1031200,
+        "varones": 411490,
+        "mujeres": 619547,
+        "total": 1031037,
+        "pct_varones": 0.89,
+        "pct_mujeres": 1.34,
         "pct_total": 2.23
       },
       {
         "grupo": "80-84",
-        "varones": 234100,
-        "mujeres": 421200,
-        "total": 655300,
+        "varones": 235798,
+        "mujeres": 420737,
+        "total": 656535,
+        "pct_varones": 0.51,
+        "pct_mujeres": 0.91,
         "pct_total": 1.42
       },
       {
         "grupo": "85+",
-        "varones": 181381,
-        "mujeres": 419741,
-        "total": 601122,
+        "varones": 180316,
+        "mujeres": 420737,
+        "total": 601053,
+        "pct_varones": 0.39,
+        "pct_mujeres": 0.91,
         "pct_total": 1.3
       }
+    ],
+    "anios_disponibles": [
+      1970,
+      1980,
+      1991,
+      2001,
+      2010,
+      2015,
+      2020,
+      2022,
+      2025,
+      2030,
+      2035,
+      2040
     ],
     "poblacion_provincias": [
       {
