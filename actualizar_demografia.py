@@ -887,8 +887,8 @@ def generate_master_dataset():
                 {"institucion": "ANSES / SIPA", "descripcion": "Administración Nacional de la Seguridad Social y Sistema Integrado Previsional Argentino (Boletines Estadísticos de la Seguridad Social)", "url": "https://www.anses.gob.ar"},
                 {"institucion": "SSN / NAIC / SOA", "descripcion": "Superintendencia de Seguros de la Nación y Normas Actuariales Internacionales (Tablas GAM-71/83/94, UP-94, CSO 1980/2001/2017)", "url": "https://www.argentina.gob.ar/ssn"}
             ],
-            "version": "3.0.0",
-            "estilo": "AGMD Dark Green • JetBrains Mono",
+            "version": "3.1.0",
+            "estilo": "La Segunda • Sora & JetBrains Mono (Claro / Oscuro)",
             "actualizado": "Agosto 2026",
             "acceso": "Libre, público y gratuito"
         },
