@@ -127,7 +127,7 @@
       font-feature-settings: "tnum";
     }
 
-    .glass-card {
+    .ls-card {
       background: var(--bg-card);
       backdrop-filter: blur(12px);
       border: 1px solid var(--border-card);
@@ -135,7 +135,7 @@
       transition: all 0.25s ease;
     }
 
-    .glass-card-brand {
+    .ls-card-brand {
       background: var(--bg-card-brand);
       backdrop-filter: blur(12px);
       border: 1px solid var(--border-brand);
@@ -225,14 +225,14 @@
       --card-shadow: 0 4px 25px -2px rgba(0, 0, 0, 0.5);
     }
 
-    .glass-card {
+    .ls-card {
       background: var(--bg-card) !important;
       border: 1px solid var(--border-card) !important;
       box-shadow: var(--card-shadow);
       color: var(--text-main);
     }
 
-    .glass-card-emerald, .glass-card-brand {
+    .ls-card-brand, .ls-card-brand {
       background: var(--bg-card-brand) !important;
       border: 1px solid var(--border-brand) !important;
       box-shadow: var(--card-shadow);
@@ -271,20 +271,20 @@
     }
 
     /* Brand Accents (La Segunda Palette) */
-    .text-emerald-400, .text-emerald-300 {
+    .text-ls-red dark:text-ls-redCoral, .text-ls-red dark:text-ls-redCoral {
       color: var(--accent-red) !important;
     }
-    .dark .border-emerald-500\/30, .dark .border-emerald-500\/20, .dark .border-emerald-900\/40 {
+    .dark .border-ls-red\/30, .dark .border-ls-red\/20, .dark .border-ls-redDark\/40 {
       border-color: var(--border-brand) !important;
     }
-    html:not(.dark) .border-emerald-500\/30, html:not(.dark) .border-emerald-500\/20, html:not(.dark) .border-emerald-900\/40 {
+    html:not(.dark) .border-ls-red\/30, html:not(.dark) .border-ls-red\/20, html:not(.dark) .border-ls-redDark\/40 {
       border-color: rgba(226, 0, 57, 0.15) !important;
     }
 
-    .dark .bg-emerald-500\/10, .dark .bg-emerald-500\/20, .dark .bg-emerald-950\/40 {
+    .dark .bg-ls-red\/10, .dark .bg-ls-red\/20, .dark .bg-ls-redDark\/40 {
       background-color: rgba(226, 0, 57, 0.12) !important;
     }
-    html:not(.dark) .bg-emerald-500\/10, html:not(.dark) .bg-emerald-500\/20, html:not(.dark) .bg-emerald-950\/40 {
+    html:not(.dark) .bg-ls-red\/10, html:not(.dark) .bg-ls-red\/20, html:not(.dark) .bg-ls-redDark\/40 {
       background-color: #ffe4e6 !important;
     }
 
@@ -402,11 +402,11 @@
     <section id="tab-mortalidad" class="tab-content space-y-6">
       
       <!-- Top Actuarial Calculator Card -->
-      <div class="glass-card-emerald rounded-2xl p-6 shadow-xl">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-emerald-900/40">
+      <div class="ls-card-brand rounded-2xl p-6 shadow-xl">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-ls-red/30">
           <div>
             <div class="flex items-center gap-2 mb-1">
-              <span class="text-xs font-mono uppercase px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Módulo Biométrico</span>
+              <span class="text-xs font-mono uppercase px-2.5 py-0.5 rounded-full bg-ls-red/20 text-ls-red dark:text-ls-redCoral border border-ls-red/30">Módulo Biométrico</span>
               <span class="text-xs text-slate-400 flex items-center gap-1">
                 <i data-lucide="clock" class="w-3 h-3"></i> Censo 2022 / Estándares SSN-SOA
               </span>
@@ -420,8 +420,8 @@
           <!-- Selectores de Entrada -->
           <div class="flex flex-wrap sm:flex-nowrap items-center gap-3">
             <div class="w-full sm:w-auto">
-              <label class="block text-[11px] font-mono text-emerald-300 uppercase mb-1">Tabla Actuarial</label>
-              <select id="calc-tabla-select" onchange="runLifeExpectancyCalculator()" class="bg-slate-950 border border-emerald-500/40 text-xs rounded-xl px-3 py-2 text-slate-200 outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 font-mono w-64 shadow-inner">
+              <label class="block text-[11px] font-mono text-ls-red dark:text-ls-redCoral uppercase mb-1">Tabla Actuarial</label>
+              <select id="calc-tabla-select" onchange="runLifeExpectancyCalculator()" class="bg-slate-950 border border-ls-red/40 text-xs rounded-xl px-3 py-2 text-slate-200 outline-none focus:border-ls-redVibrant focus:ring-1 focus:ring-ls-red font-mono w-64 shadow-inner">
                 <!-- Opciones cargadas dinámicamente -->
                 <option value="indec_2022_total" selected>INDEC 2022 - Total País (Censo)</option>
                 <option value="indec_2022_mujeres">INDEC 2022 - Mujeres</option>
@@ -447,8 +447,8 @@
             </div>
 
             <div class="w-28">
-              <label class="block text-[11px] font-mono text-emerald-300 uppercase mb-1">Edad Actual (\(x\))</label>
-              <input type="number" id="calc-edad" value="65" min="0" max="100" oninput="runLifeExpectancyCalculator()" class="bg-slate-950 border border-emerald-500/40 text-xs rounded-xl px-3 py-2 text-center text-emerald-300 font-mono font-bold outline-none focus:border-emerald-400 w-full shadow-inner">
+              <label class="block text-[11px] font-mono text-ls-red dark:text-ls-redCoral uppercase mb-1">Edad Actual (\(x\))</label>
+              <input type="number" id="calc-edad" value="65" min="0" max="100" oninput="runLifeExpectancyCalculator()" class="bg-slate-950 border border-ls-red/40 text-xs rounded-xl px-3 py-2 text-center text-ls-red dark:text-ls-redCoral font-mono font-bold outline-none focus:border-ls-redVibrant w-full shadow-inner">
             </div>
           </div>
         </div>
@@ -456,23 +456,23 @@
         <!-- Description Pill -->
         <div class="mt-4 flex items-center justify-between text-xs text-slate-400 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
           <div class="flex items-center gap-2">
-            <i data-lucide="info" class="w-4 h-4 text-emerald-400"></i>
+            <i data-lucide="info" class="w-4 h-4 text-ls-red dark:text-ls-redCoral"></i>
             <span id="calc-table-desc">Cargando metadata actuarial...</span>
           </div>
-          <span class="font-mono text-emerald-400 font-bold" id="calc-table-radix">Radix base: l₀ = 100.000</span>
+          <span class="font-mono text-ls-red dark:text-ls-redCoral font-bold" id="calc-table-radix">Radix base: l₀ = 100.000</span>
         </div>
 
         <!-- Metric KPI Cards -->
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mt-4">
           <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5">
             <span class="text-slate-400 text-[11px]">Años Remanentes (\(e_x\))</span>
-            <div class="text-2xl font-bold text-emerald-400 num mt-0.5" id="calc-res-ex">--</div>
+            <div class="text-2xl font-bold text-ls-red dark:text-ls-redCoral num mt-0.5" id="calc-res-ex">--</div>
             <div class="text-[10px] text-slate-500 mt-1">Esperanza a la edad \(x\)</div>
           </div>
 
           <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5">
             <span class="text-slate-400 text-[11px]">Edad Esperada Final</span>
-            <div class="text-2xl font-bold text-teal-300 num mt-0.5" id="calc-res-edad-final">--</div>
+            <div class="text-2xl font-bold text-ls-mint num mt-0.5" id="calc-res-edad-final">--</div>
             <div class="text-[10px] text-slate-500 mt-1">\(x + e_x\) proyectada</div>
           </div>
 
@@ -484,7 +484,7 @@
 
           <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5">
             <span class="text-slate-400 text-[11px]">Supervivencia Anual (\(p_x\))</span>
-            <div class="text-2xl font-bold text-emerald-300 num mt-0.5" id="calc-res-px">--</div>
+            <div class="text-2xl font-bold text-ls-red dark:text-ls-redCoral num mt-0.5" id="calc-res-px">--</div>
             <div class="text-[10px] text-slate-500 mt-1">\(p_x = 1 - q_x\)</div>
           </div>
 
@@ -498,8 +498,8 @@
         <!-- Milestones de Sobrevida -->
         <div class="mt-4 pt-4 border-t border-slate-800/80">
           <div class="text-xs font-semibold text-slate-300 mb-2 flex items-center gap-1.5">
-            <i data-lucide="target" class="w-3.5 h-3.5 text-emerald-400"></i>
-            <span>Probabilidad de alcanzar edades clave (Condicionada a estar vivo a los <span id="calc-milestones-edad" class="text-emerald-400 font-mono font-bold">65</span> años):</span>
+            <i data-lucide="target" class="w-3.5 h-3.5 text-ls-red dark:text-ls-redCoral"></i>
+            <span>Probabilidad de alcanzar edades clave (Condicionada a estar vivo a los <span id="calc-milestones-edad" class="text-ls-red dark:text-ls-redCoral font-mono font-bold">65</span> años):</span>
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 num" id="calc-milestones-container">
             <!-- Dynamic Cards -->
@@ -508,12 +508,12 @@
       </div>
 
       <!-- Presets & Comparador Multitabla con Raíz Dinámica -->
-      <div class="glass-card rounded-2xl p-5 space-y-4">
+      <div class="ls-card rounded-2xl p-5 space-y-4">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
             <h3 class="text-sm font-bold text-white flex items-center gap-2">
               <span>Comparador Biométrico y Curvas Dinámicas</span>
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800" id="badge-radix-status">Raíz en edad x</span>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-ls-redDark text-ls-red dark:text-ls-redCoral border border-ls-redDark" id="badge-radix-status">Raíz en edad x</span>
             </h3>
             <p class="text-xs text-slate-400">Compare hasta 5 tablas con reescalado condicional desde la edad seleccionada</p>
           </div>
@@ -521,12 +521,12 @@
           <!-- Presets Rápidos -->
           <div class="flex items-center gap-2 flex-wrap">
             <span class="text-xs text-slate-400">Presets:</span>
-            <button onclick="setComparePreset('retiro_vs_poblacion')" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs text-emerald-300 rounded-lg transition font-mono">Retiro vs Censo</button>
+            <button onclick="setComparePreset('retiro_vs_poblacion')" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs text-ls-red dark:text-ls-redCoral rounded-lg transition font-mono">Retiro vs Censo</button>
             <button onclick="setComparePreset('cso_evolucion')" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs text-amber-300 rounded-lg transition font-mono">Evolución CSO</button>
-            <button onclick="setComparePreset('gam_evolucion')" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs text-teal-300 rounded-lg transition font-mono">Evolución GAM</button>
+            <button onclick="setComparePreset('gam_evolucion')" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs text-ls-mint rounded-lg transition font-mono">Evolución GAM</button>
             
             <label class="flex items-center gap-1.5 text-xs text-slate-300 ml-2 cursor-pointer bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800">
-              <input type="checkbox" id="chk-radix-condicional" checked onchange="updateMultiTableCharts()" class="rounded bg-slate-900 border-slate-700 text-emerald-500 focus:ring-0">
+              <input type="checkbox" id="chk-radix-condicional" checked onchange="updateMultiTableCharts()" class="rounded bg-slate-900 border-slate-700 text-ls-red focus:ring-0">
               <span class="text-[11px]">Raíz en edad \(x\)</span>
             </label>
           </div>
@@ -568,16 +568,16 @@
       </div>
 
       <!-- NUEVO: COMPARADOR DE BRECHA DE GÉNERO ACTUARIAL -->
-      <div class="glass-card rounded-2xl p-5 space-y-4">
+      <div class="ls-card rounded-2xl p-5 space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <div class="flex items-center gap-2">
               <h3 class="text-sm font-bold text-white">Comparador de Brecha de Género y Sobremortalidad Masculina</h3>
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">INDEC 2022 Oficial</span>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-ls-red/20 text-ls-red dark:text-ls-redCoral border border-ls-red/30">INDEC 2022 Oficial</span>
             </div>
             <p class="text-xs text-slate-400">Ratio de sobremortalidad (\(q_x^V / q_x^M\)) y diferencia de años de esperanza de vida (\(e_x^M - e_x^V\))</p>
           </div>
-          <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-2-24-119" target="_blank" class="flex items-center gap-1 text-xs text-emerald-400 hover:underline">
+          <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-2-24-119" target="_blank" class="flex items-center gap-1 text-xs text-ls-red dark:text-ls-redCoral hover:underline">
             <span>Fuente: INDEC Serie Análisis Demográfico 40</span>
             <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
           </a>
@@ -607,13 +607,13 @@
       <!-- Evolución Histórica de e0 / e65 & Tabla Provincial -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Histórico Censal e0 -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-4">
             <div>
               <h3 class="text-sm font-bold text-white">Evolución de la Esperanza de Vida (1970 - 2022)</h3>
               <p class="text-xs text-slate-400">Ganancia de longevidad en 52 años de censos nacionales</p>
             </div>
-            <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded border border-emerald-500/20">+11.1 años</span>
+            <span class="text-xs font-mono text-ls-red dark:text-ls-redCoral bg-ls-red/10 px-2 py-1 rounded border border-ls-red/20">+11.1 años</span>
           </div>
           <div class="h-64">
             <canvas id="chart-historico-ex"></canvas>
@@ -621,7 +621,7 @@
         </div>
 
         <!-- Tabla Provincial de Esperanza de Vida -->
-        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between">
+        <div class="ls-card rounded-2xl p-5 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-3">
               <div>
@@ -652,7 +652,7 @@
       </div>
 
       <!-- Tabla Biométrica Completa Edad por Edad (0 a 100) -->
-      <div class="glass-card rounded-2xl p-5 space-y-3">
+      <div class="ls-card rounded-2xl p-5 space-y-3">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h3 class="text-sm font-bold text-white" id="tabla-explorer-title">Tabla Biométrica Completa de 0 a 100+ Años</h3>
@@ -662,7 +662,7 @@
             <select id="tabla-explorer-select" onchange="renderFullActuarialTable()" class="bg-slate-950 border border-slate-700 text-xs rounded-lg px-3 py-1.5 text-slate-200 outline-none font-mono">
               <!-- Cloned from calc selector -->
             </select>
-            <button onclick="exportActuarialCSV()" class="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-600/40 text-emerald-200 text-xs font-mono rounded-lg transition">
+            <button onclick="exportActuarialCSV()" class="flex items-center gap-1.5 px-3 py-1.5 bg-ls-redDark/80 hover:bg-ls-redDark border border-ls-red/40 text-ls-redCoral text-xs font-mono rounded-lg transition">
               <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i>
               <span>Exportar CSV</span>
             </button>
@@ -680,7 +680,7 @@
                 <th class="py-2 px-3 font-semibold text-right font-sans">Supervivencia (\(p_x\))</th>
                 <th class="py-2 px-3 font-semibold text-right font-sans">Población (\(L_x\))</th>
                 <th class="py-2 px-3 font-semibold text-right font-sans">Total Vividos (\(T_x\))</th>
-                <th class="py-2 px-3 font-semibold text-right font-sans text-emerald-400">Esperanza (\(e_x\))</th>
+                <th class="py-2 px-3 font-semibold text-right font-sans text-ls-red dark:text-ls-redCoral">Esperanza (\(e_x\))</th>
               </tr>
             </thead>
             <tbody id="tabla-actuarial-completa-body" class="divide-y divide-slate-800/60 text-slate-300">
@@ -697,11 +697,11 @@
     <section id="tab-demografia" class="tab-content hidden space-y-6">
       
       <!-- Interactive Time Machine Pyramid Card -->
-      <div class="glass-card-emerald rounded-2xl p-6 shadow-xl space-y-6">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-emerald-900/40">
+      <div class="ls-card-brand rounded-2xl p-6 shadow-xl space-y-6">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-ls-red/30">
           <div>
             <div class="flex items-center gap-2">
-              <span class="text-xs font-mono uppercase px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Evolución Censal 1970 - 2040</span>
+              <span class="text-xs font-mono uppercase px-2.5 py-0.5 rounded-full bg-ls-red/20 text-ls-red dark:text-ls-redCoral border border-ls-red/30">Evolución Censal 1970 - 2040</span>
               <span class="text-xs text-slate-400" id="desc-piramide-tipo">Censal Definitivo</span>
             </div>
             <h2 class="text-xl font-bold text-white mt-1">Evolución de la Pirámide Poblacional Argentina</h2>
@@ -710,11 +710,11 @@
 
           <!-- Controls: Unit & Play Button -->
           <div class="flex items-center gap-3">
-            <select id="select-piramide-unidad" onchange="changePyramidUnit()" class="bg-slate-950 border border-emerald-500/40 text-xs rounded-xl px-3 py-2 text-slate-200 outline-none font-mono">
+            <select id="select-piramide-unidad" onchange="changePyramidUnit()" class="bg-slate-950 border border-ls-red/40 text-xs rounded-xl px-3 py-2 text-slate-200 outline-none font-mono">
               <option value="personas">Unidad: Millones de Personas</option>
               <option value="pct">Unidad: Porcentaje (%)</option>
             </select>
-            <button id="btn-play-pyramid" onclick="togglePyramidAnimation()" class="flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl shadow-md transition font-mono">
+            <button id="btn-play-pyramid" onclick="togglePyramidAnimation()" class="flex items-center gap-1.5 px-4 py-2 bg-ls-red hover:bg-ls-red text-white text-xs font-semibold rounded-xl shadow-md transition font-mono">
               <i data-lucide="play" id="icon-play-pyramid" class="w-3.5 h-3.5"></i>
               <span id="text-play-pyramid">Reproducir Evolución</span>
             </button>
@@ -725,22 +725,22 @@
         <div class="space-y-2 bg-slate-950/70 p-4 rounded-xl border border-slate-800">
           <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
             <span>Línea Temporal de Censos y Proyecciones:</span>
-            <span class="text-emerald-400 font-bold text-sm bg-emerald-950 px-3 py-0.5 rounded-full border border-emerald-700" id="badge-piramide-anio">Año: 2022</span>
+            <span class="text-ls-red dark:text-ls-redCoral font-bold text-sm bg-ls-redDark px-3 py-0.5 rounded-full border border-ls-redDark" id="badge-piramide-anio">Año: 2022</span>
           </div>
-          <input type="range" id="slider-piramide-anio" min="0" max="11" step="1" value="7" oninput="onPyramidSliderChange(this.value)" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+          <input type="range" id="slider-piramide-anio" min="0" max="11" step="1" value="7" oninput="onPyramidSliderChange(this.value)" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-ls-red">
           <div class="flex justify-between text-[10px] text-slate-400 font-mono pt-1" id="ticks-piramide-anios">
-            <button onclick="setPyramidYear(1970)" class="hover:text-emerald-400">1970</button>
-            <button onclick="setPyramidYear(1980)" class="hover:text-emerald-400">1980</button>
-            <button onclick="setPyramidYear(1991)" class="hover:text-emerald-400">1991</button>
-            <button onclick="setPyramidYear(2001)" class="hover:text-emerald-400">2001</button>
-            <button onclick="setPyramidYear(2010)" class="hover:text-emerald-400">2010</button>
-            <button onclick="setPyramidYear(2015)" class="hover:text-emerald-400">2015</button>
-            <button onclick="setPyramidYear(2020)" class="hover:text-emerald-400">2020</button>
-            <button onclick="setPyramidYear(2022)" class="text-emerald-400 font-bold bg-emerald-500/20 py-0.5 px-1.5 rounded border border-emerald-500/40">2022</button>
-            <button onclick="setPyramidYear(2025)" class="hover:text-emerald-400">2025</button>
-            <button onclick="setPyramidYear(2030)" class="hover:text-emerald-400">2030</button>
-            <button onclick="setPyramidYear(2035)" class="hover:text-emerald-400">2035</button>
-            <button onclick="setPyramidYear(2040)" class="hover:text-emerald-400">2040</button>
+            <button onclick="setPyramidYear(1970)" class="hover:text-ls-red dark:text-ls-redCoral">1970</button>
+            <button onclick="setPyramidYear(1980)" class="hover:text-ls-red dark:text-ls-redCoral">1980</button>
+            <button onclick="setPyramidYear(1991)" class="hover:text-ls-red dark:text-ls-redCoral">1991</button>
+            <button onclick="setPyramidYear(2001)" class="hover:text-ls-red dark:text-ls-redCoral">2001</button>
+            <button onclick="setPyramidYear(2010)" class="hover:text-ls-red dark:text-ls-redCoral">2010</button>
+            <button onclick="setPyramidYear(2015)" class="hover:text-ls-red dark:text-ls-redCoral">2015</button>
+            <button onclick="setPyramidYear(2020)" class="hover:text-ls-red dark:text-ls-redCoral">2020</button>
+            <button onclick="setPyramidYear(2022)" class="text-ls-red dark:text-ls-redCoral font-bold bg-ls-red/20 py-0.5 px-1.5 rounded border border-ls-red/40">2022</button>
+            <button onclick="setPyramidYear(2025)" class="hover:text-ls-red dark:text-ls-redCoral">2025</button>
+            <button onclick="setPyramidYear(2030)" class="hover:text-ls-red dark:text-ls-redCoral">2030</button>
+            <button onclick="setPyramidYear(2035)" class="hover:text-ls-red dark:text-ls-redCoral">2035</button>
+            <button onclick="setPyramidYear(2040)" class="hover:text-ls-red dark:text-ls-redCoral">2040</button>
           </div>
         </div>
 
@@ -760,14 +760,14 @@
             <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800">
               <span class="text-slate-400" id="kpi-poblacion-label">Población Total (2022)</span>
               <div class="text-xl font-bold text-white num mt-0.5" id="kpi-poblacion-val">46.234.830</div>
-              <p class="text-[10px] text-emerald-400 mt-1 flex items-center gap-1" id="kpi-poblacion-sub">
+              <p class="text-[10px] text-ls-red dark:text-ls-redCoral mt-1 flex items-center gap-1" id="kpi-poblacion-sub">
                 <i data-lucide="info" class="w-3 h-3"></i> Censo Definitivo INDEC
               </p>
             </div>
 
             <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800">
               <span class="text-slate-400">Edad Mediana</span>
-              <div class="text-lg font-bold text-emerald-400 num mt-0.5" id="kpi-edad-mediana-val">32.0 años</div>
+              <div class="text-lg font-bold text-ls-red dark:text-ls-redCoral num mt-0.5" id="kpi-edad-mediana-val">32.0 años</div>
               <p class="text-[10px] text-slate-500 mt-0.5">50% de la población tiene menos de esta edad.</p>
             </div>
 
@@ -779,7 +779,7 @@
 
             <div class="p-3 bg-slate-950/80 rounded-xl border border-slate-800">
               <span class="text-slate-400">Relación de Dependencia</span>
-              <div class="text-lg font-bold text-teal-300 num mt-0.5" id="kpi-dependencia-val">51.8 dependientes / 100 activos</div>
+              <div class="text-lg font-bold text-ls-mint num mt-0.5" id="kpi-dependencia-val">51.8 dependientes / 100 activos</div>
               <p class="text-[10px] text-slate-500 mt-0.5">Población &lt;15 y 65+ sobre población de 15 a 64 años.</p>
             </div>
           </div>
@@ -789,13 +789,13 @@
       <!-- NUEVOS MÓDULOS: TIPOLOGÍA DE HOGARES, TENENCIA Y ENVEJECIMIENTO PROVINCIAL -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Tipología de Hogares Censo 2022 -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-2">
             <div>
               <h3 class="text-xs font-bold text-white">Tipología de Hogares</h3>
               <p class="text-[11px] text-slate-400">Censo 2022 Definitivo (INDEC)</p>
             </div>
-            <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-2-41-165" target="_blank" class="text-emerald-400 hover:text-emerald-300">
+            <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-2-41-165" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
               <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
             </a>
           </div>
@@ -806,13 +806,13 @@
         </div>
 
         <!-- Régimen de Tenencia de la Vivienda -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-2">
             <div>
               <h3 class="text-xs font-bold text-white">Régimen de Tenencia de Vivienda</h3>
               <p class="text-[11px] text-slate-400">Censo 2022 Definitivo (INDEC)</p>
             </div>
-            <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-2-41-165" target="_blank" class="text-emerald-400 hover:text-emerald-300">
+            <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-2-41-165" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
               <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
             </a>
           </div>
@@ -823,13 +823,13 @@
         </div>
 
         <!-- Brechas de Envejecimiento por Provincias -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-2">
             <div>
               <h3 class="text-xs font-bold text-white">Índice de Envejecimiento Provincial</h3>
               <p class="text-[11px] text-slate-400">Población 65+ por 100 menores de 15</p>
             </div>
-            <a href="https://www.indec.gob.ar" target="_blank" class="text-emerald-400 hover:text-emerald-300">
+            <a href="https://www.indec.gob.ar" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
               <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
             </a>
           </div>
@@ -841,7 +841,7 @@
       </div>
 
       <!-- Tabla Provincial Completa Censo 2022 -->
-      <div class="glass-card rounded-2xl p-5 space-y-3">
+      <div class="ls-card rounded-2xl p-5 space-y-3">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h3 class="text-sm font-bold text-white">Población y Crecimiento por Jurisdicción (Censo 2022 vs 2010)</h3>
@@ -857,7 +857,7 @@
                 <th class="py-2.5 px-3 font-semibold font-sans">Jurisdicción</th>
                 <th class="py-2.5 px-3 font-semibold text-right font-sans">Población 2022</th>
                 <th class="py-2.5 px-3 font-semibold text-right font-sans">Población 2010</th>
-                <th class="py-2.5 px-3 font-semibold text-right font-sans text-emerald-400">Crecimiento (%)</th>
+                <th class="py-2.5 px-3 font-semibold text-right font-sans text-ls-red dark:text-ls-redCoral">Crecimiento (%)</th>
                 <th class="py-2.5 px-3 font-semibold text-right font-sans">Densidad (hab/km²)</th>
                 <th class="py-2.5 px-3 font-semibold text-right font-sans">% Mujeres</th>
                 <th class="py-2.5 px-3 font-semibold text-right font-sans">Edad Mediana</th>
@@ -877,17 +877,17 @@
     <section id="tab-salud" class="tab-content hidden space-y-6">
       
       <!-- Banner de Fecha Oficial y Fuentes DEIS -->
-      <div class="glass-card-emerald rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
+      <div class="ls-card-brand rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
         <div>
           <div class="flex items-center gap-2">
             <h2 class="text-lg font-bold text-white tracking-tight">Estadísticas Vitales y Capacidad Sanitaria</h2>
-            <span class="text-xs font-mono px-2.5 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Último Cierre Oficial: Año 2023</span>
+            <span class="text-xs font-mono px-2.5 py-0.5 rounded-full font-bold bg-ls-red/20 text-ls-red dark:text-ls-redCoral border border-ls-red/30">Último Cierre Oficial: Año 2023</span>
           </div>
           <p class="text-xs text-slate-300 mt-1">
             Datos emitidos por la <strong>DEIS</strong> (Dirección de Estadísticas e Información de Salud - Ministerio de Salud de la Nación).
           </p>
         </div>
-        <a href="https://www.deis.msal.gov.ar" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-950 border border-emerald-500/30 text-emerald-300 text-xs font-mono rounded-lg hover:border-emerald-400 transition">
+        <a href="https://www.deis.msal.gov.ar" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-950 border border-ls-red/30 text-ls-red dark:text-ls-redCoral text-xs font-mono rounded-lg hover:border-ls-redVibrant transition">
           <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
           <span>Portal Oficial DEIS</span>
         </a>
@@ -895,27 +895,27 @@
 
       <!-- KPIs de Salud con Fecha y Enlace -->
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="glass-card rounded-xl p-4">
+        <div class="ls-card rounded-xl p-4">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Mortalidad Infantil (TMI)</span>
-            <span class="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Año 2023 (Último)</span>
+            <span class="text-[10px] font-mono font-bold text-ls-red dark:text-ls-redCoral bg-ls-red/10 px-2 py-0.5 rounded border border-ls-red/20">Año 2023 (Último)</span>
           </div>
-          <div class="text-2xl font-bold text-emerald-400 num">7.8 ‰</div>
+          <div class="text-2xl font-bold text-ls-red dark:text-ls-redCoral num">7.8 ‰</div>
           <div class="text-[11px] text-slate-300 mt-1">por mil nacidos vivos (Mínimo histórico)</div>
           <div class="text-[10px] text-slate-500 mt-0.5">Fuente: Anuario Vitales DEIS 2023</div>
         </div>
 
-        <div class="glass-card rounded-xl p-4">
+        <div class="ls-card rounded-xl p-4">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Fecundidad Global (TGF)</span>
-            <span class="text-[10px] font-mono font-bold text-teal-300 bg-teal-500/10 px-2 py-0.5 rounded border border-teal-500/20">Año 2023 (Último)</span>
+            <span class="text-[10px] font-mono font-bold text-ls-mint bg-ls-mint/10 px-2 py-0.5 rounded border border-ls-mint/30">Año 2023 (Último)</span>
           </div>
-          <div class="text-2xl font-bold text-teal-300 num">1.39</div>
+          <div class="text-2xl font-bold text-ls-mint num">1.39</div>
           <div class="text-[11px] text-rose-300 mt-1">hijos/mujer (Bajo reemplazo 2.1)</div>
           <div class="text-[10px] text-slate-500 mt-0.5">Fuente: Serie de Natalidad DEIS 2023</div>
         </div>
 
-        <div class="glass-card rounded-xl p-4">
+        <div class="ls-card rounded-xl p-4">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Mortalidad Materna (RMM)</span>
             <span class="text-[10px] font-mono font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">Año 2023 (Último)</span>
@@ -925,10 +925,10 @@
           <div class="text-[10px] text-slate-500 mt-0.5">Fuente: Defunciones Maternas DEIS 2023</div>
         </div>
 
-        <div class="glass-card rounded-xl p-4">
+        <div class="ls-card rounded-xl p-4">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Vida Saludable (HALE)</span>
-            <span class="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">OMS / DEIS</span>
+            <span class="text-[10px] font-mono font-bold text-ls-red dark:text-ls-redCoral bg-ls-red/10 px-2 py-0.5 rounded border border-ls-red/20">OMS / DEIS</span>
           </div>
           <div class="text-2xl font-bold text-white num">67.2 años</div>
           <div class="text-[11px] text-slate-300 mt-1">Esperanza de vida libre de discapacidad</div>
@@ -939,13 +939,13 @@
       <!-- NUEVO: SALDO VEGETATIVO Y RANKING PROVINCIAL TMI -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Nacimientos vs Defunciones (Saldo Vegetativo) -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-3">
             <div>
               <h3 class="text-sm font-bold text-white">Nacimientos vs Defunciones (1980 - 2023)</h3>
               <p class="text-xs text-slate-400">Desplome de nacimientos anuales (de ~777k en 2014 a ~485k en 2023)</p>
             </div>
-            <a href="https://www.deis.msal.gov.ar" target="_blank" class="text-emerald-400 hover:text-emerald-300">
+            <a href="https://www.deis.msal.gov.ar" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
               <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
             </a>
           </div>
@@ -955,14 +955,14 @@
         </div>
 
         <!-- Ranking Provincial de Mortalidad Infantil 2023 -->
-        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between">
+        <div class="ls-card rounded-2xl p-5 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-2">
               <div>
                 <h3 class="text-sm font-bold text-white">Tasa de Mortalidad Infantil por Provincia (2023)</h3>
                 <p class="text-xs text-slate-400">Brecha provincial de TMI según Anuario DEIS 2023</p>
               </div>
-              <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Media: 7.8 ‰</span>
+              <span class="text-xs font-mono text-ls-red dark:text-ls-redCoral bg-ls-red/10 px-2 py-0.5 rounded border border-ls-red/20">Media: 7.8 ‰</span>
             </div>
             <div class="h-64">
               <canvas id="chart-salud-tmi-ranking"></canvas>
@@ -974,13 +974,13 @@
       <!-- Charts Row: TMI Evolución & Causas de Muerte -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Chart TMI Histórico -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-4">
             <div>
               <h3 class="text-sm font-bold text-white">Evolución de la Mortalidad Infantil (1990 - 2023)</h3>
               <p class="text-xs text-slate-400">Tasa Total, Neonatal (&lt;28 días) y Posneonatal (DEIS)</p>
             </div>
-            <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded border border-emerald-500/20">-69.5% descenso</span>
+            <span class="text-xs font-mono text-ls-red dark:text-ls-redCoral bg-ls-red/10 px-2 py-1 rounded border border-ls-red/20">-69.5% descenso</span>
           </div>
           <div class="h-64">
             <canvas id="chart-salud-tmi"></canvas>
@@ -988,7 +988,7 @@
         </div>
 
         <!-- Causas de Defunción CIE-10 -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-4">
             <div>
               <h3 class="text-sm font-bold text-white">Principales Causas de Defunción (CIE-10 DEIS 2023)</h3>
@@ -1009,17 +1009,17 @@
     <section id="tab-educacion" class="tab-content hidden space-y-6">
       
       <!-- Banner Educación -->
-      <div class="glass-card-emerald rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
+      <div class="ls-card-brand rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
         <div>
           <div class="flex items-center gap-2">
             <h2 class="text-lg font-bold text-white tracking-tight">Estadísticas del Sistema Educativo y Aprendizajes</h2>
-            <span class="text-xs font-mono px-2.5 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Relevamiento Anual & Aprender</span>
+            <span class="text-xs font-mono px-2.5 py-0.5 rounded-full font-bold bg-ls-red/20 text-ls-red dark:text-ls-redCoral border border-ls-red/30">Relevamiento Anual & Aprender</span>
           </div>
           <p class="text-xs text-slate-300 mt-1">
             Secretaría de Educación (Ministerio de Capital Humano) • DINIECE • Censo Nacional 2022.
           </p>
         </div>
-        <a href="https://www.argentina.gob.ar/educacion" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-950 border border-emerald-500/30 text-emerald-300 text-xs font-mono rounded-lg hover:border-emerald-400 transition">
+        <a href="https://www.argentina.gob.ar/educacion" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-950 border border-ls-red/30 text-ls-red dark:text-ls-redCoral text-xs font-mono rounded-lg hover:border-ls-redVibrant transition">
           <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
           <span>Portal Oficial Educación</span>
         </a>
@@ -1027,25 +1027,25 @@
 
       <!-- KPIs Educación -->
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="glass-card rounded-xl p-4">
+        <div class="ls-card rounded-xl p-4">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Tasa de Analfabetismo</span>
-            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">Censo 2022</span>
+            <span class="text-[10px] font-mono text-ls-red dark:text-ls-redCoral bg-ls-red/10 px-2 py-0.5 rounded">Censo 2022</span>
           </div>
-          <div class="text-2xl font-bold text-emerald-400 num">1.4%</div>
+          <div class="text-2xl font-bold text-ls-red dark:text-ls-redCoral num">1.4%</div>
           <div class="text-[11px] text-slate-300 mt-1">Mínimo censal histórico</div>
         </div>
 
-        <div class="glass-card rounded-xl p-4">
+        <div class="ls-card rounded-xl p-4">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Años Promedio Escolaridad</span>
-            <span class="text-[10px] font-mono text-teal-300 bg-teal-500/10 px-2 py-0.5 rounded">Pob 25+</span>
+            <span class="text-[10px] font-mono text-ls-mint bg-ls-mint/10 px-2 py-0.5 rounded">Pob 25+</span>
           </div>
-          <div class="text-2xl font-bold text-teal-300 num">11.2 años</div>
+          <div class="text-2xl font-bold text-ls-mint num">11.2 años</div>
           <div class="text-[11px] text-slate-300 mt-1">Equivalente a secundario casi completo</div>
         </div>
 
-        <div class="glass-card rounded-xl p-4">
+        <div class="ls-card rounded-xl p-4">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Egreso Secundario en Término</span>
             <span class="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">DINIECE</span>
@@ -1054,10 +1054,10 @@
           <div class="text-[11px] text-slate-300 mt-1">68.4% con egreso acumulado/tardío</div>
         </div>
 
-        <div class="glass-card rounded-xl p-4">
+        <div class="ls-card rounded-xl p-4">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Matrícula Total Sistema</span>
-            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">RA 2023</span>
+            <span class="text-[10px] font-mono text-ls-red dark:text-ls-redCoral bg-ls-red/10 px-2 py-0.5 rounded">RA 2023</span>
           </div>
           <div class="text-2xl font-bold text-white num">12.8M</div>
           <div class="text-[11px] text-slate-300 mt-1">72.8% Gestión Estatal • 27.2% Privada</div>
@@ -1067,13 +1067,13 @@
       <!-- NUEVO: RESULTADOS PRUEBAS APRENDER & ÁREAS UNIVERSITARIAS -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Pruebas Aprender: Lengua y Matemática -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-3">
             <div>
               <h3 class="text-sm font-bold text-white">Logros de Aprendizaje al Finalizar Secundaria (Pruebas Aprender)</h3>
               <p class="text-xs text-slate-400">Distribución de estudiantes según nivel de desempeño en Lengua vs Matemática</p>
             </div>
-            <a href="https://www.argentina.gob.ar/educacion/evaluacion-e-informacion-educativa" target="_blank" class="text-emerald-400 hover:text-emerald-300">
+            <a href="https://www.argentina.gob.ar/educacion/evaluacion-e-informacion-educativa" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
               <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
             </a>
           </div>
@@ -1083,13 +1083,13 @@
         </div>
 
         <!-- Áreas de Conocimiento Universitario (SPU) -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-3">
             <div>
               <h3 class="text-sm font-bold text-white">Distribución de Estudiantes Universitarios por Área (SPU)</h3>
               <p class="text-xs text-slate-400">2.54 millones de alumnos de grado y pregrado en universidades nacionales</p>
             </div>
-            <a href="https://www.argentina.gob.ar/educacion/universidades" target="_blank" class="text-emerald-400 hover:text-emerald-300">
+            <a href="https://www.argentina.gob.ar/educacion/universidades" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
               <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
             </a>
           </div>
@@ -1102,7 +1102,7 @@
       <!-- Cobertura y Trayectoria Secundaria -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Cobertura por Nivel -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-4">
             <div>
               <h3 class="text-sm font-bold text-white">Tasa de Escolarización por Nivel de Enseñanza</h3>
@@ -1115,7 +1115,7 @@
         </div>
 
         <!-- Trayectoria Secundaria -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-4">
             <div>
               <h3 class="text-sm font-bold text-white">Trayectoria en el Nivel Secundario: Repitencia y Abandono</h3>
@@ -1135,17 +1135,17 @@
     <section id="tab-empleo" class="tab-content hidden space-y-6">
       
       <!-- Banner Empleo -->
-      <div class="glass-card-emerald rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
+      <div class="ls-card-brand rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
         <div>
           <div class="flex items-center gap-2">
             <h2 class="text-lg font-bold text-white tracking-tight">Mercado de Trabajo, Empleo e Ingresos</h2>
-            <span class="text-xs font-mono px-2.5 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">EPH INDEC - 31 Aglomerados Urbanos</span>
+            <span class="text-xs font-mono px-2.5 py-0.5 rounded-full font-bold bg-ls-red/20 text-ls-red dark:text-ls-redCoral border border-ls-red/30">EPH INDEC - 31 Aglomerados Urbanos</span>
           </div>
           <p class="text-xs text-slate-300 mt-1">
             Encuesta Permanente de Hogares (INDEC) • Serie trimestral consolidada de actividad laboral.
           </p>
         </div>
-        <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-31-58" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-950 border border-emerald-500/30 text-emerald-300 text-xs font-mono rounded-lg hover:border-emerald-400 transition">
+        <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-31-58" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-950 border border-ls-red/30 text-ls-red dark:text-ls-redCoral text-xs font-mono rounded-lg hover:border-ls-redVibrant transition">
           <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
           <span>Portal Oficial EPH</span>
         </a>
@@ -1153,25 +1153,25 @@
 
       <!-- KPIs Empleo -->
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="glass-card rounded-xl p-4">
+        <div class="ls-card rounded-xl p-4">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Tasa de Actividad</span>
-            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">EPH 2024</span>
+            <span class="text-[10px] font-mono text-ls-red dark:text-ls-redCoral bg-ls-red/10 px-2 py-0.5 rounded">EPH 2024</span>
           </div>
-          <div class="text-2xl font-bold text-emerald-400 num">48.2%</div>
+          <div class="text-2xl font-bold text-ls-red dark:text-ls-redCoral num">48.2%</div>
           <div class="text-[11px] text-slate-300 mt-1">Población económicamente activa (PEA)</div>
         </div>
 
-        <div class="glass-card rounded-xl p-4">
+        <div class="ls-card rounded-xl p-4">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Tasa de Empleo</span>
-            <span class="text-[10px] font-mono text-teal-300 bg-teal-500/10 px-2 py-0.5 rounded">EPH 2024</span>
+            <span class="text-[10px] font-mono text-ls-mint bg-ls-mint/10 px-2 py-0.5 rounded">EPH 2024</span>
           </div>
-          <div class="text-2xl font-bold text-teal-300 num">44.9%</div>
+          <div class="text-2xl font-bold text-ls-mint num">44.9%</div>
           <div class="text-[11px] text-slate-300 mt-1">Porcentaje de la población ocupada</div>
         </div>
 
-        <div class="glass-card rounded-xl p-4">
+        <div class="ls-card rounded-xl p-4">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Tasa de Desocupación</span>
             <span class="text-[10px] font-mono text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded">EPH 2024</span>
@@ -1180,7 +1180,7 @@
           <div class="text-[11px] text-slate-300 mt-1">Buscadores activos sin ocupación</div>
         </div>
 
-        <div class="glass-card rounded-xl p-4">
+        <div class="ls-card rounded-xl p-4">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Empleo Asalariado Informal</span>
             <span class="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">EPH 2024</span>
@@ -1193,13 +1193,13 @@
       <!-- NUEVO: COMPOSICIÓN DEL EMPLEO & DESEMPLEO POR EDAD -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Composición de la Ocupación -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-3">
             <div>
               <h3 class="text-sm font-bold text-white">Composición de la Población Ocupada (Categoría Ocupacional)</h3>
               <p class="text-xs text-slate-400">Asalariados registrados vs informales vs cuentapropistas</p>
             </div>
-            <a href="https://www.indec.gob.ar" target="_blank" class="text-emerald-400 hover:text-emerald-300">
+            <a href="https://www.indec.gob.ar" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
               <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
             </a>
           </div>
@@ -1209,13 +1209,13 @@
         </div>
 
         <!-- Desempleo por Grupos Etarios -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-3">
             <div>
               <h3 class="text-sm font-bold text-white">Tasa de Desocupación por Rango de Edad y Género</h3>
               <p class="text-xs text-slate-400">Impacto del desempleo juvenil (14 a 29 años) vs adultos</p>
             </div>
-            <a href="https://www.indec.gob.ar" target="_blank" class="text-emerald-400 hover:text-emerald-300">
+            <a href="https://www.indec.gob.ar" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
               <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
             </a>
           </div>
@@ -1228,7 +1228,7 @@
       <!-- Serie EPH & Ramas de Actividad -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Serie EPH -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-4">
             <div>
               <h3 class="text-sm font-bold text-white">Evolución Trimestral de Tasas del Mercado Laboral (EPH)</h3>
@@ -1241,7 +1241,7 @@
         </div>
 
         <!-- Ramas de Actividad -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-4">
             <div>
               <h3 class="text-sm font-bold text-white">Distribución de los Ocupados por Rama de Actividad</h3>
@@ -1261,17 +1261,17 @@
     <section id="tab-prevision" class="tab-content hidden space-y-6">
       
       <!-- Banner Previsión -->
-      <div class="glass-card-emerald rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
+      <div class="ls-card-brand rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
         <div>
           <div class="flex items-center gap-2">
             <h2 class="text-lg font-bold text-white tracking-tight">Sistema Integrado Previsional Argentino (SIPA / ANSES)</h2>
-            <span class="text-xs font-mono px-2.5 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Boletín Estadístico de la Seguridad Social</span>
+            <span class="text-xs font-mono px-2.5 py-0.5 rounded-full font-bold bg-ls-red/20 text-ls-red dark:text-ls-redCoral border border-ls-red/30">Boletín Estadístico de la Seguridad Social</span>
           </div>
           <p class="text-xs text-slate-300 mt-1">
             Datos oficiales de aportantes activos, jubilados, pensionados y sostenibilidad previsional de la República Argentina.
           </p>
         </div>
-        <a href="https://www.anses.gob.ar" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-950 border border-emerald-500/30 text-emerald-300 text-xs font-mono rounded-lg hover:border-emerald-400 transition">
+        <a href="https://www.anses.gob.ar" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-950 border border-ls-red/30 text-ls-red dark:text-ls-redCoral text-xs font-mono rounded-lg hover:border-ls-redVibrant transition">
           <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
           <span>Portal ANSES</span>
         </a>
@@ -1279,7 +1279,7 @@
 
       <!-- KPIs Previsionales -->
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="glass-card rounded-xl p-4">
+        <div class="ls-card rounded-xl p-4">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Relación Activo / Pasivo</span>
             <span class="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">SIPA 2024</span>
@@ -1288,28 +1288,28 @@
           <div class="text-[11px] text-slate-300 mt-1">Aportantes por cada beneficiario pasivo</div>
         </div>
 
-        <div class="glass-card rounded-xl p-4">
+        <div class="ls-card rounded-xl p-4">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Cobertura Adultos Mayores (65+)</span>
-            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">ANSES / Censo</span>
+            <span class="text-[10px] font-mono text-ls-red dark:text-ls-redCoral bg-ls-red/10 px-2 py-0.5 rounded">ANSES / Censo</span>
           </div>
-          <div class="text-2xl font-bold text-emerald-400 num">94.5%</div>
+          <div class="text-2xl font-bold text-ls-red dark:text-ls-redCoral num">94.5%</div>
           <div class="text-[11px] text-slate-300 mt-1">Percibe jubilación, pensión o PUAM</div>
         </div>
 
-        <div class="glass-card rounded-xl p-4">
+        <div class="ls-card rounded-xl p-4">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Beneficiarios Totales SIPA</span>
-            <span class="text-[10px] font-mono text-teal-300 bg-teal-500/10 px-2 py-0.5 rounded">ANSES</span>
+            <span class="text-[10px] font-mono text-ls-mint bg-ls-mint/10 px-2 py-0.5 rounded">ANSES</span>
           </div>
-          <div class="text-2xl font-bold text-teal-300 num">7.20M</div>
+          <div class="text-2xl font-bold text-ls-mint num">7.20M</div>
           <div class="text-[11px] text-slate-300 mt-1">Jubilaciones y pensiones vigentes</div>
         </div>
 
-        <div class="glass-card rounded-xl p-4">
+        <div class="ls-card rounded-xl p-4">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Aportantes Activos SIPA</span>
-            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">SIPA / AFIP</span>
+            <span class="text-[10px] font-mono text-ls-red dark:text-ls-redCoral bg-ls-red/10 px-2 py-0.5 rounded">SIPA / AFIP</span>
           </div>
           <div class="text-2xl font-bold text-white num">10.95M</div>
           <div class="text-[11px] text-slate-300 mt-1">Trabajadores aportantes registrados</div>
@@ -1319,7 +1319,7 @@
       <!-- Charts Previsionales: Relación Histórica & Composición de Beneficios -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Evolución Relación Activo / Pasivo -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-3">
             <div>
               <h3 class="text-sm font-bold text-white">Evolución de la Relación Activo / Pasivo (1990 - 2024)</h3>
@@ -1332,7 +1332,7 @@
         </div>
 
         <!-- Composición de los Beneficios Previsionales -->
-        <div class="glass-card rounded-2xl p-5">
+        <div class="ls-card rounded-2xl p-5">
           <div class="flex items-center justify-between mb-3">
             <div>
               <h3 class="text-sm font-bold text-white">Composición de Beneficios Jubilatorios y Moratorias</h3>
@@ -1350,7 +1350,7 @@
     <!-- TAB 7: FUENTES OFICIALES Y METODOLOGÍA     -->
     <!-- ========================================== -->
     <section id="tab-metodologia" class="tab-content hidden space-y-6">
-      <div class="glass-card rounded-2xl p-6 space-y-6">
+      <div class="ls-card rounded-2xl p-6 space-y-6">
         <div>
           <h2 class="text-lg font-bold text-white">Catálogo de Fuentes Oficiales, Open Data y Metodología</h2>
           <p class="text-xs text-slate-400 mt-1">Este monitor se alimenta exclusivamente de bases de datos públicas, oficiales, auditadas y gratuitas de la República Argentina y estándares actuariales internacionales.</p>
@@ -1359,8 +1359,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
           <div class="p-4 bg-slate-950/80 rounded-xl border border-slate-800 space-y-2">
             <div class="flex items-center justify-between">
-              <h3 class="font-bold text-emerald-400 text-sm">INDEC (Instituto Nacional de Estadística y Censos)</h3>
-              <a href="https://www.indec.gob.ar" target="_blank" class="text-emerald-400 hover:text-emerald-300">
+              <h3 class="font-bold text-ls-red dark:text-ls-redCoral text-sm">INDEC (Instituto Nacional de Estadística y Censos)</h3>
+              <a href="https://www.indec.gob.ar" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
                 <i data-lucide="external-link" class="w-4 h-4"></i>
               </a>
             </div>
@@ -1369,8 +1369,8 @@
 
           <div class="p-4 bg-slate-950/80 rounded-xl border border-slate-800 space-y-2">
             <div class="flex items-center justify-between">
-              <h3 class="font-bold text-emerald-400 text-sm">DEIS (Dirección de Estadísticas e Información de Salud)</h3>
-              <a href="https://www.deis.msal.gov.ar" target="_blank" class="text-emerald-400 hover:text-emerald-300">
+              <h3 class="font-bold text-ls-red dark:text-ls-redCoral text-sm">DEIS (Dirección de Estadísticas e Información de Salud)</h3>
+              <a href="https://www.deis.msal.gov.ar" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
                 <i data-lucide="external-link" class="w-4 h-4"></i>
               </a>
             </div>
@@ -1379,8 +1379,8 @@
 
           <div class="p-4 bg-slate-950/80 rounded-xl border border-slate-800 space-y-2">
             <div class="flex items-center justify-between">
-              <h3 class="font-bold text-emerald-400 text-sm">DINIECE / Secretaría de Educación (Capital Humano)</h3>
-              <a href="https://www.argentina.gob.ar/educacion" target="_blank" class="text-emerald-400 hover:text-emerald-300">
+              <h3 class="font-bold text-ls-red dark:text-ls-redCoral text-sm">DINIECE / Secretaría de Educación (Capital Humano)</h3>
+              <a href="https://www.argentina.gob.ar/educacion" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
                 <i data-lucide="external-link" class="w-4 h-4"></i>
               </a>
             </div>
@@ -1389,8 +1389,8 @@
 
           <div class="p-4 bg-slate-950/80 rounded-xl border border-slate-800 space-y-2">
             <div class="flex items-center justify-between">
-              <h3 class="font-bold text-emerald-400 text-sm">ANSES / SIPA (Seguridad Social)</h3>
-              <a href="https://www.anses.gob.ar" target="_blank" class="text-emerald-400 hover:text-emerald-300">
+              <h3 class="font-bold text-ls-red dark:text-ls-redCoral text-sm">ANSES / SIPA (Seguridad Social)</h3>
+              <a href="https://www.anses.gob.ar" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
                 <i data-lucide="external-link" class="w-4 h-4"></i>
               </a>
             </div>
@@ -1399,8 +1399,8 @@
 
           <div class="p-4 bg-slate-950/80 rounded-xl border border-slate-800 space-y-2 md:col-span-2">
             <div class="flex items-center justify-between">
-              <h3 class="font-bold text-emerald-400 text-sm">SSN • SOA • NAIC (Organismos Actuariales y Regulatorios)</h3>
-              <a href="https://www.argentina.gob.ar/ssn" target="_blank" class="text-emerald-400 hover:text-emerald-300">
+              <h3 class="font-bold text-ls-red dark:text-ls-redCoral text-sm">SSN • SOA • NAIC (Organismos Actuariales y Regulatorios)</h3>
+              <a href="https://www.argentina.gob.ar/ssn" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
                 <i data-lucide="external-link" class="w-4 h-4"></i>
               </a>
             </div>
@@ -1547,28 +1547,28 @@
       activeCompareTables: ['indec_2022_total', 'gam_83_varones', 'cso_2017_varones'],
       
       colors: {
-        'indec_2022_mujeres': '#34d399',
-        'indec_2022_varones': '#059669',
-        'indec_2022_total': '#10b981',
+        'indec_2022_mujeres': '#3ac792',
+        'indec_2022_varones': '#b91f38',
+        'indec_2022_total': '#e20039',
         'indec_2010_total': '#64748b',
         'indec_2001_total': '#475569',
-        'gam_71_varones': '#eab308',
+        'gam_71_varones': '#f8cc59',
         'gam_71_mujeres': '#facc15',
-        'gam_83_varones': '#14b8a6',
-        'gam_83_mujeres': '#2dd4bf',
-        'gam_94_varones': '#06b6d4',
-        'gam_94_mujeres': '#22d3ee',
+        'gam_83_varones': '#3ac792',
+        'gam_83_mujeres': '#3ac792',
+        'gam_94_varones': '#4183ca',
+        'gam_94_mujeres': '#4183ca',
         'up_94_total': '#38bdf8',
-        'cso_1980_varones': '#f97316',
+        'cso_1980_varones': '#ff593e',
         'cso_1980_mujeres': '#fb923c',
-        'cso_2001_varones': '#a855f7',
+        'cso_2001_varones': '#b91f38',
         'cso_2001_mujeres': '#c084fc',
-        'cso_2017_varones': '#8b5cf6',
+        'cso_2017_varones': '#b91f38',
         'cso_2017_mujeres': '#a78bfa',
         'mi_85_invalidez': '#ef4444',
-        'chile_ine_total': '#10b981',
+        'chile_ine_total': '#e20039',
         'uruguay_ine_total': '#d97706',
-        'espana_ine_total': '#6366f1'
+        'espana_ine_total': '#4183ca'
       },
 
       init() {
@@ -1597,9 +1597,9 @@
           const item = catalogo[key];
           const isChecked = this.activeCompareTables.includes(key);
           const label = document.createElement('label');
-          label.className = `inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border transition cursor-pointer font-mono text-xs ${isChecked ? 'bg-emerald-950/80 border-emerald-500/60 text-emerald-300' : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-slate-200'}`;
+          label.className = `inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border transition cursor-pointer font-mono text-xs ${isChecked ? 'bg-ls-redDark/80 border-ls-red/60 text-ls-red dark:text-ls-redCoral' : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-slate-200'}`;
           label.innerHTML = `
-            <input type="checkbox" value="${key}" ${isChecked ? 'checked' : ''} onchange="SectionMortalidad.toggleTable('${key}', this.checked)" class="rounded bg-slate-900 border-slate-700 text-emerald-500 focus:ring-0">
+            <input type="checkbox" value="${key}" ${isChecked ? 'checked' : ''} onchange="SectionMortalidad.toggleTable('${key}', this.checked)" class="rounded bg-slate-900 border-slate-700 text-ls-red focus:ring-0">
             <span>${item.metadata.nombre}</span>
           `;
           container.appendChild(label);
@@ -1678,9 +1678,9 @@
             card.className = 'p-2.5 bg-slate-950 border border-slate-800 rounded-xl';
             card.innerHTML = `
               <div class="text-[10px] text-slate-400 font-sans">Alcanzar ${targetAge} años</div>
-              <div class="text-sm font-bold text-emerald-400 mt-0.5">${prob.toFixed(1)}%</div>
+              <div class="text-sm font-bold text-ls-red dark:text-ls-redCoral mt-0.5">${prob.toFixed(1)}%</div>
               <div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden mt-1.5">
-                <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full" style="width: ${Math.min(100, Math.max(0, prob))}%"></div>
+                <div class="bg-gradient-to-r from-ls-red to-ls-mint h-full rounded-full" style="width: ${Math.min(100, Math.max(0, prob))}%"></div>
               </div>
             `;
             container.appendChild(card);
@@ -1726,7 +1726,7 @@
 
         const lxDatasets = this.activeCompareTables.map(key => {
           const item = DATA.mortalidad.catalogo[key];
-          const color = this.colors[key] || '#10b981';
+          const color = this.colors[key] || '#e20039';
           const table = item.tabla;
           const baseRow = table.find(r => r.x === startAge) || table[0];
           const lx_base = baseRow.lx > 0 ? baseRow.lx : 1.0;
@@ -1750,7 +1750,7 @@
 
         const exDatasets = this.activeCompareTables.map(key => {
           const item = DATA.mortalidad.catalogo[key];
-          const color = this.colors[key] || '#10b981';
+          const color = this.colors[key] || '#e20039';
           const table = item.tabla;
           return {
             label: item.metadata.nombre,
@@ -1833,7 +1833,7 @@
               datasets: [{
                 label: 'Ratio qx Varón / qx Mujer',
                 data: brecha.map(b => b.ratio_sobremortalidad),
-                backgroundColor: brecha.map(b => b.ratio_sobremortalidad >= 2.0 ? '#ef4444' : '#10b981'),
+                backgroundColor: brecha.map(b => b.ratio_sobremortalidad >= 2.0 ? '#ef4444' : '#e20039'),
                 borderRadius: 4
               }]
             },
@@ -1866,7 +1866,7 @@
               datasets: [{
                 label: 'Ventaja Femenina en Años de Vida (ex_m - ex_v)',
                 data: brecha.map(b => b.brecha_anios_ex),
-                borderColor: '#34d399',
+                borderColor: '#3ac792',
                 backgroundColor: '#34d39920',
                 fill: true,
                 borderWidth: 2.5,
@@ -1896,10 +1896,10 @@
           data: {
             labels: hist.map(h => h.periodo),
             datasets: [
-              { label: 'Mujeres e0', data: hist.map(h => h.mujeres_e0), backgroundColor: '#34d399' },
-              { label: 'Total e0', data: hist.map(h => h.total_e0), backgroundColor: '#10b981' },
-              { label: 'Varones e0', data: hist.map(h => h.varones_e0), backgroundColor: '#064e3b' },
-              { label: 'Total e65 (A los 65 años)', data: hist.map(h => h.total_e65), type: 'line', borderColor: '#f59e0b', borderWidth: 3, pointRadius: 4 }
+              { label: 'Mujeres e0', data: hist.map(h => h.mujeres_e0), backgroundColor: '#3ac792' },
+              { label: 'Total e0', data: hist.map(h => h.total_e0), backgroundColor: '#e20039' },
+              { label: 'Varones e0', data: hist.map(h => h.varones_e0), backgroundColor: '#512420' },
+              { label: 'Total e65 (A los 65 años)', data: hist.map(h => h.total_e65), type: 'line', borderColor: '#f8cc59', borderWidth: 3, pointRadius: 4 }
             ]
           },
           options: {
@@ -1929,16 +1929,16 @@
 
         table.forEach(r => {
           const tr = document.createElement('tr');
-          tr.className = 'hover:bg-emerald-950/30 transition';
+          tr.className = 'hover:bg-ls-redDark/30 transition';
           tr.innerHTML = `
             <td class="py-1.5 px-3 font-semibold text-slate-200 font-sans">${r.x}</td>
             <td class="py-1.5 px-3 text-right text-slate-300">${Math.round(r.lx).toLocaleString('es-AR')}</td>
             <td class="py-1.5 px-3 text-right text-rose-300">${Math.round(r.dx).toLocaleString('es-AR')}</td>
             <td class="py-1.5 px-3 text-right text-amber-300">${r.qx.toFixed(5)}</td>
-            <td class="py-1.5 px-3 text-right text-teal-300">${r.px.toFixed(5)}</td>
+            <td class="py-1.5 px-3 text-right text-ls-mint">${r.px.toFixed(5)}</td>
             <td class="py-1.5 px-3 text-right text-slate-400">${Math.round(r.Lx).toLocaleString('es-AR')}</td>
             <td class="py-1.5 px-3 text-right text-slate-400">${Math.round(r.Tx).toLocaleString('es-AR')}</td>
-            <td class="py-1.5 px-3 text-right font-bold text-emerald-400">${r.ex.toFixed(2)}</td>
+            <td class="py-1.5 px-3 text-right font-bold text-ls-red dark:text-ls-redCoral">${r.ex.toFixed(2)}</td>
           `;
           tbody.appendChild(tr);
         });
@@ -1957,8 +1957,8 @@
           tr.className = 'hover:bg-slate-800/40 transition';
           tr.innerHTML = `
             <td class="py-2 px-3 font-medium text-slate-200 font-sans">${p.provincia}</td>
-            <td class="py-2 px-3 text-right font-semibold text-emerald-400">${p.e0_total}</td>
-            <td class="py-2 px-3 text-right text-teal-300">${p.e0_mujeres}</td>
+            <td class="py-2 px-3 text-right font-semibold text-ls-red dark:text-ls-redCoral">${p.e0_total}</td>
+            <td class="py-2 px-3 text-right text-ls-mint">${p.e0_mujeres}</td>
             <td class="py-2 px-3 text-right text-slate-300">${p.e0_varones}</td>
             <td class="py-2 px-3 text-right font-medium text-amber-400">${p.e65_total}</td>
           `;
@@ -2037,7 +2037,7 @@
           clearInterval(this.animationTimer);
           this.animationTimer = null;
           if (text) text.innerText = 'Reproducir Evolución';
-          if (btn) btn.className = 'flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl shadow-md transition font-mono';
+          if (btn) btn.className = 'flex items-center gap-1.5 px-4 py-2 bg-ls-red hover:bg-ls-red text-white text-xs font-semibold rounded-xl shadow-md transition font-mono';
         } else {
           if (text) text.innerText = 'Pausar Animación';
           if (btn) btn.className = 'flex items-center gap-1.5 px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold rounded-xl shadow-md transition font-mono';
@@ -2090,9 +2090,9 @@
           buttons.forEach(btn => {
             const btnYear = parseInt(btn.innerText, 10);
             if (btnYear === year) {
-              btn.className = 'text-emerald-400 font-bold bg-emerald-500/20 py-0.5 px-1.5 rounded border border-emerald-500/40';
+              btn.className = 'text-ls-red dark:text-ls-redCoral font-bold bg-ls-red/20 py-0.5 px-1.5 rounded border border-ls-red/40';
             } else {
-              btn.className = 'hover:text-emerald-400 py-0.5 px-1 rounded text-slate-400';
+              btn.className = 'hover:text-ls-red dark:text-ls-redCoral py-0.5 px-1 rounded text-slate-400';
             }
           });
         }
@@ -2128,8 +2128,8 @@
             data: {
               labels: piramideGrupos,
               datasets: [
-                { label: 'Varones', data: varonesData, backgroundColor: '#059669', borderRadius: 4 },
-                { label: 'Mujeres', data: mujeresData, backgroundColor: '#34d399', borderRadius: 4 }
+                { label: 'Varones', data: varonesData, backgroundColor: '#b91f38', borderRadius: 4 },
+                { label: 'Mujeres', data: mujeresData, backgroundColor: '#3ac792', borderRadius: 4 }
               ]
             },
             options: {
@@ -2178,7 +2178,7 @@
               labels: hogares.map(h => h.tipo),
               datasets: [{
                 data: hogares.map(h => h.porcentaje),
-                backgroundColor: ['#10b981', '#059669', '#34d399', '#f59e0b', '#8b5cf6'],
+                backgroundColor: ['#e20039', '#b91f38', '#3ac792', '#f8cc59', '#b91f38'],
                 borderWidth: 0
               }]
             },
@@ -2201,7 +2201,7 @@
               datasets: [{
                 label: '% de los Hogares',
                 data: tenencia.map(t => t.porcentaje),
-                backgroundColor: '#10b981',
+                backgroundColor: '#e20039',
                 borderRadius: 4
               }]
             },
@@ -2237,7 +2237,7 @@
               datasets: [{
                 label: 'Índice de Envejecimiento (%)',
                 data: topBottomProvs.map(p => p.indice_envejecimiento),
-                backgroundColor: topBottomProvs.map(p => p.jurisdiccion === 'Total País' ? '#f59e0b' : '#34d399'),
+                backgroundColor: topBottomProvs.map(p => p.jurisdiccion === 'Total País' ? '#f8cc59' : '#3ac792'),
                 borderRadius: 4
               }]
             },
@@ -2267,9 +2267,9 @@
             <td class="py-2 px-3 font-medium text-slate-200 font-sans">${p.jurisdiccion}</td>
             <td class="py-2 px-3 text-right font-bold text-white">${p.poblacion_2022.toLocaleString('es-AR')}</td>
             <td class="py-2 px-3 text-right text-slate-400">${p.poblacion_2010.toLocaleString('es-AR')}</td>
-            <td class="py-2 px-3 text-right font-semibold text-emerald-400">+${p.var_intercensal_pct.toFixed(2)}%</td>
+            <td class="py-2 px-3 text-right font-semibold text-ls-red dark:text-ls-redCoral">+${p.var_intercensal_pct.toFixed(2)}%</td>
             <td class="py-2 px-3 text-right text-slate-300">${p.densidad_km2.toLocaleString('es-AR')}</td>
-            <td class="py-2 px-3 text-right text-teal-300">${p.mujeres_pct}%</td>
+            <td class="py-2 px-3 text-right text-ls-mint">${p.mujeres_pct}%</td>
             <td class="py-2 px-3 text-right text-amber-400">${p.edad_mediana} años</td>
           `;
           tbody.appendChild(tr);
@@ -2300,9 +2300,9 @@
             data: {
               labels: saldoData.map(d => d.anio),
               datasets: [
-                { label: 'Nacimientos Anuales', data: saldoData.map(d => d.nacimientos), backgroundColor: '#34d399', borderRadius: 4 },
+                { label: 'Nacimientos Anuales', data: saldoData.map(d => d.nacimientos), backgroundColor: '#3ac792', borderRadius: 4 },
                 { label: 'Defunciones Anuales', data: saldoData.map(d => d.defunciones), backgroundColor: '#f87171', borderRadius: 4 },
-                { label: 'Crecimiento Vegetativo', data: saldoData.map(d => d.saldo_crecimiento), type: 'line', borderColor: '#10b981', borderWidth: 2.5, pointRadius: 3 }
+                { label: 'Crecimiento Vegetativo', data: saldoData.map(d => d.saldo_crecimiento), type: 'line', borderColor: '#e20039', borderWidth: 2.5, pointRadius: 3 }
               ]
             },
             options: {
@@ -2330,7 +2330,7 @@
               datasets: [{
                 label: 'TMI (por mil nacidos vivos)',
                 data: rankingTmi.map(r => r.tmi),
-                backgroundColor: rankingTmi.map(r => r.tmi <= 7.8 ? '#10b981' : '#f59e0b'),
+                backgroundColor: rankingTmi.map(r => r.tmi <= 7.8 ? '#e20039' : '#f8cc59'),
                 borderRadius: 4
               }]
             },
@@ -2353,9 +2353,9 @@
             data: {
               labels: tmiData.map(d => d.anio),
               datasets: [
-                { label: 'Tasa Total', data: tmiData.map(d => d.tmi_total), borderColor: '#10b981', backgroundColor: '#10b98120', fill: true, tension: 0.3, borderWidth: 3 },
-                { label: 'Neonatal (<28 días)', data: tmiData.map(d => d.tmi_neonatal), borderColor: '#34d399', tension: 0.3, borderWidth: 2 },
-                { label: 'Posneonatal (28d a 11m)', data: tmiData.map(d => d.tmi_posneonatal), borderColor: '#f59e0b', tension: 0.3, borderWidth: 2 }
+                { label: 'Tasa Total', data: tmiData.map(d => d.tmi_total), borderColor: '#e20039', backgroundColor: '#10b98120', fill: true, tension: 0.3, borderWidth: 3 },
+                { label: 'Neonatal (<28 días)', data: tmiData.map(d => d.tmi_neonatal), borderColor: '#3ac792', tension: 0.3, borderWidth: 2 },
+                { label: 'Posneonatal (28d a 11m)', data: tmiData.map(d => d.tmi_posneonatal), borderColor: '#f8cc59', tension: 0.3, borderWidth: 2 }
               ]
             },
             options: {
@@ -2411,8 +2411,8 @@
             data: {
               labels: ['Avanzado', 'Satisfactorio', 'Básico', 'Por debajo del Básico'],
               datasets: [
-                { label: 'Lengua Secundaria (%)', data: aprender.lengua_secundaria.map(l => l.porcentaje), backgroundColor: '#10b981', borderRadius: 4 },
-                { label: 'Matemática Secundaria (%)', data: aprender.matematica_secundaria.map(m => m.porcentaje), backgroundColor: '#f59e0b', borderRadius: 4 }
+                { label: 'Lengua Secundaria (%)', data: aprender.lengua_secundaria.map(l => l.porcentaje), backgroundColor: '#e20039', borderRadius: 4 },
+                { label: 'Matemática Secundaria (%)', data: aprender.matematica_secundaria.map(m => m.porcentaje), backgroundColor: '#f8cc59', borderRadius: 4 }
               ]
             },
             options: {
@@ -2434,7 +2434,7 @@
               labels: univAreas.map(u => u.area),
               datasets: [{
                 data: univAreas.map(u => u.porcentaje),
-                backgroundColor: ['#10b981', '#059669', '#34d399', '#f59e0b', '#8b5cf6'],
+                backgroundColor: ['#e20039', '#b91f38', '#3ac792', '#f8cc59', '#b91f38'],
                 borderWidth: 0
               }]
             },
@@ -2457,7 +2457,7 @@
               datasets: [{
                 label: 'Tasa de Escolarización (%)',
                 data: edCob.map(e => e.tasa_escolarizacion),
-                backgroundColor: '#10b981',
+                backgroundColor: '#e20039',
                 borderRadius: 6
               }]
             },
@@ -2479,9 +2479,9 @@
             data: {
               labels: edTray.map(t => t.anio_estudio),
               datasets: [
-                { label: 'Sobreedad (%)', data: edTray.map(t => t.sobreedad_pct), backgroundColor: '#f59e0b' },
+                { label: 'Sobreedad (%)', data: edTray.map(t => t.sobreedad_pct), backgroundColor: '#f8cc59' },
                 { label: 'Repitencia (%)', data: edTray.map(t => t.repitencia_pct), backgroundColor: '#ef4444' },
-                { label: 'Abandono Interanual (%)', data: edTray.map(t => t.abandono_pct), backgroundColor: '#8b5cf6' }
+                { label: 'Abandono Interanual (%)', data: edTray.map(t => t.abandono_pct), backgroundColor: '#b91f38' }
               ]
             },
             options: {
@@ -2513,7 +2513,7 @@
               labels: comp.map(c => c.categoria),
               datasets: [{
                 data: comp.map(c => c.porcentaje),
-                backgroundColor: ['#10b981', '#f59e0b', '#34d399', '#8b5cf6'],
+                backgroundColor: ['#e20039', '#f8cc59', '#3ac792', '#b91f38'],
                 borderWidth: 0
               }]
             },
@@ -2536,7 +2536,7 @@
               datasets: [{
                 label: 'Tasa de Desocupación (%)',
                 data: desempEdad.map(d => d.tasa),
-                backgroundColor: ['#f87171', '#fb923c', '#34d399', '#10b981'],
+                backgroundColor: ['#f87171', '#fb923c', '#3ac792', '#e20039'],
                 borderRadius: 4
               }]
             },
@@ -2558,9 +2558,9 @@
             data: {
               labels: ephSerie.map(s => s.periodo),
               datasets: [
-                { label: 'Actividad', data: ephSerie.map(s => s.actividad), borderColor: '#34d399', borderWidth: 2 },
-                { label: 'Empleo', data: ephSerie.map(s => s.empleo), borderColor: '#10b981', borderWidth: 2 },
-                { label: 'Informalidad', data: ephSerie.map(s => s.informalidad), borderColor: '#f59e0b', borderWidth: 2 },
+                { label: 'Actividad', data: ephSerie.map(s => s.actividad), borderColor: '#3ac792', borderWidth: 2 },
+                { label: 'Empleo', data: ephSerie.map(s => s.empleo), borderColor: '#e20039', borderWidth: 2 },
+                { label: 'Informalidad', data: ephSerie.map(s => s.informalidad), borderColor: '#f8cc59', borderWidth: 2 },
                 { label: 'Desocupación', data: ephSerie.map(s => s.desocupacion), borderColor: '#ef4444', borderWidth: 2.5 }
               ]
             },
@@ -2584,7 +2584,7 @@
               datasets: [{
                 label: '% de los Ocupados',
                 data: ephRamas.map(r => r.porcentaje),
-                backgroundColor: '#059669',
+                backgroundColor: '#b91f38',
                 borderRadius: 4
               }]
             },
@@ -2617,7 +2617,7 @@
             data: {
               labels: relData.map(r => r.periodo),
               datasets: [
-                { label: 'Relación Activo / Pasivo (Aportantes por Beneficiario)', data: relData.map(r => r.relacion), borderColor: '#10b981', backgroundColor: '#10b98120', fill: true, tension: 0.3, borderWidth: 3, pointRadius: 4 }
+                { label: 'Relación Activo / Pasivo (Aportantes por Beneficiario)', data: relData.map(r => r.relacion), borderColor: '#e20039', backgroundColor: '#10b98120', fill: true, tension: 0.3, borderWidth: 3, pointRadius: 4 }
               ]
             },
             options: {
@@ -2639,7 +2639,7 @@
               labels: comp.map(c => c.tipo),
               datasets: [{
                 data: comp.map(c => c.porcentaje),
-                backgroundColor: ['#f59e0b', '#10b981', '#34d399', '#8b5cf6'],
+                backgroundColor: ['#f8cc59', '#e20039', '#3ac792', '#b91f38'],
                 borderWidth: 0
               }]
             },
