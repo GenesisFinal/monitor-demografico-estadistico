@@ -26367,25 +26367,25 @@
         "tipo": "Jubilaciones con Moratoria Previsional",
         "porcentaje": 48.5,
         "beneficiarios": 3492000,
-        "color": "#f59e0b"
+        "color": "#f8cc59"
       },
       {
         "tipo": "Jubilaciones Contributivas (Aportes Completos)",
         "porcentaje": 28.2,
         "beneficiarios": 2030000,
-        "color": "#10b981"
+        "color": "#3ac792"
       },
       {
         "tipo": "Pensiones por Fallecimiento / Derivadas",
         "porcentaje": 18.1,
         "beneficiarios": 1303000,
-        "color": "#0ea5e9"
+        "color": "#4183ca"
       },
       {
         "tipo": "PUAM (Pensión Universal Adulto Mayor)",
         "porcentaje": 5.2,
         "beneficiarios": 374000,
-        "color": "#a855f7"
+        "color": "#ff593e"
       }
     ],
     "distribucion_haberes": [
@@ -26406,11 +26406,142 @@
         "porcentaje": 5.6
       }
     ],
+    "serie_ocupacion_adultos_mayores": [
+      {
+        "periodo": "2016",
+        "ocupados_eph": 517441,
+        "tasa_actividad": 14.8,
+        "tasa_empleo": 14.2,
+        "pct_total_ocupados": 4.1
+      },
+      {
+        "periodo": "2017",
+        "ocupados_eph": 535200,
+        "tasa_actividad": 15.1,
+        "tasa_empleo": 14.5,
+        "pct_total_ocupados": 4.2
+      },
+      {
+        "periodo": "2018",
+        "ocupados_eph": 561800,
+        "tasa_actividad": 15.8,
+        "tasa_empleo": 15.1,
+        "pct_total_ocupados": 4.3
+      },
+      {
+        "periodo": "2019",
+        "ocupados_eph": 589400,
+        "tasa_actividad": 16.4,
+        "tasa_empleo": 15.7,
+        "pct_total_ocupados": 4.5
+      },
+      {
+        "periodo": "2020",
+        "ocupados_eph": 412000,
+        "tasa_actividad": 11.2,
+        "tasa_empleo": 10.8,
+        "pct_total_ocupados": 3.4
+      },
+      {
+        "periodo": "2021",
+        "ocupados_eph": 548900,
+        "tasa_actividad": 15.3,
+        "tasa_empleo": 14.7,
+        "pct_total_ocupados": 4.2
+      },
+      {
+        "periodo": "2022",
+        "ocupados_eph": 604100,
+        "tasa_actividad": 16.8,
+        "tasa_empleo": 16.1,
+        "pct_total_ocupados": 4.6
+      },
+      {
+        "periodo": "2023",
+        "ocupados_eph": 628300,
+        "tasa_actividad": 17.4,
+        "tasa_empleo": 16.8,
+        "pct_total_ocupados": 4.7
+      },
+      {
+        "periodo": "2024",
+        "ocupados_eph": 659500,
+        "tasa_actividad": 18.2,
+        "tasa_empleo": 17.5,
+        "pct_total_ocupados": 4.9
+      },
+      {
+        "periodo": "2025",
+        "ocupados_eph": 686160,
+        "tasa_actividad": 18.9,
+        "tasa_empleo": 18.1,
+        "pct_total_ocupados": 5.1
+      }
+    ],
+    "modalidad_ocupacional_65": [
+      {
+        "modalidad": "Cuentapropistas / Autónomos",
+        "porcentaje": 48.1,
+        "color": "#e20039"
+      },
+      {
+        "modalidad": "Asalariados No Registrados (Informales / Changas)",
+        "porcentaje": 31.5,
+        "color": "#ff593e"
+      },
+      {
+        "modalidad": "Asalariados Registrados (Formales)",
+        "porcentaje": 15.2,
+        "color": "#3ac792"
+      },
+      {
+        "modalidad": "Patrones / Empleadores",
+        "porcentaje": 5.2,
+        "color": "#4183ca"
+      }
+    ],
+    "actividad_tramos_etarios": [
+      {
+        "tramo": "60 a 64 años",
+        "total": 53.4,
+        "varones": 68.2,
+        "mujeres": 40.5,
+        "contexto": "Edad jubilatoria femenina activa y varones en actividad plena"
+      },
+      {
+        "tramo": "65 a 69 años",
+        "total": 29.1,
+        "varones": 41.5,
+        "mujeres": 18.2,
+        "contexto": "Primer quinquenio pasivo con alta tasa de reinserción"
+      },
+      {
+        "tramo": "70 a 74 años",
+        "total": 18.6,
+        "varones": 26.8,
+        "mujeres": 11.9,
+        "contexto": "Actividades independientes y comercio barrial"
+      },
+      {
+        "tramo": "75 años y más",
+        "total": 7.2,
+        "varones": 11.4,
+        "mujeres": 4.5,
+        "contexto": "Ocupaciones puntuales y asesorías profesionales"
+      }
+    ],
     "indicadores_previsionales": {
       "cobertura_adultos_mayores_65": 94.5,
       "total_beneficiarios_sipa": 7200000,
       "total_aportantes_activos_sipa": 10950000,
-      "relacion_soporte_actual": 1.52
+      "relacion_soporte_actual": 1.52,
+      "ocupados_65_mas_eph": 686160,
+      "ocupados_65_mas_proy_pais": 1050000,
+      "tasa_actividad_65_mas": 18.9,
+      "tasa_empleo_65_mas": 18.1,
+      "pct_jubilados_que_trabajan": 76.4,
+      "crecimiento_empleo_65_mas_2016_2025": 32.6,
+      "crecimiento_empleo_general_2016_2025": 17.8
     }
   }
 }
