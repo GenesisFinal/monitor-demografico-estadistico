@@ -121,6 +121,22 @@ def get_complete_actuarial_catalog():
             "descripcion": "Tabla de mortalidad del Censo Nacional 2001.",
             "e0": 73.8, "e65": 15.3
         },
+        "iam_71_varones": {
+            "nombre": "IAM-71 Varones (Rentas Individuales)",
+            "categoria": "Seguros de Retiro y Rentas",
+            "fuente": "SOA (Society of Actuaries) / Harold Cherry",
+            "url": "https://www.soa.org",
+            "descripcion": "1971 Individual Annuity Mortality para rentas vitalicias y seguros de retiro individuales masculinos.",
+            "e0": 75.8, "e65": 16.8
+        },
+        "iam_71_mujeres": {
+            "nombre": "IAM-71 Mujeres (Rentas Individuales)",
+            "categoria": "Seguros de Retiro y Rentas",
+            "fuente": "SOA (Society of Actuaries) / Harold Cherry",
+            "url": "https://www.soa.org",
+            "descripcion": "1971 Individual Annuity Mortality para rentas vitalicias y seguros de retiro individuales femeninos.",
+            "e0": 80.6, "e65": 20.1
+        },
         "gam_71_varones": {
             "nombre": "GAM-71 Varones (Rentas)",
             "categoria": "Seguros de Retiro y Rentas",
@@ -289,6 +305,14 @@ def get_complete_actuarial_catalog():
             0: 0.01660, 1: 0.00095, 5: 0.00035, 10: 0.00038, 15: 0.00085, 20: 0.00130,
             30: 0.00165, 40: 0.00310, 50: 0.00720, 60: 0.01750, 70: 0.04200, 80: 0.10500, 90: 0.25500, 100: 1.0
         },
+        "iam_71_varones": {
+            0: 0.00480, 10: 0.00036, 20: 0.00065, 30: 0.00092, 40: 0.00168, 50: 0.00465,
+            60: 0.01185, 65: 0.01915, 70: 0.03220, 75: 0.05340, 80: 0.08620, 85: 0.13680, 90: 0.20850, 100: 1.0
+        },
+        "iam_71_mujeres": {
+            0: 0.00360, 10: 0.00024, 20: 0.00038, 30: 0.00054, 40: 0.00102, 50: 0.00245,
+            60: 0.00625, 65: 0.01040, 70: 0.01790, 75: 0.03180, 80: 0.05680, 85: 0.09820, 90: 0.16450, 100: 1.0
+        },
         "gam_71_varones": {
             0: 0.00500, 10: 0.00040, 20: 0.00072, 30: 0.00102, 40: 0.00185, 50: 0.00520,
             60: 0.01312, 65: 0.02126, 70: 0.03611, 75: 0.05942, 80: 0.09458, 85: 0.14725, 90: 0.22010, 100: 1.0
@@ -417,11 +441,7 @@ def get_complete_actuarial_catalog():
         {"provincia": "Santiago del Estero", "e0_total": 75.1, "e0_varones": 71.6, "e0_mujeres": 78.5, "e65_total": 16.7},
         {"provincia": "Chaco", "e0_total": 74.8, "e0_varones": 71.3, "e0_mujeres": 78.2, "e65_total": 16.5},
         {"provincia": "Formosa", "e0_total": 74.6, "e0_varones": 71.1, "e0_mujeres": 78.0, "e65_total": 16.4},
-        {"provincia": "Catamarca", "e0_total": 75.6, "e0_varones": 72.1, "e0_mujeres": 79.0, "e65_total": 17.0},
-        {"provincia": "La Rioja", "e0_total": 75.8, "e0_varones": 72.3, "e0_mujeres": 79.2, "e65_total": 17.1},
-        {"provincia": "La Pampa", "e0_total": 77.3, "e0_varones": 73.9, "e0_mujeres": 80.6, "e65_total": 18.3},
-        {"provincia": "Santa Cruz", "e0_total": 76.4, "e0_varones": 72.9, "e0_mujeres": 79.8, "e65_total": 17.5},
-        {"provincia": "Tierra del Fuego", "e0_total": 76.7, "e0_varones": 73.2, "e0_mujeres": 80.1, "e65_total": 17.7}
+        {"provincia": "Catamarca", "e0_total": 75.6, "e0_varones": 72.1, "e0_mujeres": 79.0, "e65_total": 17.0}
     ]
 
     return {
