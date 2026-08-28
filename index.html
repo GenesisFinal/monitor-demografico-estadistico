@@ -585,7 +585,7 @@
         </div>
 
         <!-- Description Pill -->
-        <div class="mt-4 flex items-center justify-between text-xs text-card-desc ls-subcard/60 p-2.5 rounded-xl border border-slate-800">
+        <div class="mt-4 flex items-center justify-between text-xs text-card-desc ls-subcard/60 p-2.5 rounded-xl border border-slate-200 dark:border-white/10">
           <div class="flex items-center gap-2">
             <i data-lucide="info" class="w-4 h-4 text-ls-red dark:text-ls-redCoral"></i>
             <span id="calc-table-desc">Cargando metadata actuarial...</span>
@@ -627,10 +627,10 @@
         </div>
 
         <!-- Milestones de Sobrevida -->
-        <div class="mt-4 pt-4 border-t border-slate-800/80">
+        <div class="mt-4 pt-4 border-t border-slate-200 dark:border-white/10">
           <div class="text-xs font-semibold text-card-desc mb-2 flex items-center gap-1.5">
             <i data-lucide="target" class="w-3.5 h-3.5 text-ls-red dark:text-ls-redCoral"></i>
-            <span>Probabilidad de alcanzar edades clave (Condicionada a estar vivo a los <span id="calc-milestones-edad" class="text-ls-red dark:text-ls-redCoral font-mono font-bold">65</span> años):</span>
+            <span>Probabilidad de alcanzar edades clave (Condicionada a estar vivo a los <span id="calc-milestones-edad" class="text-brand-500 dark:text-brand-coral font-mono font-bold">65</span> años):</span>
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 num" id="calc-milestones-container">
             <!-- Dynamic Cards -->
@@ -652,11 +652,11 @@
           <!-- Presets Rápidos -->
           <div class="flex items-center gap-2 flex-wrap">
             <span class="text-xs text-card-desc">Presets:</span>
-            <button onclick="setComparePreset('retiro_vs_poblacion')" class="px-2.5 py-1 ls-subcard hover:bg-slate-800 border border-slate-700 text-xs text-ls-red dark:text-ls-redCoral rounded-lg transition font-mono">Retiro vs Censo</button>
-            <button onclick="setComparePreset('cso_evolucion')" class="px-2.5 py-1 ls-subcard hover:bg-slate-800 border border-slate-700 text-xs text-amber-300 rounded-lg transition font-mono">Evolución CSO</button>
-            <button onclick="setComparePreset('gam_evolucion')" class="px-2.5 py-1 ls-subcard hover:bg-slate-800 border border-slate-700 text-xs text-ls-mint rounded-lg transition font-mono">Evolución GAM</button>
+            <button onclick="setComparePreset('retiro_vs_poblacion')" class="px-2.5 py-1 bg-slate-100 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-white/15 border border-slate-200 dark:border-white/10 text-xs text-brand-500 dark:text-brand-coral rounded-lg transition font-mono">Retiro vs Censo</button>
+            <button onclick="setComparePreset('cso_evolucion')" class="px-2.5 py-1 bg-slate-100 dark:bg-white/5 hover:bg-amber-500 hover:text-slate-950 dark:hover:bg-white/15 border border-slate-200 dark:border-white/10 text-xs text-amber-600 dark:text-amber-300 rounded-lg transition font-mono">Evolución CSO</button>
+            <button onclick="setComparePreset('gam_evolucion')" class="px-2.5 py-1 bg-slate-100 dark:bg-white/5 hover:bg-mint hover:text-slate-950 dark:hover:bg-white/15 border border-slate-200 dark:border-white/10 text-xs text-emerald-600 dark:text-mint rounded-lg transition font-mono">Evolución GAM</button>
             
-            <label class="flex items-center gap-1.5 text-xs text-card-desc ml-2 cursor-pointer ls-subcard px-2.5 py-1 rounded-lg border border-slate-800">
+            <label class="flex items-center gap-1.5 text-xs text-card-desc ml-2 cursor-pointer ls-subcard px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/10">
               <input type="checkbox" id="chk-radix-condicional" checked onchange="updateMultiTableCharts()" class="rounded ls-subcard border-slate-700 text-ls-red focus:ring-0">
               <span class="text-[11px]">Raíz en edad x</span>
             </label>
@@ -671,7 +671,7 @@
         <!-- Charts Grid: lx & ex -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
           <!-- Chart lx -->
-          <div class="ls-subcard/80 border border-slate-800/80 rounded-xl p-4">
+          <div class="ls-subcard/80 border border-slate-200 dark:border-white/10/80 rounded-xl p-4">
             <div class="flex items-center justify-between mb-3">
               <div>
                 <div class="flex items-center justify-between gap-2 mb-2">
@@ -690,7 +690,7 @@
           </div>
 
           <!-- Chart ex -->
-          <div class="ls-subcard/80 border border-slate-800/80 rounded-xl p-4">
+          <div class="ls-subcard/80 border border-slate-200 dark:border-white/10/80 rounded-xl p-4">
             <div class="flex items-center justify-between mb-3">
               <div>
                 <div class="flex items-center justify-between gap-2 mb-2">
@@ -728,7 +728,7 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-1">
           <!-- Chart Ratio Sobremortalidad -->
-          <div class="ls-subcard/80 border border-slate-800/80 rounded-xl p-4">
+          <div class="ls-subcard/80 border border-slate-200 dark:border-white/10/80 rounded-xl p-4">
             <div class="flex items-center justify-between gap-2 mb-2">
             <h4 class="text-xs font-bold text-main-heading mb-1">Ratio de Sobremortalidad Masculina (\(q_x^{\text{Varones}} / q_x^{\text{Mujeres}}\))</h4>
             <button onclick="exportChartAsPNG('chart-brecha-ratio', 'Ratio de Sobremortalidad Masculina q(x)')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
@@ -743,7 +743,7 @@
           </div>
 
           <!-- Chart Brecha en Años de Vida -->
-          <div class="ls-subcard/80 border border-slate-800/80 rounded-xl p-4">
+          <div class="ls-subcard/80 border border-slate-200 dark:border-white/10/80 rounded-xl p-4">
             <div class="flex items-center justify-between gap-2 mb-2">
             <h4 class="text-xs font-bold text-main-heading mb-1">Ventaja Femenina en Esperanza de Vida (\(e_x^{\text{Mujer}} - e_x^{\text{Varón}}\))</h4>
             <button onclick="exportChartAsPNG('chart-brecha-anios', 'Brecha de Esperanza de Vida e(x)')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
@@ -792,7 +792,7 @@
               <input type="text" id="filtro-prov-mortalidad" placeholder="Filtrar provincia..." oninput="renderProvMortalidadTable()" class="ls-subcard border border-slate-700 text-xs rounded-lg px-2.5 py-1 text-slate-200 outline-none w-36">
             </div>
 
-            <div class="overflow-x-auto max-h-60 border border-slate-800 rounded-lg">
+            <div class="overflow-x-auto max-h-60 border border-slate-200 dark:border-white/10 rounded-lg">
               <table class="w-full text-left text-xs num">
                 <thead class="ls-subcard text-card-desc sticky top-0 border-b border-slate-800">
                   <tr>
@@ -830,7 +830,7 @@
           </div>
         </div>
 
-        <div class="overflow-x-auto max-h-80 border border-slate-800 rounded-lg">
+        <div class="overflow-x-auto max-h-80 border border-slate-200 dark:border-white/10 rounded-lg">
           <table class="w-full text-left text-xs num">
             <thead class="ls-subcard text-card-desc sticky top-0 border-b border-slate-800">
               <tr>
@@ -883,7 +883,7 @@
         </div>
 
         <!-- Slider & Year Ticks -->
-        <div class="space-y-2 ls-subcard/70 p-4 rounded-xl border border-slate-800">
+        <div class="space-y-2 ls-subcard/70 p-4 rounded-xl border border-slate-200 dark:border-white/10">
           <div class="flex items-center justify-between text-xs text-card-desc font-mono">
             <span>Línea Temporal de Censos y Proyecciones:</span>
             <span class="text-ls-red dark:text-ls-redCoral font-bold text-sm bg-ls-redDark px-3 py-0.5 rounded-full border border-ls-redDark" id="badge-piramide-anio">Año: 2022</span>
@@ -907,7 +907,7 @@
 
         <!-- Pyramid Layout: Chart + Dynamic Stats -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div class="lg:col-span-8 ls-subcard/80 border border-slate-800 rounded-xl p-4">
+          <div class="lg:col-span-8 ls-subcard/80 border border-slate-200 dark:border-white/10 rounded-xl p-4">
             <div class="flex items-center justify-between mb-2">
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-xs font-bold text-main-heading" id="title-piramide-chart">Pirámide de Población (Censo 2022)</h3>
@@ -924,7 +924,7 @@
           </div>
 
           <div class="lg:col-span-4 flex flex-col justify-between gap-3 text-xs">
-            <div class="p-3 ls-subcard/80 rounded-xl border border-slate-800">
+            <div class="p-3 ls-subcard/80 rounded-xl border border-slate-200 dark:border-white/10">
               <span class="text-card-desc" id="kpi-poblacion-label">Población Total (2022)</span>
               <div class="text-xl font-bold text-main-heading num mt-0.5" id="kpi-poblacion-val">46.234.830</div>
               <p class="text-[10px] text-ls-red dark:text-ls-redCoral mt-1 flex items-center gap-1" id="kpi-poblacion-sub">
@@ -932,19 +932,19 @@
               </p>
             </div>
 
-            <div class="p-3 ls-subcard/80 rounded-xl border border-slate-800">
+            <div class="p-3 ls-subcard/80 rounded-xl border border-slate-200 dark:border-white/10">
               <span class="text-card-desc">Edad Mediana</span>
               <div class="text-lg font-bold text-ls-red dark:text-ls-redCoral num mt-0.5" id="kpi-edad-mediana-val">32.0 años</div>
               <p class="text-[10px] text-slate-500 mt-0.5">50% de la población tiene menos de esta edad.</p>
             </div>
 
-            <div class="p-3 ls-subcard/80 rounded-xl border border-slate-800">
+            <div class="p-3 ls-subcard/80 rounded-xl border border-slate-200 dark:border-white/10">
               <span class="text-card-desc">Índice de Envejecimiento</span>
               <div class="text-lg font-bold text-amber-400 num mt-0.5" id="kpi-envejecimiento-val">53.3%</div>
               <p class="text-[10px] text-slate-500 mt-0.5">Personas de 65+ por cada 100 niños de 0 a 14 años.</p>
             </div>
 
-            <div class="p-3 ls-subcard/80 rounded-xl border border-slate-800">
+            <div class="p-3 ls-subcard/80 rounded-xl border border-slate-200 dark:border-white/10">
               <span class="text-card-desc">Relación de Dependencia</span>
               <div class="text-lg font-bold text-ls-mint num mt-0.5" id="kpi-dependencia-val">51.8 dependientes / 100 activos</div>
               <p class="text-[10px] text-slate-500 mt-0.5">Población &lt;15 y 65+ sobre población de 15 a 64 años.</p>
@@ -1035,7 +1035,7 @@
           <input type="text" id="filtro-prov-censo" placeholder="Buscar jurisdicción..." oninput="renderCensoProvTable()" class="ls-subcard border border-slate-700 text-xs rounded-lg px-3 py-1.5 text-slate-200 outline-none w-48">
         </div>
 
-        <div class="overflow-x-auto max-h-72 border border-slate-800 rounded-lg">
+        <div class="overflow-x-auto max-h-72 border border-slate-200 dark:border-white/10 rounded-lg">
           <table class="w-full text-left text-xs num">
             <thead class="ls-subcard text-card-desc sticky top-0 border-b border-slate-800">
               <tr>
@@ -1706,7 +1706,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-          <div class="p-4 ls-subcard/80 rounded-xl border border-slate-800 space-y-2">
+          <div class="p-4 ls-subcard/80 rounded-xl border border-slate-200 dark:border-white/10 space-y-2">
             <div class="flex items-center justify-between">
               <h3 class="font-bold text-ls-red dark:text-ls-redCoral text-sm">INDEC (Instituto Nacional de Estadística y Censos)</h3>
               <a href="https://www.indec.gob.ar" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
@@ -1716,7 +1716,7 @@
             <p class="text-card-desc">Responsable del Censo Nacional de Población, Hogares y Viviendas 2022, Encuesta Permanente de Hogares (EPH) y Tablas Oficiales de Mortalidad (Serie Análisis Demográfico N° 40).</p>
           </div>
 
-          <div class="p-4 ls-subcard/80 rounded-xl border border-slate-800 space-y-2">
+          <div class="p-4 ls-subcard/80 rounded-xl border border-slate-200 dark:border-white/10 space-y-2">
             <div class="flex items-center justify-between">
               <h3 class="font-bold text-ls-red dark:text-ls-redCoral text-sm">DEIS (Dirección de Estadísticas e Información de Salud)</h3>
               <a href="https://www.deis.msal.gov.ar" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
@@ -1726,7 +1726,7 @@
             <p class="text-card-desc">Organismo rector del Ministerio de Salud. Procesa los certificados de defunción, informes de nacido vivo, series de mortalidad infantil, materna y causas de muerte CIE-10.</p>
           </div>
 
-          <div class="p-4 ls-subcard/80 rounded-xl border border-slate-800 space-y-2">
+          <div class="p-4 ls-subcard/80 rounded-xl border border-slate-200 dark:border-white/10 space-y-2">
             <div class="flex items-center justify-between">
               <h3 class="font-bold text-ls-red dark:text-ls-redCoral text-sm">DINIECE / Secretaría de Educación (Capital Humano)</h3>
               <a href="https://www.argentina.gob.ar/educacion" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
@@ -1736,7 +1736,7 @@
             <p class="text-card-desc">Relevamiento Anual (RA) de matrícula, cobertura, sobreedad, repitencia, Pruebas Nacionales Aprender y estadísticas universitarias (SPU).</p>
           </div>
 
-          <div class="p-4 ls-subcard/80 rounded-xl border border-slate-800 space-y-2">
+          <div class="p-4 ls-subcard/80 rounded-xl border border-slate-200 dark:border-white/10 space-y-2">
             <div class="flex items-center justify-between">
               <h3 class="font-bold text-ls-red dark:text-ls-redCoral text-sm">ANSES / SIPA (Seguridad Social)</h3>
               <a href="https://www.anses.gob.ar" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
@@ -1746,7 +1746,7 @@
             <p class="text-card-desc">Boletines Estadísticos de la Seguridad Social (BESS), relación activo/pasivo, composición de jubilaciones y cobertura de adultos mayores.</p>
           </div>
 
-          <div class="p-4 ls-subcard/80 rounded-xl border border-slate-800 space-y-2 md:col-span-2">
+          <div class="p-4 ls-subcard/80 rounded-xl border border-slate-200 dark:border-white/10 space-y-2 md:col-span-2">
             <div class="flex items-center justify-between">
               <h3 class="font-bold text-ls-red dark:text-ls-redCoral text-sm">SSN • SOA • NAIC (Organismos Actuariales y Regulatorios)</h3>
               <a href="https://www.argentina.gob.ar/ssn" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
@@ -2012,12 +2012,12 @@
 
             const prob = (targetRow.lx / row.lx) * 100;
             const card = document.createElement('div');
-            card.className = 'p-2.5 bg-slate-950 border border-slate-800 rounded-xl';
+            card.className = 'p-3 bg-slate-100/90 dark:bg-white/5 border border-slate-200/90 dark:border-white/10 rounded-xl transition-all hover:border-brand-500/30';
             card.innerHTML = `
-              <div class="text-[10px] text-card-desc font-sans">Alcanzar ${targetAge} años</div>
-              <div class="text-sm font-bold text-ls-red dark:text-ls-redCoral mt-0.5">${prob.toFixed(1)}%</div>
-              <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden mt-1.5">
-                <div class="bg-gradient-to-r from-ls-red to-ls-mint h-full rounded-full" style="width: ${Math.min(100, Math.max(0, prob))}%"></div>
+              <div class="text-[11px] font-semibold text-slate-600 dark:text-slate-400 font-sans">Alcanzar ${targetAge} años</div>
+              <div class="text-base font-bold num-main font-mono mt-0.5">${prob.toFixed(1)}%</div>
+              <div class="w-full bg-slate-200 dark:bg-white/10 h-1.5 rounded-full overflow-hidden mt-2">
+                <div class="bg-gradient-to-r from-brand-500 to-mint h-full rounded-full" style="width: ${Math.min(100, Math.max(0, prob))}%"></div>
               </div>
             `;
             container.appendChild(card);
@@ -2291,7 +2291,7 @@
         const list = DATA.mortalidad.provincias_ex.filter(p => p.provincia.toLowerCase().includes(filtro));
         list.forEach(p => {
           const tr = document.createElement('tr');
-          tr.className = 'hover:bg-slate-800/40 transition';
+          tr.className = 'hover:bg-slate-100/80 dark:hover:bg-white/5 transition';
           tr.innerHTML = `
             <td class="py-2 px-3 font-medium text-slate-200 font-sans">${p.provincia}</td>
             <td class="py-2 px-3 text-right font-semibold text-ls-red dark:text-ls-redCoral">${p.e0_total}</td>
@@ -2599,7 +2599,7 @@
         const list = DATA.demografia.poblacion_provincias.filter(p => p.jurisdiccion.toLowerCase().includes(filtro));
         list.forEach(p => {
           const tr = document.createElement('tr');
-          tr.className = 'hover:bg-slate-800/40 transition';
+          tr.className = 'hover:bg-slate-100/80 dark:hover:bg-white/5 transition';
           tr.innerHTML = `
             <td class="py-2 px-3 font-medium text-slate-200 font-sans">${p.jurisdiccion}</td>
             <td class="py-2 px-3 text-right font-bold text-main-heading">${p.poblacion_2022.toLocaleString('es-AR')}</td>
