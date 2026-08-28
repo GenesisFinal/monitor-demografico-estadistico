@@ -450,6 +450,109 @@
       box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
     }
 
+  
+    /* Botón de Expansión / Pantalla Completa */
+    .btn-chart-expand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: 0.5rem;
+      font-size: 0.725rem;
+      font-weight: 600;
+      color: #334155;
+      background-color: rgba(100, 116, 139, 0.1);
+      border: 1px solid rgba(100, 116, 139, 0.25);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    .dark .btn-chart-expand {
+      color: #94a3b8;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    .btn-chart-expand:hover {
+      color: #ffffff;
+      background-color: #4183ca;
+      border-color: #4183ca;
+      box-shadow: 0 4px 12px rgba(65, 131, 202, 0.3);
+      transform: translateY(-1px);
+    }
+    .btn-chart-expand:active {
+      transform: translateY(0);
+    }
+    .btn-chart-expand svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Backdrop de Pantalla Completa */
+    #card-fullscreen-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 9990;
+      background: rgba(10, 11, 15, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    #card-fullscreen-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Tarjeta en Pantalla Completa */
+    .card-fullscreen-active {
+      position: fixed !important;
+      top: 1.5rem !important;
+      left: 1.5rem !important;
+      right: 1.5rem !important;
+      bottom: 1.5rem !important;
+      width: calc(100vw - 3rem) !important;
+      height: calc(100vh - 3rem) !important;
+      max-width: none !important;
+      max-height: none !important;
+      z-index: 10000 !important;
+      margin: 0 !important;
+      overflow-y: auto !important;
+      background: var(--bg-card) !important;
+      border: 2px solid var(--border-brand) !important;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75) !important;
+      border-radius: 1.25rem !important;
+      display: flex !important;
+      flex-direction: column !important;
+      animation: zoomCardIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .card-fullscreen-active .h-56,
+    .card-fullscreen-active .h-60,
+    .card-fullscreen-active .h-64,
+    .card-fullscreen-active .h-72,
+    .card-fullscreen-active .h-80 {
+      height: auto !important;
+      min-height: 480px !important;
+      flex: 1 1 auto !important;
+    }
+
+    .card-fullscreen-active .max-h-60,
+    .card-fullscreen-active .max-h-72,
+    .card-fullscreen-active .max-h-80 {
+      max-height: calc(100vh - 14rem) !important;
+    }
+
+    @keyframes zoomCardIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.96);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
   </style>
 
   <script>
@@ -464,8 +567,8 @@
       
       <!-- Brand Logo / Title with La Segunda Mosaic Motif -->
       <div class="flex items-center gap-3">
-        <div class="p-2.5 rounded-xl bg-gradient-to-br from-brand-500 via-brand-vibrant to-brand-600 shadow-md shadow-brand-500/20 border border-brand-coral/40 text-main-heading flex items-center justify-center">
-          <i data-lucide="shield" class="w-6 h-6"></i>
+        <div class="p-2.5 rounded-xl bg-gradient-to-br from-brand-500 via-brand-vibrant to-brand-600 shadow-md shadow-brand-500/20 border border-brand-coral/40 text-white flex items-center justify-center">
+          <i data-lucide="shield" class="w-6 h-6 text-white stroke-[2.2]"></i>
         </div>
         <div>
           <div class="flex items-center gap-2">
@@ -676,10 +779,16 @@
               <div>
                 <div class="flex items-center justify-between gap-2 mb-2">
             <h4 class="text-xs font-bold text-main-heading">Curva de Sobrevivientes Condicional (l(x | x₀))</h4>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-multi-lx', 'Curvas de Supervivencia l(x)')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
                 <p class="text-xs text-card-desc font-medium" id="label-radix-lx">Supervivencia sobre 100.000 personas vivas a edad seleccionada</p>
               </div>
@@ -695,10 +804,16 @@
               <div>
                 <div class="flex items-center justify-between gap-2 mb-2">
             <h4 class="text-xs font-bold text-main-heading">Curva de Esperanza de Vida Remanente (e(x))</h4>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-multi-ex', 'Esperanza de Vida Remanente e(x)')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
                 <p class="text-xs text-card-desc font-medium" id="label-radix-ex">Años esperados de vida a cada edad alcanzada</p>
               </div>
@@ -731,10 +846,16 @@
           <div class="ls-subcard/80 border border-slate-200 dark:border-white/10/80 rounded-xl p-4">
             <div class="flex items-center justify-between gap-2 mb-2">
             <h4 class="text-xs font-bold text-main-heading mb-1">Ratio de Sobremortalidad Masculina (\(q_x^{\text{Varones}} / q_x^{\text{Mujeres}}\))</h4>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-brecha-ratio', 'Ratio de Sobremortalidad Masculina q(x)')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
             <p class="text-xs text-card-desc font-medium mb-3">Valor &gt; 1 indica mayor riesgo de muerte en varones (pico en jóvenes por causas externas)</p>
             <div class="h-60">
@@ -746,10 +867,16 @@
           <div class="ls-subcard/80 border border-slate-200 dark:border-white/10/80 rounded-xl p-4">
             <div class="flex items-center justify-between gap-2 mb-2">
             <h4 class="text-xs font-bold text-main-heading mb-1">Ventaja Femenina en Esperanza de Vida (\(e_x^{\text{Mujer}} - e_x^{\text{Varón}}\))</h4>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-brecha-anios', 'Brecha de Esperanza de Vida e(x)')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
             <p class="text-xs text-card-desc font-medium mb-3">Años adicionales promedio que vive una mujer argentina respecto a un varón</p>
             <div class="h-60">
@@ -767,10 +894,16 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Evolución de la Esperanza de Vida (1970 - 2022)</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-historico-ex', 'Evolución Histórica de la Esperanza de Vida')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc">Ganancia de longevidad en 52 años de censos nacionales</p>
             </div>
@@ -911,10 +1044,16 @@
             <div class="flex items-center justify-between mb-2">
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-xs font-bold text-main-heading" id="title-piramide-chart">Pirámide de Población (Censo 2022)</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-piramide-poblacion', 'Pirámide Poblacional Argentina')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <span class="text-xs text-card-desc font-medium">Varones (Izquierda) • Mujeres (Derecha)</span>
             </div>
@@ -961,10 +1100,16 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-xs font-bold text-main-heading">Tipología de Hogares</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-censo-hogares', 'Evolución y Tamaño de Hogares')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc font-medium">Censo 2022 Definitivo (INDEC)</p>
             </div>
@@ -984,10 +1129,16 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-xs font-bold text-main-heading">Régimen de Tenencia de Vivienda</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-censo-tenencia', 'Régimen de Tenencia de la Vivienda')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc font-medium">Censo 2022 Definitivo (INDEC)</p>
             </div>
@@ -1007,16 +1158,20 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-xs font-bold text-main-heading">Índice de Envejecimiento Provincial</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-envejecimiento-prov', 'Índice de Envejecimiento por Jurisdicción')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc font-medium">Población 65+ por 100 menores de 15</p>
             </div>
-            <a href="https://www.indec.gob.ar" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
-              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-            </a>
+            
           </div>
           <div class="h-56">
             <canvas id="chart-envejecimiento-prov"></canvas>
@@ -1129,10 +1284,16 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Nacimientos vs Defunciones (1980 - 2023)</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-salud-saldo-vegetativo', 'Dinámica Vital Nacimientos vs Defunciones')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc">Desplome de nacimientos anuales (de ~777k en 2014 a ~485k en 2023)</p>
             </div>
@@ -1152,10 +1313,16 @@
               <div>
                 <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Tasa de Mortalidad Infantil por Provincia (2023)</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-salud-tmi-ranking', 'Tasa de Mortalidad Infantil por Jurisdicción')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
                 <p class="text-xs text-card-desc">Brecha provincial de TMI según Anuario DEIS 2023</p>
               </div>
@@ -1176,10 +1343,16 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Evolución de la Mortalidad Infantil (1990 - 2023)</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-salud-tmi', 'Evolución Histórica de la Mortalidad Infantil')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc">Tasa Total, Neonatal (&lt;28 días) y Posneonatal (DEIS)</p>
             </div>
@@ -1196,10 +1369,16 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Principales Causas de Defunción (CIE-10 DEIS 2023)</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-salud-causas', 'Distribución de Causas de Muerte (CIE-10)')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc">Distribución porcentual sobre el total de defunciones registradas</p>
             </div>
@@ -1281,10 +1460,16 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Logros de Aprendizaje al Finalizar Secundaria (Pruebas Aprender)</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-educacion-aprender', 'Resultados Evaluaciones Aprender')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc">Distribución de estudiantes según nivel de desempeño en Lengua vs Matemática</p>
             </div>
@@ -1303,10 +1488,16 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Distribución de Estudiantes Universitarios por Área (SPU)</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-educacion-universidad-areas', 'Distribución de Graduados Universitarios')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc">2.54 millones de alumnos de grado y pregrado en universidades nacionales</p>
             </div>
@@ -1328,10 +1519,16 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Tasa de Escolarización por Nivel de Enseñanza</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-educacion-cobertura', 'Cobertura y Escolarización por Nivel')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc">Porcentaje de asistencia escolar de la cohorte teórica de edad</p>
             </div>
@@ -1347,10 +1544,16 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Trayectoria en el Nivel Secundario: Repitencia y Abandono</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-educacion-trayectoria', 'Trayectoria y Eficiencia Educativa')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc">Indicadores de eficiencia interna por año de estudio</p>
             </div>
@@ -1431,16 +1634,20 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Composición de la Población Ocupada (Categoría Ocupacional)</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-eph-composicion-ocupados', 'Estructura del Mercado de Trabajo EPH')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc">Asalariados registrados vs informales vs cuentapropistas</p>
             </div>
-            <a href="https://www.indec.gob.ar" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
-              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-            </a>
+            
           </div>
           <div class="h-64">
             <canvas id="chart-eph-composicion-ocupados"></canvas>
@@ -1453,16 +1660,20 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Tasa de Desocupación por Rango de Edad y Género</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-eph-desempleo-edad', 'Desempleo por Tramo de Edad y Género')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc">Impacto del desempleo juvenil (14 a 29 años) vs adultos</p>
             </div>
-            <a href="https://www.indec.gob.ar" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
-              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-            </a>
+            
           </div>
           <div class="h-64">
             <canvas id="chart-eph-desempleo-edad"></canvas>
@@ -1478,10 +1689,16 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Evolución Trimestral de Tasas del Mercado Laboral (EPH)</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-eph-serie', 'Evolución Histórica Empleo y Desempleo')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc">Actividad, Empleo, Informalidad y Desocupación</p>
             </div>
@@ -1497,10 +1714,16 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Distribución de los Ocupados por Rama de Actividad</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-eph-ramas', 'Distribución de la Ocupación por Rama de Actividad')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc">Sectores económicos generadores de empleo en Argentina</p>
             </div>
@@ -1587,10 +1810,16 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Evolución de la Relación Activo / Pasivo (1990 - 2024)</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-prevision-relacion-historica', 'Evolución Relación Activo / Pasivo SIPA')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc">Presión demográfica sobre el sistema de reparto (de 2.45 a 1.52 activos por pasivo)</p>
             </div>
@@ -1606,10 +1835,16 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Composición de Beneficios Jubilatorios y Moratorias</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-prevision-composicion', 'Composición de Beneficios del Sistema Previsional')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc">Jubilaciones con moratoria vs aportes puros vs PUAM vs pensiones</p>
             </div>
@@ -1628,10 +1863,16 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Evolución del Trabajo en Adultos Mayores de 65 Años (2016 - 2025)</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-prevision-adultos-mayores-serie', 'Evolución del Trabajo en Adultos Mayores (65+)')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc">Crecimiento de ocupados (+32.6%) y tasa de actividad récord (18.9% en EPH)</p>
             </div>
@@ -1647,10 +1888,16 @@
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
             <h3 class="text-sm font-bold text-main-heading">Modalidad de Inserción Laboral en Mayores de 65 Años</h3>
+            <div class="flex items-center gap-1.5 shrink-0">
             <button onclick="exportChartAsPNG('chart-prevision-modalidad-65', 'Modalidad de Inserción Laboral Senior (65+)')" title="Capturar y guardar gráfico en imagen PNG" class="btn-chart-export" aria-label="Capturar gráfico en PNG">
             <i data-lucide="camera" class="w-3.5 h-3.5"></i>
             <span>PNG</span>
           </button>
+            <button onclick="toggleCardFullscreen(this)" title="Ampliar a pantalla completa" class="btn-chart-expand" aria-label="Ampliar a pantalla completa">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+            <span>Ampliar</span>
+          </button>
+          </div>
           </div>
               <p class="text-xs text-card-desc">Cuentapropismo, informalidad y trabajo registrado (EPH INDEC / ODSA-UCA)</p>
             </div>
@@ -1709,9 +1956,7 @@
           <div class="p-4 ls-subcard/80 rounded-xl border border-slate-200 dark:border-white/10 space-y-2">
             <div class="flex items-center justify-between">
               <h3 class="font-bold text-ls-red dark:text-ls-redCoral text-sm">INDEC (Instituto Nacional de Estadística y Censos)</h3>
-              <a href="https://www.indec.gob.ar" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
-                <i data-lucide="external-link" class="w-4 h-4"></i>
-              </a>
+              
             </div>
             <p class="text-card-desc">Responsable del Censo Nacional de Población, Hogares y Viviendas 2022, Encuesta Permanente de Hogares (EPH) y Tablas Oficiales de Mortalidad (Serie Análisis Demográfico N° 40).</p>
           </div>
@@ -3169,6 +3414,89 @@
       }, 3200);
     };
 
+    
+    // ==========================================
+    // SISTEMA UNIVERSAL DE PANTALLA COMPLETA
+    // ==========================================
+    window.toggleCardFullscreen = function(btn) {
+      const card = btn.closest('.ls-card, .ls-card-brand');
+      if (!card) return;
+
+      const isFullscreen = card.classList.contains('card-fullscreen-active');
+      const backdrop = document.getElementById('card-fullscreen-backdrop');
+
+      if (!isFullscreen) {
+        // Cerrar cualquier otra tarjeta que esté activa
+        closeActiveFullscreenCard();
+
+        card.classList.add('card-fullscreen-active');
+        if (backdrop) backdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        btn.innerHTML = `<i data-lucide="minimize-2" class="w-3.5 h-3.5"></i><span class="hidden sm:inline">Restaurar</span>`;
+        btn.setAttribute('title', 'Restaurar vista normal (Esc)');
+        btn.classList.add('bg-brand-500', 'text-white', 'border-brand-500');
+
+        // Redimensionar gráficos dentro de la tarjeta
+        setTimeout(() => {
+          const canvases = card.querySelectorAll('canvas');
+          canvases.forEach(c => {
+            const chart = Chart.getChart(c);
+            if (chart) chart.resize();
+          });
+        }, 60);
+      } else {
+        card.classList.remove('card-fullscreen-active');
+        if (backdrop) backdrop.classList.remove('active');
+        document.body.style.overflow = '';
+
+        btn.innerHTML = `<i data-lucide="maximize-2" class="w-3.5 h-3.5"></i><span class="hidden sm:inline">Ampliar</span>`;
+        btn.setAttribute('title', 'Ampliar a pantalla completa');
+        btn.classList.remove('bg-brand-500', 'text-white', 'border-brand-500');
+
+        setTimeout(() => {
+          const canvases = card.querySelectorAll('canvas');
+          canvases.forEach(c => {
+            const chart = Chart.getChart(c);
+            if (chart) chart.resize();
+          });
+        }, 60);
+      }
+
+      if (window.lucide) lucide.createIcons();
+    };
+
+    window.closeActiveFullscreenCard = function() {
+      const activeCard = document.querySelector('.card-fullscreen-active');
+      const backdrop = document.getElementById('card-fullscreen-backdrop');
+      if (activeCard) {
+        activeCard.classList.remove('card-fullscreen-active');
+        const btn = activeCard.querySelector('.btn-chart-expand');
+        if (btn) {
+          btn.innerHTML = `<i data-lucide="maximize-2" class="w-3.5 h-3.5"></i><span class="hidden sm:inline">Ampliar</span>`;
+          btn.setAttribute('title', 'Ampliar a pantalla completa');
+          btn.classList.remove('bg-brand-500', 'text-white', 'border-brand-500');
+        }
+        setTimeout(() => {
+          const canvases = activeCard.querySelectorAll('canvas');
+          canvases.forEach(c => {
+            const chart = Chart.getChart(c);
+            if (chart) chart.resize();
+          });
+        }, 60);
+      }
+      if (backdrop) backdrop.classList.remove('active');
+      document.body.style.overflow = '';
+      if (window.lucide) lucide.createIcons();
+    };
+
+    // Cerrar pantalla completa con tecla Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeActiveFullscreenCard();
+      }
+    });
+
     window.exportChartAsPNG = function(canvasId, customTitle) {
       const canvas = document.getElementById(canvasId);
       if (!canvas) {
@@ -3276,5 +3604,6 @@
     </div>
   </div>
 
+<div id="card-fullscreen-backdrop" onclick="closeActiveFullscreenCard()"></div>
 </body>
 </html>
