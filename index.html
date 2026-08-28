@@ -85,8 +85,8 @@
       
       /* Tipografía de Alto Contraste en Claro */
       --text-main: #0f172a;       /* Titulares y cifras principales (Negro/Azul grafito profundo) */
-      --text-sub: #334155;        /* Subtítulos y descripciones (Slate 700) */
-      --text-muted: #475569;      /* Metadatos y fuentes (Slate 600, perfectamente legible) */
+      --text-sub: #1e293b;        /* Subtítulos y descripciones (Slate 800 - Alto Contraste) */
+      --text-muted: #334155;      /* Metadatos y fuentes (Slate 700 - Alto Contraste) */
       
       /* Métricas y Cifras Temáticas en Claro */
       --num-red: #b91f38;         /* Rojo Seguro Profundo (Contraste 5.8:1) */
@@ -681,7 +681,7 @@
             <span>PNG</span>
           </button>
           </div>
-                <p class="text-[11px] text-card-desc" id="label-radix-lx">Supervivencia sobre 100.000 personas vivas a edad seleccionada</p>
+                <p class="text-xs text-card-desc font-medium" id="label-radix-lx">Supervivencia sobre 100.000 personas vivas a edad seleccionada</p>
               </div>
             </div>
             <div class="h-64">
@@ -700,7 +700,7 @@
             <span>PNG</span>
           </button>
           </div>
-                <p class="text-[11px] text-card-desc" id="label-radix-ex">Años esperados de vida a cada edad alcanzada</p>
+                <p class="text-xs text-card-desc font-medium" id="label-radix-ex">Años esperados de vida a cada edad alcanzada</p>
               </div>
             </div>
             <div class="h-64">
@@ -736,7 +736,7 @@
             <span>PNG</span>
           </button>
           </div>
-            <p class="text-[11px] text-card-desc mb-3">Valor &gt; 1 indica mayor riesgo de muerte en varones (pico en jóvenes por causas externas)</p>
+            <p class="text-xs text-card-desc font-medium mb-3">Valor &gt; 1 indica mayor riesgo de muerte en varones (pico en jóvenes por causas externas)</p>
             <div class="h-60">
               <canvas id="chart-brecha-ratio"></canvas>
             </div>
@@ -751,7 +751,7 @@
             <span>PNG</span>
           </button>
           </div>
-            <p class="text-[11px] text-card-desc mb-3">Años adicionales promedio que vive una mujer argentina respecto a un varón</p>
+            <p class="text-xs text-card-desc font-medium mb-3">Años adicionales promedio que vive una mujer argentina respecto a un varón</p>
             <div class="h-60">
               <canvas id="chart-brecha-anios"></canvas>
             </div>
@@ -889,7 +889,7 @@
             <span class="text-ls-red dark:text-ls-redCoral font-bold text-sm bg-ls-redDark px-3 py-0.5 rounded-full border border-ls-redDark" id="badge-piramide-anio">Año: 2022</span>
           </div>
           <input type="range" id="slider-piramide-anio" min="0" max="11" step="1" value="7" oninput="onPyramidSliderChange(this.value)" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-ls-red">
-          <div class="flex justify-between text-[10px] text-card-desc font-mono pt-1" id="ticks-piramide-anios">
+          <div class="flex justify-between text-xs text-card-desc font-medium font-mono pt-1" id="ticks-piramide-anios">
             <button onclick="setPyramidYear(1970)" class="hover:text-ls-red dark:text-ls-redCoral">1970</button>
             <button onclick="setPyramidYear(1980)" class="hover:text-ls-red dark:text-ls-redCoral">1980</button>
             <button onclick="setPyramidYear(1991)" class="hover:text-ls-red dark:text-ls-redCoral">1991</button>
@@ -916,7 +916,7 @@
             <span>PNG</span>
           </button>
           </div>
-              <span class="text-[10px] text-card-desc">Varones (Izquierda) • Mujeres (Derecha)</span>
+              <span class="text-xs text-card-desc font-medium">Varones (Izquierda) • Mujeres (Derecha)</span>
             </div>
             <div class="h-96">
               <canvas id="chart-piramide-poblacion"></canvas>
@@ -935,19 +935,19 @@
             <div class="p-3 ls-subcard/80 rounded-xl border border-slate-200 dark:border-white/10">
               <span class="text-card-desc">Edad Mediana</span>
               <div class="text-lg font-bold text-ls-red dark:text-ls-redCoral num mt-0.5" id="kpi-edad-mediana-val">32.0 años</div>
-              <p class="text-[10px] text-slate-500 mt-0.5">50% de la población tiene menos de esta edad.</p>
+              <p class="text-xs text-slate-700 dark:text-slate-300 font-medium mt-0.5">50% de la población tiene menos de esta edad.</p>
             </div>
 
             <div class="p-3 ls-subcard/80 rounded-xl border border-slate-200 dark:border-white/10">
               <span class="text-card-desc">Índice de Envejecimiento</span>
               <div class="text-lg font-bold text-amber-400 num mt-0.5" id="kpi-envejecimiento-val">53.3%</div>
-              <p class="text-[10px] text-slate-500 mt-0.5">Personas de 65+ por cada 100 niños de 0 a 14 años.</p>
+              <p class="text-xs text-slate-700 dark:text-slate-300 font-medium mt-0.5">Personas de 65+ por cada 100 niños de 0 a 14 años.</p>
             </div>
 
             <div class="p-3 ls-subcard/80 rounded-xl border border-slate-200 dark:border-white/10">
               <span class="text-card-desc">Relación de Dependencia</span>
               <div class="text-lg font-bold text-ls-mint num mt-0.5" id="kpi-dependencia-val">51.8 dependientes / 100 activos</div>
-              <p class="text-[10px] text-slate-500 mt-0.5">Población &lt;15 y 65+ sobre población de 15 a 64 años.</p>
+              <p class="text-xs text-slate-700 dark:text-slate-300 font-medium mt-0.5">Población &lt;15 y 65+ sobre población de 15 a 64 años.</p>
             </div>
           </div>
         </div>
@@ -966,7 +966,7 @@
             <span>PNG</span>
           </button>
           </div>
-              <p class="text-[11px] text-card-desc">Censo 2022 Definitivo (INDEC)</p>
+              <p class="text-xs text-card-desc font-medium">Censo 2022 Definitivo (INDEC)</p>
             </div>
             <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-2-41-165" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
               <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
@@ -975,7 +975,7 @@
           <div class="h-56">
             <canvas id="chart-censo-hogares"></canvas>
           </div>
-          <p class="text-[10px] text-slate-500 text-center mt-2">Crecimiento de hogares unipersonales: 25.3% nacional (38.2% en CABA).</p>
+          <p class="text-xs text-slate-700 dark:text-slate-300 font-medium text-center mt-2">Crecimiento de hogares unipersonales: 25.3% nacional (38.2% en CABA).</p>
         </div>
 
         <!-- Régimen de Tenencia de la Vivienda -->
@@ -989,7 +989,7 @@
             <span>PNG</span>
           </button>
           </div>
-              <p class="text-[11px] text-card-desc">Censo 2022 Definitivo (INDEC)</p>
+              <p class="text-xs text-card-desc font-medium">Censo 2022 Definitivo (INDEC)</p>
             </div>
             <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-2-41-165" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
               <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
@@ -998,7 +998,7 @@
           <div class="h-56">
             <canvas id="chart-censo-tenencia"></canvas>
           </div>
-          <p class="text-[10px] text-slate-500 text-center mt-2">65.5% Propietarios de vivienda y terreno • 20.7% Inquilinos/Alquiler.</p>
+          <p class="text-xs text-slate-700 dark:text-slate-300 font-medium text-center mt-2">65.5% Propietarios de vivienda y terreno • 20.7% Inquilinos/Alquiler.</p>
         </div>
 
         <!-- Brechas de Envejecimiento por Provincias -->
@@ -1012,7 +1012,7 @@
             <span>PNG</span>
           </button>
           </div>
-              <p class="text-[11px] text-card-desc">Población 65+ por 100 menores de 15</p>
+              <p class="text-xs text-card-desc font-medium">Población 65+ por 100 menores de 15</p>
             </div>
             <a href="https://www.indec.gob.ar" target="_blank" class="text-ls-red dark:text-ls-redCoral hover:text-ls-red dark:text-ls-redCoral">
               <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
@@ -1021,7 +1021,7 @@
           <div class="h-56">
             <canvas id="chart-envejecimiento-prov"></canvas>
           </div>
-          <p class="text-[10px] text-slate-500 text-center mt-2">CABA (110.2%) duplica a Misiones (35.8%) y Chaco (38.1%).</p>
+          <p class="text-xs text-slate-700 dark:text-slate-300 font-medium text-center mt-2">CABA (110.2%) duplica a Misiones (35.8%) y Chaco (38.1%).</p>
         </div>
       </div>
 
@@ -1086,8 +1086,8 @@
             <span class="text-[10px] font-mono font-bold text-ls-red dark:text-ls-redCoral bg-ls-red/10 px-2 py-0.5 rounded border border-ls-red/20">Año 2023 (Último)</span>
           </div>
           <div class="text-2xl font-bold text-ls-red dark:text-ls-redCoral num">7.8 ‰</div>
-          <div class="text-[11px] text-card-desc mt-1">por mil nacidos vivos (Mínimo histórico)</div>
-          <div class="text-[10px] text-slate-500 mt-0.5">Fuente: Anuario Vitales DEIS 2023</div>
+          <div class="text-xs text-card-desc font-medium mt-1">por mil nacidos vivos (Mínimo histórico)</div>
+          <div class="text-xs text-slate-700 dark:text-slate-300 font-medium mt-0.5">Fuente: Anuario Vitales DEIS 2023</div>
         </div>
 
         <div class="ls-card rounded-xl p-4">
@@ -1097,7 +1097,7 @@
           </div>
           <div class="text-2xl font-bold text-ls-mint num">1.39</div>
           <div class="text-[11px] text-rose-300 mt-1">hijos/mujer (Bajo reemplazo 2.1)</div>
-          <div class="text-[10px] text-slate-500 mt-0.5">Fuente: Serie de Natalidad DEIS 2023</div>
+          <div class="text-xs text-slate-700 dark:text-slate-300 font-medium mt-0.5">Fuente: Serie de Natalidad DEIS 2023</div>
         </div>
 
         <div class="ls-card rounded-xl p-4">
@@ -1106,8 +1106,8 @@
             <span class="text-[10px] font-mono font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">Año 2023 (Último)</span>
           </div>
           <div class="text-2xl font-bold text-amber-400 num">3.0</div>
-          <div class="text-[11px] text-card-desc mt-1">por 10.000 nacidos vivos (191 casos)</div>
-          <div class="text-[10px] text-slate-500 mt-0.5">Fuente: Defunciones Maternas DEIS 2023</div>
+          <div class="text-xs text-card-desc font-medium mt-1">por 10.000 nacidos vivos (191 casos)</div>
+          <div class="text-xs text-slate-700 dark:text-slate-300 font-medium mt-0.5">Fuente: Defunciones Maternas DEIS 2023</div>
         </div>
 
         <div class="ls-card rounded-xl p-4">
@@ -1116,8 +1116,8 @@
             <span class="text-[10px] font-mono font-bold text-ls-red dark:text-ls-redCoral bg-ls-red/10 px-2 py-0.5 rounded border border-ls-red/20">OMS / DEIS</span>
           </div>
           <div class="text-2xl font-bold text-main-heading num">67.2 años</div>
-          <div class="text-[11px] text-card-desc mt-1">Esperanza de vida libre de discapacidad</div>
-          <div class="text-[10px] text-slate-500 mt-0.5">Total e₀: 76.5 vs HALE: 67.2 años</div>
+          <div class="text-xs text-card-desc font-medium mt-1">Esperanza de vida libre de discapacidad</div>
+          <div class="text-xs text-slate-700 dark:text-slate-300 font-medium mt-0.5">Total e₀: 76.5 vs HALE: 67.2 años</div>
         </div>
       </div>
 
@@ -1242,7 +1242,7 @@
             <span class="text-[10px] font-mono text-ls-red dark:text-ls-redCoral bg-ls-red/10 px-2 py-0.5 rounded">Censo 2022</span>
           </div>
           <div class="text-2xl font-bold text-ls-red dark:text-ls-redCoral num">1.4%</div>
-          <div class="text-[11px] text-card-desc mt-1">Mínimo censal histórico</div>
+          <div class="text-xs text-card-desc font-medium mt-1">Mínimo censal histórico</div>
         </div>
 
         <div class="ls-card rounded-xl p-4">
@@ -1251,7 +1251,7 @@
             <span class="text-[10px] font-mono text-ls-mint bg-ls-mint/10 px-2 py-0.5 rounded">Pob 25+</span>
           </div>
           <div class="text-2xl font-bold text-ls-mint num">11.2 años</div>
-          <div class="text-[11px] text-card-desc mt-1">Equivalente a secundario casi completo</div>
+          <div class="text-xs text-card-desc font-medium mt-1">Equivalente a secundario casi completo</div>
         </div>
 
         <div class="ls-card rounded-xl p-4">
@@ -1260,7 +1260,7 @@
             <span class="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">DINIECE</span>
           </div>
           <div class="text-2xl font-bold text-amber-400 num">53.8%</div>
-          <div class="text-[11px] text-card-desc mt-1">68.4% con egreso acumulado/tardío</div>
+          <div class="text-xs text-card-desc font-medium mt-1">68.4% con egreso acumulado/tardío</div>
         </div>
 
         <div class="ls-card rounded-xl p-4">
@@ -1269,7 +1269,7 @@
             <span class="text-[10px] font-mono text-ls-red dark:text-ls-redCoral bg-ls-red/10 px-2 py-0.5 rounded">RA 2023</span>
           </div>
           <div class="text-2xl font-bold text-main-heading num">12.8M</div>
-          <div class="text-[11px] text-card-desc mt-1">72.8% Gestión Estatal • 27.2% Privada</div>
+          <div class="text-xs text-card-desc font-medium mt-1">72.8% Gestión Estatal • 27.2% Privada</div>
         </div>
       </div>
 
@@ -1392,7 +1392,7 @@
             <span class="text-[10px] font-mono text-ls-red dark:text-ls-redCoral bg-ls-red/10 px-2 py-0.5 rounded">EPH 2024</span>
           </div>
           <div class="text-2xl font-bold text-ls-red dark:text-ls-redCoral num">48.2%</div>
-          <div class="text-[11px] text-card-desc mt-1">Población económicamente activa (PEA)</div>
+          <div class="text-xs text-card-desc font-medium mt-1">Población económicamente activa (PEA)</div>
         </div>
 
         <div class="ls-card rounded-xl p-4">
@@ -1401,7 +1401,7 @@
             <span class="text-[10px] font-mono text-ls-mint bg-ls-mint/10 px-2 py-0.5 rounded">EPH 2024</span>
           </div>
           <div class="text-2xl font-bold text-ls-mint num">44.9%</div>
-          <div class="text-[11px] text-card-desc mt-1">Porcentaje de la población ocupada</div>
+          <div class="text-xs text-card-desc font-medium mt-1">Porcentaje de la población ocupada</div>
         </div>
 
         <div class="ls-card rounded-xl p-4">
@@ -1410,7 +1410,7 @@
             <span class="text-[10px] font-mono text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded">EPH 2024</span>
           </div>
           <div class="text-2xl font-bold text-rose-400 num">6.9%</div>
-          <div class="text-[11px] text-card-desc mt-1">Buscadores activos sin ocupación</div>
+          <div class="text-xs text-card-desc font-medium mt-1">Buscadores activos sin ocupación</div>
         </div>
 
         <div class="ls-card rounded-xl p-4">
@@ -1419,7 +1419,7 @@
             <span class="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">EPH 2024</span>
           </div>
           <div class="text-2xl font-bold text-amber-400 num">36.1%</div>
-          <div class="text-[11px] text-card-desc mt-1">Asalariados sin descuento jubilatorio</div>
+          <div class="text-xs text-card-desc font-medium mt-1">Asalariados sin descuento jubilatorio</div>
         </div>
       </div>
 
@@ -1548,7 +1548,7 @@
             <span class="ls-badge-yellow">SIPA</span>
           </div>
           <div class="text-2xl font-extrabold num-orange num mt-0.5">1.52</div>
-          <div class="text-[11px] text-card-desc mt-1">Aportantes registrados por cada pasivo</div>
+          <div class="text-xs text-card-desc font-medium mt-1">Aportantes registrados por cada pasivo</div>
         </div>
 
         <div class="ls-card rounded-xl p-4">
@@ -1557,7 +1557,7 @@
             <span class="ls-badge-mint">ANSES / Censo</span>
           </div>
           <div class="text-2xl font-extrabold num-mint num mt-0.5">94.5%</div>
-          <div class="text-[11px] text-card-desc mt-1">Percibe jubilación, pensión o PUAM</div>
+          <div class="text-xs text-card-desc font-medium mt-1">Percibe jubilación, pensión o PUAM</div>
         </div>
 
         <div class="ls-card rounded-xl p-4">
@@ -1566,7 +1566,7 @@
             <span class="ls-badge-red">+32.6% vs 2016</span>
           </div>
           <div class="text-2xl font-extrabold num-red num mt-0.5">686.160</div>
-          <div class="text-[11px] text-card-desc mt-1">En aglomerados urbanos (~1.05M total país)</div>
+          <div class="text-xs text-card-desc font-medium mt-1">En aglomerados urbanos (~1.05M total país)</div>
         </div>
 
         <div class="ls-card rounded-xl p-4">
@@ -1575,7 +1575,7 @@
             <span class="ls-badge-blue">EPH INDEC</span>
           </div>
           <div class="text-2xl font-extrabold num-blue num mt-0.5">76.4%</div>
-          <div class="text-[11px] text-card-desc mt-1">De los mayores ocupados cobran jubilación</div>
+          <div class="text-xs text-card-desc font-medium mt-1">De los mayores ocupados cobran jubilación</div>
         </div>
       </div>
 
@@ -3109,9 +3109,8 @@
     async function initApp() {
       initTheme();
       if (window.Chart) {
-        Chart.defaults.color = '#94a3b8';
-        Chart.defaults.borderColor = '#1e293b';
-        Chart.defaults.font.family = 'JetBrains Mono, Inter, ui-sans-serif, system-ui, sans-serif';
+        const isDark = document.documentElement.classList.contains('dark');
+        updateChartsTheme(isDark);
       }
 
       try {
