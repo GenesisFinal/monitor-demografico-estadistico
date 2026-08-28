@@ -1934,7 +1934,7 @@
           const item = catalogo[key];
           const isChecked = this.activeCompareTables.includes(key);
           const label = document.createElement('label');
-          label.className = `inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border transition cursor-pointer font-mono text-xs ${isChecked ? 'bg-ls-redDark/80 border-ls-red/60 text-ls-red dark:text-ls-redCoral' : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-slate-200'}`;
+          label.className = `inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border transition cursor-pointer font-mono text-xs ${isChecked ? 'bg-brand-500/15 dark:bg-brand-500/25 border-brand-500 text-brand-500 dark:text-brand-coral font-bold' : 'bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/70 dark:hover:bg-white/10'}`;
           label.innerHTML = `
             <input type="checkbox" value="${key}" ${isChecked ? 'checked' : ''} onchange="SectionMortalidad.toggleTable('${key}', this.checked)" class="rounded ls-subcard border-slate-700 text-ls-red focus:ring-0">
             <span>${item.metadata.nombre}</span>
