@@ -1,5 +1,5 @@
 {
-  "fecha_chequeo": "2026-08-29T17:37:40.692542",
+  "fecha_chequeo": "2026-09-05T16:42:37.645170",
   "fuentes": {
     "INDEC_CALENDARIO": {
       "status_code": 200,
@@ -14,7 +14,7 @@
       "ok": true
     },
     "DEIS_ESTADISTICAS": {
-      "error": "HTTPSConnectionPool(host='www.deis.msal.gov.ar', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.deis.msal.gov.ar', port=443) at 0x7fe74bdfe090>, 'Connection to www.deis.msal.gov.ar timed out. (connect timeout=10)'))",
+      "error": "HTTPSConnectionPool(host='www.deis.msal.gov.ar', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.deis.msal.gov.ar', port=443) at 0x7f364d3259d0>, 'Connection to www.deis.msal.gov.ar timed out. (connect timeout=10)'))",
       "ok": false
     },
     "ANSES_BESS": {
@@ -25,7 +25,7 @@
     },
     "SSN_CIRCULARES": {
       "status_code": 200,
-      "last_modified": "Sat, 29 Aug 2026 17:22:49 GMT",
+      "last_modified": "Sat, 05 Sep 2026 09:51:38 GMT",
       "etag": "N/A",
       "ok": true
     }
