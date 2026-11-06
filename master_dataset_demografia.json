@@ -10,7 +10,7 @@
       {
         "institucion": "DEIS",
         "descripcion": "Dirección de Estadísticas e Información de Salud - Ministerio de Salud de la Nación (Series de Natalidad, Mortalidad Infantil, Materna y Causas CIE-10)",
-        "url": "https://www.deis.msal.gov.ar"
+        "url": "https://www.argentina.gob.ar/salud/deis"
       },
       {
         "institucion": "DINIECE / Relevamiento Anual",
@@ -28,9 +28,9 @@
         "url": "https://www.argentina.gob.ar/ssn"
       }
     ],
-    "version": "3.1.0",
+    "version": "3.2.0",
     "estilo": "La Segunda • Sora & JetBrains Mono (Claro / Oscuro)",
-    "actualizado": "Agosto 2026",
+    "actualizado": "Noviembre 2026",
     "acceso": "Libre, público y gratuito"
   },
   "mortalidad": {
@@ -27641,8 +27641,20 @@
       },
       {
         "anio": 2023,
-        "tmi_total": 7.8,
-        "tmi_neonatal": 5.3,
+        "tmi_total": 8.0,
+        "tmi_neonatal": 5.5,
+        "tmi_posneonatal": 2.5
+      },
+      {
+        "anio": 2024,
+        "tmi_total": 8.5,
+        "tmi_neonatal": 5.8,
+        "tmi_posneonatal": 2.7
+      },
+      {
+        "anio": 2025,
+        "tmi_total": 8.0,
+        "tmi_neonatal": 5.5,
         "tmi_posneonatal": 2.5
       }
     ],
@@ -27849,9 +27861,15 @@
       },
       {
         "anio": 2023,
-        "nacimientos": 485000,
-        "defunciones": 361000,
-        "saldo_crecimiento": 124000
+        "nacimientos": 460902,
+        "defunciones": 353428,
+        "saldo_crecimiento": 107474
+      },
+      {
+        "anio": 2024,
+        "nacimientos": 413135,
+        "defunciones": 358200,
+        "saldo_crecimiento": 54935
       }
     ],
     "serie_fecundidad": [
@@ -27894,6 +27912,11 @@
         "anio": 2023,
         "tgf": 1.39,
         "tasa_fec_adolescente_15_19": 21.8
+      },
+      {
+        "anio": 2024,
+        "tgf": 1.33,
+        "tasa_fec_adolescente_15_19": 19.2
       }
     ],
     "esperanza_vida_saludable_hale": {
@@ -28222,6 +28245,62 @@
         "desocupacion": 6.9,
         "subocupacion": 11.5,
         "informalidad": 36.1
+      },
+      {
+        "periodo": "2024-T4",
+        "actividad": 48.8,
+        "empleo": 45.7,
+        "desocupacion": 6.4,
+        "subocupacion": 11.3,
+        "informalidad": 36.1
+      },
+      {
+        "periodo": "2025-T1",
+        "actividad": 48.2,
+        "empleo": 44.4,
+        "desocupacion": 7.9,
+        "subocupacion": 11.7,
+        "informalidad": 36.3
+      },
+      {
+        "periodo": "2025-T2",
+        "actividad": 48.1,
+        "empleo": 44.5,
+        "desocupacion": 7.6,
+        "subocupacion": 11.6,
+        "informalidad": 36.5
+      },
+      {
+        "periodo": "2025-T3",
+        "actividad": 48.6,
+        "empleo": 45.4,
+        "desocupacion": 6.6,
+        "subocupacion": 11.4,
+        "informalidad": 36.7
+      },
+      {
+        "periodo": "2025-T4",
+        "actividad": 48.6,
+        "empleo": 45.0,
+        "desocupacion": 7.5,
+        "subocupacion": 11.6,
+        "informalidad": 37.0
+      },
+      {
+        "periodo": "2026-T1",
+        "actividad": 48.6,
+        "empleo": 44.8,
+        "desocupacion": 7.8,
+        "subocupacion": 11.8,
+        "informalidad": 37.2
+      },
+      {
+        "periodo": "2026-T2",
+        "actividad": 48.9,
+        "empleo": 45.0,
+        "desocupacion": 7.9,
+        "subocupacion": 11.9,
+        "informalidad": 37.6
       }
     ],
     "composicion_ocupados": [
@@ -28378,6 +28457,12 @@
         "relacion": 1.52,
         "activos_millones": 10.9,
         "pasivos_millones": 7.2
+      },
+      {
+        "periodo": "2025",
+        "relacion": 1.5,
+        "activos_millones": 10.95,
+        "pasivos_millones": 7.3
       }
     ],
     "composicion_beneficios_sipa": [
