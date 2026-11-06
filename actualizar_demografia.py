@@ -594,10 +594,12 @@ def get_salud_data():
         {"anio": 2020, "tmi_total": 8.4, "tmi_neonatal": 5.7, "tmi_posneonatal": 2.7},
         {"anio": 2021, "tmi_total": 8.0, "tmi_neonatal": 5.4, "tmi_posneonatal": 2.6},
         {"anio": 2022, "tmi_total": 8.0, "tmi_neonatal": 5.5, "tmi_posneonatal": 2.5},
-        {"anio": 2023, "tmi_total": 7.8, "tmi_neonatal": 5.3, "tmi_posneonatal": 2.5}
+        {"anio": 2023, "tmi_total": 8.0, "tmi_neonatal": 5.5, "tmi_posneonatal": 2.5},
+        {"anio": 2024, "tmi_total": 8.5, "tmi_neonatal": 5.8, "tmi_posneonatal": 2.7},
+        {"anio": 2025, "tmi_total": 8.0, "tmi_neonatal": 5.5, "tmi_posneonatal": 2.5}
     ]
     
-    # Serie de Nacimientos, Defunciones y Saldo Vegetativo (1980 - 2023)
+    # Serie de Nacimientos, Defunciones y Saldo Vegetativo (1980 - 2024)
     saldo_vegetativo_historico = [
         {"anio": 1980, "nacimientos": 697000, "defunciones": 241000, "saldo_crecimiento": 456000},
         {"anio": 1990, "nacimientos": 678000, "defunciones": 259000, "saldo_crecimiento": 419000},
@@ -607,7 +609,8 @@ def get_salud_data():
         {"anio": 2018, "nacimientos": 685000, "defunciones": 336000, "saldo_crecimiento": 349000},
         {"anio": 2020, "nacimientos": 533000, "defunciones": 376000, "saldo_crecimiento": 157000},
         {"anio": 2022, "nacimientos": 495000, "defunciones": 392000, "saldo_crecimiento": 103000},
-        {"anio": 2023, "nacimientos": 485000, "defunciones": 361000, "saldo_crecimiento": 124000}
+        {"anio": 2023, "nacimientos": 460902, "defunciones": 353428, "saldo_crecimiento": 107474},
+        {"anio": 2024, "nacimientos": 413135, "defunciones": 358200, "saldo_crecimiento": 54935}
     ]
 
     # Ranking Provincial de TMI (Anuario DEIS 2023)
@@ -647,7 +650,8 @@ def get_salud_data():
         {"anio": 2018, "tgf": 1.88, "tasa_fec_adolescente_15_19": 49.2},
         {"anio": 2020, "tgf": 1.54, "tasa_fec_adolescente_15_19": 30.3},
         {"anio": 2022, "tgf": 1.44, "tasa_fec_adolescente_15_19": 24.5},
-        {"anio": 2023, "tgf": 1.39, "tasa_fec_adolescente_15_19": 21.8}
+        {"anio": 2023, "tgf": 1.39, "tasa_fec_adolescente_15_19": 21.8},
+        {"anio": 2024, "tgf": 1.33, "tasa_fec_adolescente_15_19": 19.2}
     ]
     
     esperanza_vida_saludable_hale = {
@@ -783,7 +787,14 @@ def get_mercado_trabajo_data():
         {"periodo": "2023-T4", "actividad": 48.6, "empleo": 45.8, "desocupacion": 5.7, "subocupacion": 10.5, "informalidad": 35.7},
         {"periodo": "2024-T1", "actividad": 48.0, "empleo": 44.3, "desocupacion": 7.7, "subocupacion": 11.8, "informalidad": 35.7},
         {"periodo": "2024-T2", "actividad": 48.5, "empleo": 44.8, "desocupacion": 7.6, "subocupacion": 11.8, "informalidad": 36.4},
-        {"periodo": "2024-T3", "actividad": 48.2, "empleo": 44.9, "desocupacion": 6.9, "subocupacion": 11.5, "informalidad": 36.1}
+        {"periodo": "2024-T3", "actividad": 48.2, "empleo": 44.9, "desocupacion": 6.9, "subocupacion": 11.5, "informalidad": 36.1},
+        {"periodo": "2024-T4", "actividad": 48.8, "empleo": 45.7, "desocupacion": 6.4, "subocupacion": 11.3, "informalidad": 36.1},
+        {"periodo": "2025-T1", "actividad": 48.2, "empleo": 44.4, "desocupacion": 7.9, "subocupacion": 11.7, "informalidad": 36.3},
+        {"periodo": "2025-T2", "actividad": 48.1, "empleo": 44.5, "desocupacion": 7.6, "subocupacion": 11.6, "informalidad": 36.5},
+        {"periodo": "2025-T3", "actividad": 48.6, "empleo": 45.4, "desocupacion": 6.6, "subocupacion": 11.4, "informalidad": 36.7},
+        {"periodo": "2025-T4", "actividad": 48.6, "empleo": 45.0, "desocupacion": 7.5, "subocupacion": 11.6, "informalidad": 37.0},
+        {"periodo": "2026-T1", "actividad": 48.6, "empleo": 44.8, "desocupacion": 7.8, "subocupacion": 11.8, "informalidad": 37.2},
+        {"periodo": "2026-T2", "actividad": 48.9, "empleo": 45.0, "desocupacion": 7.9, "subocupacion": 11.9, "informalidad": 37.6}
     ]
     
     # Composición de la Población Ocupada (Categoría Ocupacional EPH)
@@ -845,7 +856,8 @@ def get_prevision_social_data():
         {"periodo": "2010", "relacion": 1.68, "activos_millones": 9.4, "pasivos_millones": 5.6},
         {"periodo": "2015", "relacion": 1.58, "activos_millones": 10.4, "pasivos_millones": 6.6},
         {"periodo": "2020", "relacion": 1.55, "activos_millones": 10.7, "pasivos_millones": 6.9},
-        {"periodo": "2024", "relacion": 1.52, "activos_millones": 10.9, "pasivos_millones": 7.2}
+        {"periodo": "2024", "relacion": 1.52, "activos_millones": 10.9, "pasivos_millones": 7.2},
+        {"periodo": "2025", "relacion": 1.50, "activos_millones": 10.95, "pasivos_millones": 7.3}
     ]
 
     composicion_beneficios_sipa = [
@@ -943,14 +955,14 @@ def generate_master_dataset():
             "titulo": "Monitor Demográfico y Estadístico de la República Argentina",
             "fuentes": [
                 {"institucion": "INDEC", "descripcion": "Instituto Nacional de Estadística y Censos (Censo 2022, EPH, Tablas de Mortalidad Serie Análisis Demográfico)", "url": "https://www.indec.gob.ar"},
-                {"institucion": "DEIS", "descripcion": "Dirección de Estadísticas e Información de Salud - Ministerio de Salud de la Nación (Series de Natalidad, Mortalidad Infantil, Materna y Causas CIE-10)", "url": "https://www.deis.msal.gov.ar"},
+                {"institucion": "DEIS", "descripcion": "Dirección de Estadísticas e Información de Salud - Ministerio de Salud de la Nación (Series de Natalidad, Mortalidad Infantil, Materna y Causas CIE-10)", "url": "https://www.argentina.gob.ar/salud/deis"},
                 {"institucion": "DINIECE / Relevamiento Anual", "descripcion": "Secretaría de Educación - Ministerio de Capital Humano (Cobertura, Trayectorias, Pruebas Aprender y Eficiencia Universitaria)", "url": "https://www.argentina.gob.ar/educacion"},
                 {"institucion": "ANSES / SIPA", "descripcion": "Administración Nacional de la Seguridad Social y Sistema Integrado Previsional Argentino (Boletines Estadísticos de la Seguridad Social)", "url": "https://www.anses.gob.ar"},
                 {"institucion": "SSN / NAIC / SOA", "descripcion": "Superintendencia de Seguros de la Nación y Normas Actuariales Internacionales (Tablas GAM-71/83/94, UP-94, CSO 1980/2001/2017)", "url": "https://www.argentina.gob.ar/ssn"}
             ],
-            "version": "3.1.0",
+            "version": "3.2.0",
             "estilo": "La Segunda • Sora & JetBrains Mono (Claro / Oscuro)",
-            "actualizado": "Agosto 2026",
+            "actualizado": "Noviembre 2026",
             "acceso": "Libre, público y gratuito"
         },
         "mortalidad": mortalidad,
