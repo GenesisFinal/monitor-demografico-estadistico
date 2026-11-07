@@ -1,5 +1,5 @@
 {
-  "fecha_chequeo": "2026-11-06T13:40:24.551918",
+  "fecha_chequeo": "2026-11-07T18:35:48.457530",
   "fuentes": {
     "INDEC_CALENDARIO": {
       "status_code": 200,
@@ -15,19 +15,19 @@
     },
     "DEIS_ESTADISTICAS": {
       "status_code": 200,
-      "last_modified": "Fri, 06 Nov 2026 13:58:38 GMT",
+      "last_modified": "Sat, 07 Nov 2026 18:35:45 GMT",
       "etag": "N/A",
       "ok": true
     },
     "ANSES_BESS": {
       "status_code": 200,
-      "last_modified": "Fri, 06 Nov 2026 15:58:58 GMT",
+      "last_modified": "Sat, 07 Nov 2026 11:51:42 GMT",
       "etag": "N/A",
       "ok": true
     },
     "SSN_CIRCULARES": {
       "status_code": 200,
-      "last_modified": "Fri, 06 Nov 2026 14:41:07 GMT",
+      "last_modified": "Sat, 07 Nov 2026 18:35:48 GMT",
       "etag": "N/A",
       "ok": true
     }
